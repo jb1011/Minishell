@@ -6,7 +6,9 @@ SRCDIR  = srcs/
 
 LIB             = ./lib/
 
-FILES   =       minishell.c 	
+FILES   =       minishell.c \
+				fonctions.c	\
+				setting_ending.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 
@@ -16,7 +18,7 @@ CC              = gcc
 
 RM              = rm -f
 
-CFLAGS  = -Wall -Wextra  -fsanitize=address  -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)
+CFLAGS  = -Wall -Wextra -fsanitize=address  -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)
 
 FLAGS = -L $(LIB)libft -lft 
 

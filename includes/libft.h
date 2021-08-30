@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:18:42 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 16:11:33 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/08/30 21:21:17 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
+# include<sys/wait.h>
 
 # define NBRS "0123456789"
 

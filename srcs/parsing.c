@@ -1,6 +1,6 @@
 #include "lib/libft/libft.h"
 
-void    caca()
+void    it()
 {
-    printf("caca\n");
+    return;
 }
