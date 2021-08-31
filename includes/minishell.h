@@ -24,6 +24,9 @@ typedef struct s_all
 {
 	char    *line;
     char    *path;
+    char    pipe;
+    char    croco;
+    char    doublecroco;
 }	t_all;
 
 int	_fct(char *todo[], char *env[]);

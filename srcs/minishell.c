@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 	char id = fork();
 	while(42)
 	{
-		//printf("%s\n", all.line);
 		begin(&all);
 	}
 }
