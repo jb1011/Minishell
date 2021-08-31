@@ -6,11 +6,15 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 21:48:51 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/08/31 14:49:47 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+#include <unistd.h>
 
 
 int main(int argc, char **argv)
@@ -20,13 +24,18 @@ int main(int argc, char **argv)
 	char *ty;
 	t_slv s;
 
-	all.path = ft_strdup("/home/louis/42/minishell");
+	ty = malloc(400);
+	all.path = ft_strdup("/home");
 	chdir(all.path);
 	s.j = 0;
-	char *t[] = {"test.sh", 0, 0};
-	_fct(t, 0);
+	//tputs("echo hi\n", getpid(), 0);
+	//char *t[] = {"/bin/ls", ">", "hi", 0};
+	//char *env[] = {"", "ARG2", 0};
+	//_fct(t, env);
+	char id = fork();
 	while(42)
 	{
+		//printf("%s\n", all.line);
 		begin(&all);
 	}
 }

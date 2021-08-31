@@ -22,8 +22,7 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+
 
 # define NBRS "0123456789"
 

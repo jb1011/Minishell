@@ -8,7 +8,7 @@ LIB             = ./lib/
 
 FILES   =       minishell.c \
 				fonctions.c	\
-				setting_ending.c
+				setting_ending.c 
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 
@@ -20,7 +20,7 @@ RM              = rm -f
 
 CFLAGS  = -Wall -Wextra -fsanitize=address  -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)
 
-FLAGS = -L $(LIB)libft -lft 
+FLAGS = -L $(LIB)libft -lft -L/usr/includes -lcurses 
 
 MACOS_MACRO = -D MACOS 
 LINUX_MACRO = -D LINUX 

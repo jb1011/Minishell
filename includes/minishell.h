@@ -14,6 +14,11 @@
 # define MINISHELL_H
 # include "libft.h"
 # define SHELL_PROMPT "\nMINISHELL:: "
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <curses.h>
+# include <sys/wait.h>
+# include <term.h>
 
 typedef struct s_all
 {
