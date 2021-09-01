@@ -12,8 +12,10 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "libft.h"
+
 # define SHELL_PROMPT "\nMINISHELL:: "
+
+# include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <curses.h>
@@ -23,23 +25,21 @@
 typedef struct s_all
 {
 	char	*line;
-	char	*path;
 	char	pipe;
 	char	croco;
 	char	doublecroco;
 	char	*path;
 	char	**splt_line;
-	char	**splt_pipe;
 	char	***w_line;
 }	t_all;
 
 int		_fct(char *todo[], char *env[]);
 int		begin(t_all *all);
 int		parse_line(t_all *all);
-void	ft_print_tab(char **tab);
-void	ft_free_tab(char **tab);
-void	ft_print_megatab(char ***tab);
+void	ft_print_tab(char **t);
+void	ft_free_tab(char **t);
+void	ft_print_megatab(char ***t);
 int		ft_count_split(char *line);
-void	ft_free_megatab(char ***tab);
+void	ft_free_megatab(char ***t);
 
 #endif

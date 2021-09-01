@@ -12,28 +12,28 @@
 
 #include "../includes/minishell.h"
 
-void	ft_free_tab(char **tab)
+void	ft_free_tab(char **t)
 {
 	int j;
 
 	j = 0;
-	while (tab[j])
+	while (t[j])
 	{
-		free(tab[j]);
+		free(t[j]);
 		j++;
 	}
-	free(tab);
+	free(t);
 }
 
-void	ft_free_megatab(char ***tab)
+void	ft_free_megatab(char ***t)
 {
 	int j;
 
 	j = 0;
-	while (tab[j])
+	while (t[j])
 	{
-		ft_free_tab(tab[j]);
+		ft_free_tab(t[j]);
 		j++;
 	}
-	free(tab);
+	free(t);
 }

@@ -12,32 +12,32 @@
 
 #include "../includes/minishell.h"
 
-void	ft_print_tab(char **tab)
+void	ft_print_tab(char **t)
 {
 	int j;
 
 	j = 0;
 	printf("**TAB :\n");
-	while (tab[j])
+	while (t[j])
 	{
-		printf("%s\n", tab[j]);
+		printf("%s\n", t[j]);
 		j++;
 	}
 }
 
-void	ft_print_megatab(char ***tab)
+void	ft_print_megatab(char ***t)
 {
 	int j;
 	int i;
 
 	j = 0;
 	printf("***TAB :\n");
-	while (tab[j])
+	while (t[j])
 	{
 		i = 0;
-		while (tab[j][i])
+		while (t[j][i])
 		{
-			printf("%s\n", tab[j][i]);
+			printf("%s\n", t[j][i]);
 			i++;
 		}
 		j++;
