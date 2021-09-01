@@ -1,40 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   setting&ending.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/31 14:49:47 by lgelinet         ###   ########.fr       */
+/*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
+/*   Updated: 2021/08/30 21:47:51 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <term.h>
-#include <unistd.h>
 
-
-int main(int argc, char **argv)
+void	ft_print_tab(char **t)
 {
-	t_all all;
-	char *test;
-	char *ty;
-	t_slv s;
+	int j;
 
-	ty = malloc(400);
-	all.path = ft_strdup("/home");
-	chdir(all.path);
-	s.j = 0;
-	//tputs("echo hi\n", getpid(), 0);
-	//char *t[] = {"/bin/ls", ">", "hi", 0};
-	//char *env[] = {"", "ARG2", 0};
-	//_fct(t, env);
-	char id = fork();
-	while(42)
+	j = 0;
+	printf("**TAB :\n");
+	while (t[j])
 	{
-		begin(&all);
+		printf("%s\n", t[j]);
+		j++;
+	}
+}
+
+void	ft_print_megatab(char ***t)
+{
+	int j;
+	int i;
+
+	j = 0;
+	printf("***TAB :\n");
+	while (t[j])
+	{
+		i = 0;
+    	printf("\tCASE %d :\n", j);
+		while (t[j][i])
+		{
+        	printf("\t\tCASE STRING :\n");
+			printf("\t\t\t%s\n", t[j][i]);
+			i++;
+		}
+		j++;
 	}
 }
