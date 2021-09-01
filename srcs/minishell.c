@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/31 14:49:47 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/01 18:06:02 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main(int argc, char **argv)
 	//char *t[] = {"/bin/ls", ">", "hi", 0};
 	//char *env[] = {"", "ARG2", 0};
 	//_fct(t, env);
-	char id = fork();
 	while(42)
 	{
 		begin(&all);
