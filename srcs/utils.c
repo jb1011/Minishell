@@ -12,45 +12,34 @@
 
 #include "../includes/minishell.h"
 
-int	ft_count_split(char *line)
-{
-	int i;
-	int count;
-
-	count = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '|' || line[i] == ';')
-			count++;
-		i++;
-	}
-	return (count + 1);
-}
-
-int	parse_line(t_all *all)
+void	ft_print_tab(char **tab)
 {
 	int j;
 
-	all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) + 1);
 	j = 0;
-	if (ft_strchr(all->line, '|'))
+	printf("**TAB :\n");
+	while (tab[j])
 	{
-		all->splt_line = ft_split(all->line, ';');
-		while (all->splt_line[j])
+		printf("%s\n", tab[j]);
+		j++;
+	}
+}
+
+void	ft_print_megatab(char ***tab)
+{
+	int j;
+	int i;
+
+	j = 0;
+	printf("***TAB :\n");
+	while (tab[j])
+	{
+		i = 0;
+		while (tab[j][i])
 		{
-			all->w_line[j] = ft_split(all->splt_line[j], '|');
-			j++;
+			printf("%s\n", tab[j][i]);
+			i++;
 		}
-		all->w_line[j] = 0;
-	ft_free_tab(all->splt_line);
+		j++;
 	}
-	else
-	{
-		all->w_line[0] = ft_split(all->line, ';');
-		all->w_line[1] = 0;
-	}
-	ft_print_megatab(all->w_line);
-	ft_free_megatab(all->w_line);
-	return (1);
 }

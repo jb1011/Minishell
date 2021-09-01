@@ -9,7 +9,9 @@ LIB             = ./lib/
 FILES   =       minishell.c \
 				fonctions.c	\
 				setting_ending.c \
-				parsing.c
+				parsing.c \
+				free.c \
+				utils.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 
