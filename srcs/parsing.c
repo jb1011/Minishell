@@ -28,6 +28,22 @@ int	ft_count_split(char *line)
 	return (count);
 }
 
+int	ft_count_spaces(char *line)
+{
+	int i;
+	int count;
+
+	count = 1;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int	parse_line(t_all *all)
 {
 	int j;
@@ -36,24 +52,27 @@ int	parse_line(t_all *all)
 	j = 0;
 	if (!ft_strchr(all->line, ';') && !ft_strchr(all->line, '|'))
 	{
-		ft_putstr("HHHHH");
-		// tmp = ft_strtrim(all->line, " ");
-		// all->w_line[0] = ft_split(tmp, ' ');
-		// free(tmp);
-		// all->w_line[0] = (char **)malloc(sizeof(char *) * (1 + 1));
-		// all->w_line[0][0] = ft_strdup(all->line);
-		// all->w_line[0][1] = 0;
-		// all->w_line[1] = 0;
-		tmp = ft_strtrim(all->line, " ");
-		free(all->line);
-		all->line = ft_strdup(tmp);
-		free(tmp);
-		printf("tab : %s", all->line);
+		if (ft_strchr(all->line, ' '))
+		{
+			all->w_line = malloc(sizeof(char **) * ft_count_spaces(all->line) + 1);
+			all->w_line[0] = ft_split(all->line, ' ');
+			all->w_line[1] = 0;
+			trim_tab(all->w_line);
+			ft_print_megatab(all->w_line);
+		}
+		else
+		{
+			all->w_line = malloc(sizeof(char **) * 2);
+			all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
+			all->w_line[0][0] = ft_strdup(all->line);
+			all->w_line[0][1] = 0;
+			all->w_line[1] = 0;
+			trim_tab(all->w_line);
+			ft_print_megatab(all->w_line);
+		}
 	}
 	if (ft_strchr(all->line, '|'))
 	{
-		ft_putstr("JJJJ");
-
 		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) + 1);
 		all->splt_line = ft_split(all->line, ';');
 		while (all->splt_line[j])
@@ -69,8 +88,6 @@ int	parse_line(t_all *all)
 	}
 	if (!ft_strchr(all->line, '|') && ft_strchr(all->line, ';'))
 	{
-		ft_putstr("DDDD");
-
 		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) + 1);
 		all->w_line[0] = ft_split(all->line, ';');
 		all->w_line[1] = 0;
