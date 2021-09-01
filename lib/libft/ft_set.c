@@ -57,3 +57,24 @@ void	*ft_memset(void *s, int c, int n)
 	}
 	return (s);
 }
+
+char	*_extract(char *str, char *set_to_stop)
+{
+	int	i;
+	int	j;
+	char *ret;
+
+	i = 0;
+	if (!set_to_stop || !*str)
+		return(ft_strdup(""));
+	while(str[i] && !ft_strchr(set_to_stop, str[i]))
+		i++;
+	if (!str[i])
+		return (ft_strdup(str));
+	ret = malloc(i * sizeof(char) + 1);
+	j = -1;
+	while (++j < i)
+		ret[j] = str[i];
+	ret[i] = 0;
+	return (ret);
+}

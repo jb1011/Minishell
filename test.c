@@ -8,7 +8,10 @@ int main (int argc, char **argv)
 
     argv++;
 
-
+    while (42)
+    {
+        readline();
+    }
     printf("builtin -->\n");
     _echo(0, argv, 0, 0);
     *argv = ft_join_free("/usr/bin/", *argv, 0);
