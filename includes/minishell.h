@@ -42,7 +42,9 @@ void	ft_print_megatab(char ***t);
 int		ft_count_split(char *line);
 void	ft_free_megatab(char ***t);
 void	trim_tab(char ***t);
-int	ft_count_spaces(char *line);
+int		ft_count_spaces(char *line);
+int		is_pipe_inhib(char *str);
+void 	reverse_pipe(char **str);
 
 
 #endif

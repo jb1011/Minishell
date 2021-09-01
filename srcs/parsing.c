@@ -47,7 +47,6 @@ int	ft_count_spaces(char *line)
 int	parse_line(t_all *all)
 {
 	int j;
-	char	*tmp;
 
 	if (!ft_strchr(all->line, '|'))
 	{
@@ -88,7 +87,11 @@ int	parse_line(t_all *all)
 		if (ft_strchr(all->line, ' '))
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
+			/////////
+			is_pipe_inhib(all->line);
 			all->splt_line = ft_split(all->line, '|');
+			reverse_pipe(all->splt_line);
+			
 			while (all->splt_line[j])
 			{
 				all->w_line[j] = ft_split(all->splt_line[j], ' ');
@@ -134,24 +137,63 @@ int	is_pipe_inhib(char *str)
 {
 	int i;
 	int count;
+	// int pipes;
 
-	i = 0;
+	// i = 0;
 	count = 0;
-	while (str[i] && str[i] != '|')
-	{
-		if (str[i] == '\'')
-		{
-			count++;
-		}
-	}
+	// pipes = 0;
+	// while (str[i])
+	// {
+	// 	if (str[i] == '|')
+	// 		pipes++;
+	// 	i++;
+	// }
+	// i = 0;
+	// while (str[i] && str[i] != '|')
+	// {
+	// 	if (str[i] == '\'')
+	// 		count++;
+	// 	i++;
+	// }
 	i = 0;
+	// if (pipes == 1)
+	// {
+	// 	while (str[i])
+	// 	{
+	// 		if (str[i] == '|' && (count % 2 != 0))
+	// 		{
+	// 			//alors il faut ignorer le pipe
+	// 			return (0);
+	// 		}
+	// 		i++;
+	// 	}
+	// }
 	while (str[i])
 	{
+		if (str[i] == '\'')
+			count++;
 		if (str[i] == '|' && (count % 2 != 0))
-		{
-			//alors il faut ignorer le pipe
-			return (0);
-		}
+			str[i] = '@';
+		i++;
 	}
 	return (1);
+}
+
+void reverse_pipe(char **str)
+{
+	int i;
+	int j;
+
+	j = 0;
+	while (str[j])
+	{
+		i = 0;
+		while (str[j][i])
+		{
+			if (str[j][i] == '@')
+				str[j][i] = '|';
+			i++;
+		}
+		j++;
+	}
 }
