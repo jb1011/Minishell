@@ -6,54 +6,29 @@ void    it()
 	return;
 }
 
-int    parse_line(t_all *all)
+int	parse_line(t_all *all)
 {
-	// all->splt_line = ft_split(all->line, ";| >");
-	// ft_print_tab(all->splt_line);
-
-	// int i;
-	// char *iso;
-	// char *rest;
-
-	// i = 0;
-	// rest = ft_strdup(all->line);
-	// while (rest[i])
-	// {
-	// 	if (ft_strchr(";|> ", all->line[i]))
-	// 	{
-	// 		iso = ft_substr(all->line, 0, i);
-	// 		rest = ft_strdup(&str[i]);
-	// 	}
-	// 	i++;
-	// }
-
-	// printf("%d", ft_count_split(all->line));
-
-	// while (all->w_line[i])
-	// {
-	// 	all->w_line[i] = ft_split(all->splt_line[i], '|');
-	// 	i++;
-	// }
-	// all->w_line[i] = 0;
+	int j;
 
 	all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) + 1);
-
-	all->splt_line = ft_split(all->line, ';');
-	int j = 0;
+	j = 0;
 	if (ft_strchr(all->line, '|'))
 	{
+		all->splt_line = ft_split(all->line, ';');
 		while (all->splt_line[j])
 		{
 			all->w_line[j] = ft_split(all->splt_line[j], '|');
 			j++;
 		}
-	}
-
-	all->w_line[j] = 0;
-	// ft_print_tab(all->splt_line);
-	ft_print_megatab(all->w_line);
-
+		all->w_line[j] = 0;
 	ft_free_tab(all->splt_line);
+	}
+	else
+	{
+		all->w_line[0] = ft_split(all->line, ';');
+		all->w_line[1] = 0;
+	}
+	ft_print_megatab(all->w_line);
 	ft_free_megatab(all->w_line);
 	return (1);
 }
@@ -79,6 +54,7 @@ void	ft_print_tab(char **tab)
 	int j;
 
 	j = 0;
+	printf("**TAB :\n");
 	while (tab[j])
 	{
 		printf("%s\n", tab[j]);
@@ -119,6 +95,7 @@ void	ft_print_megatab(char ***tab)
 	int i;
 
 	j = 0;
+	printf("***TAB :\n");
 	while (tab[j])
 	{
 		i = 0;
