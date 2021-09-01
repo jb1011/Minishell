@@ -17,10 +17,13 @@ void	ft_free_tab(char **t)
 	int j;
 
 	j = 0;
-	while (t[j])
+	if (t[j])
 	{
-		free(t[j]);
-		j++;
+		while (t[j])
+		{
+			free(t[j]);
+			j++;
+		}
 	}
 	free(t);
 }
@@ -30,10 +33,13 @@ void	ft_free_megatab(char ***t)
 	int j;
 
 	j = 0;
-	while (t[j])
+	if (t[j])
 	{
-		ft_free_tab(t[j]);
-		j++;
+		while (t[j])
+		{
+			ft_free_tab(t[j]);
+			j++;
+		}
 	}
 	free(t);
 }
