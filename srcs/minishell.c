@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	//char *t[] = {"/bin/ls", ">", "hi", 0};
 	//char *env[] = {"", "ARG2", 0};
 	//_fct(t, env);
-	char id = fork();
+	// char id = fork();
 	while(42)
 	{
 		begin(&all);

@@ -25,7 +25,7 @@ int	ft_count_split(char *line)
 			count++;
 		i++;
 	}
-	return (count);
+	return (count + 1);
 }
 
 int	ft_count_spaces(char *line)
@@ -49,12 +49,11 @@ int	parse_line(t_all *all)
 	int j;
 	char	*tmp;
 
-	j = 0;
-	if (!ft_strchr(all->line, ';') && !ft_strchr(all->line, '|'))
+	if (!ft_strchr(all->line, '|'))
 	{
 		if (ft_strchr(all->line, ' '))
 		{
-			all->w_line = malloc(sizeof(char **) * ft_count_spaces(all->line) + 1);
+			all->w_line = malloc(sizeof(char **) * 2);
 			all->w_line[0] = ft_split(all->line, ' ');
 			all->w_line[1] = 0;
 			trim_tab(all->w_line);
@@ -71,30 +70,36 @@ int	parse_line(t_all *all)
 			ft_print_megatab(all->w_line);
 		}
 	}
+	j = 0;
 	if (ft_strchr(all->line, '|'))
 	{
-		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) + 1);
-		all->splt_line = ft_split(all->line, ';');
-		while (all->splt_line[j])
+		if (!ft_strchr(all->line, ' '))
 		{
-			all->w_line[j] = ft_split(all->splt_line[j], '|');
-			j++;
+			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
+			while (j < ft_count_split(all->line))
+			{
+				all->w_line[0] = ft_split(all->line, '|');
+				j++;
+			}
+			all->w_line[1] = 0;
+			trim_tab(all->w_line);
+			ft_print_megatab(all->w_line);
 		}
-		all->w_line[j] = 0;
-		ft_free_tab(all->splt_line);
-		trim_tab(all->w_line);
-		ft_print_megatab(all->w_line);
-
+		if (ft_strchr(all->line, ' '))
+		{
+			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
+			all->splt_line = ft_split(all->line, '|');
+			while (all->splt_line[j])
+			{
+				all->w_line[j] = ft_split(all->splt_line[j], ' ');
+				j++;
+			}
+			all->w_line[j] = 0;
+			ft_free_tab(all->splt_line);
+			trim_tab(all->w_line);
+			ft_print_megatab(all->w_line);
+		}
 	}
-	if (!ft_strchr(all->line, '|') && ft_strchr(all->line, ';'))
-	{
-		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) + 1);
-		all->w_line[0] = ft_split(all->line, ';');
-		all->w_line[1] = 0;
-		trim_tab(all->w_line);
-		ft_print_megatab(all->w_line);
-	}
-
 	if (!all->w_line)
 		ft_free_megatab(all->w_line);
 	return (1);
@@ -122,5 +127,18 @@ void	trim_tab(char ***t)
 			i++;
 		}
 		j++;
+	}
+}
+
+void	ft_replace_pipe(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '|')
+			str[i] = ' ';
+		i++;
 	}
 }
