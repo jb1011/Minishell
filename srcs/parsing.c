@@ -43,14 +43,41 @@ int	parse_line(t_all *all)
 			j++;
 		}
 		all->w_line[j] = 0;
-	ft_free_tab(all->splt_line);
+		ft_free_tab(all->splt_line);
 	}
 	else
 	{
 		all->w_line[0] = ft_split(all->line, ';');
 		all->w_line[1] = 0;
 	}
+	trim_tab(all->w_line);
+
 	ft_print_megatab(all->w_line);
 	ft_free_megatab(all->w_line);
 	return (1);
+}
+
+void	trim_tab(char ***t)
+{
+	int j;
+	int i;
+	char	*tmp;
+
+	j = 0;
+	while (t[j])
+	{
+		i = 0;
+		while (t[j][i])
+		{
+			if (ft_strchr(t[j][i], ' '))
+			{
+				tmp = ft_strtrim(t[j][i], " ");
+				free(t[j][i]);
+				t[j][i] = ft_strdup(tmp);
+				free(tmp);
+			}
+			i++;
+		}
+		j++;
+	}
 }

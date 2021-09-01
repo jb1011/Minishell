@@ -41,5 +41,6 @@ void	ft_free_tab(char **t);
 void	ft_print_megatab(char ***t);
 int		ft_count_split(char *line);
 void	ft_free_megatab(char ***t);
+void	trim_tab(char ***t);
 
 #endif
