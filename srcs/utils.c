@@ -35,9 +35,11 @@ void	ft_print_megatab(char ***t)
 	while (t[j])
 	{
 		i = 0;
+    	printf("\tCASE %d :\n", j);
 		while (t[j][i])
 		{
-			printf("%s\n", t[j][i]);
+        	printf("\t\tCASE STRING :\n");
+			printf("\t\t\t%s\n", t[j][i]);
 			i++;
 		}
 		j++;

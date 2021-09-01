@@ -17,6 +17,7 @@ int     begin(t_all *all)
     printf(SHELL_PROMPT);
     all->line = readline(all->path);
 	add_history(all->line);
-    parse_line(all);
+    printf("%s", all->line);
+    // parse_line(all);
     return (1);
 }
