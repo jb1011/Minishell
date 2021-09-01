@@ -130,15 +130,28 @@ void	trim_tab(char ***t)
 	}
 }
 
-void	ft_replace_pipe(char *str)
+int	is_pipe_inhib(char *str)
 {
 	int i;
+	int count;
 
+	i = 0;
+	count = 0;
+	while (str[i] && str[i] != '|')
+	{
+		if (str[i] == '\'')
+		{
+			count++;
+		}
+	}
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '|')
-			str[i] = ' ';
-		i++;
+		if (str[i] == '|' && (count % 2 != 0))
+		{
+			//alors il faut ignorer le pipe
+			return (0);
+		}
 	}
+	return (1);
 }
