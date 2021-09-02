@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting&ending.c                                   :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 21:47:51 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/02 13:17:28 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parse_line(t_all *all)
 			all->w_line[0] = ft_split(all->line, ' ');
 			all->w_line[1] = 0;
 			trim_tab(all->w_line);
-			ft_print_megatab(all->w_line);
+			// ft_print_megatab(all->w_line);
 		}
 		else
 		{
@@ -68,7 +68,7 @@ int	parse_line(t_all *all)
 			all->w_line[0][1] = 0;
 			all->w_line[1] = 0;
 			trim_tab(all->w_line);
-			ft_print_megatab(all->w_line);
+			// ft_print_megatab(all->w_line);
 		}
 	}
 	j = 0;

@@ -6,14 +6,14 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 21:46:46 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/02 13:16:19 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define SHELL_PROMPT "\nMINISHELL:: "
+# define SHELL_PROMPT "MINISHELL:: "
 
 # include "libft.h"
 # include <readline/readline.h>
@@ -21,6 +21,10 @@
 # include <curses.h>
 # include <sys/wait.h>
 # include <term.h>
+# define STOP_DOLLAR "\"\'$"
+# define STOP_STR "\"\'$"
+# define STOP_DBLQUOTE "\"$"
+# define STOP_QUOTE "\'\""
 
 typedef struct s_all
 {
@@ -28,7 +32,7 @@ typedef struct s_all
 	char	pipe;
 	char	croco;
 	char	doublecroco;
-	char	*path;
+	char	path[400];
 	char	**splt_line;
 	char	***w_line;
 	char	*pipendirect;
@@ -49,5 +53,10 @@ void 	reverse_pipe(char **str);
 void	replace_quote(char *str);
 void	count_pipe_croc(char *str,t_all *all);
 
+int	ft_count_spaces(char *line);
+int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
+int dollar_case(char **buffer, char *object, int *index);
+int str_case(char **buffer, char *object, int *index, char *stops);
+void quotes_bool(int *boolean);
 
 #endif

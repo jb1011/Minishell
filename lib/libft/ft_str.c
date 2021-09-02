@@ -98,5 +98,5 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 			return (ptr1[i] - ptr2[i]);
 		i++;
 	}
-	return (0);
+	return (ptr1[i] - ptr2[i]);
 }
