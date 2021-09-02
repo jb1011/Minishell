@@ -250,7 +250,6 @@ void count_pipe_croc(char *str, t_all *all)
 			count++;
 		i++;
 	}
-	// printf("COUNT PIPESCROCS : %d\n", count);
 	all->pipendirect = malloc(sizeof(char) * count + 1);
 	i = 0;
 	count = 0;
