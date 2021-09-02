@@ -16,12 +16,15 @@ int	ft_count_split(char *line)
 {
 	int i;
 	int count;
+	int c;
 
 	count = 1;
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '|' || line[i] == ';')
+		if (line[i] == '\'')
+			c++;
+		if ((line[i] == '|' || line[i] == '<' || line[i] == '>') && (c % 2 != 0))
 			count++;
 		i++;
 	}
@@ -74,16 +77,48 @@ int	parse_line(t_all *all)
 	j = 0;
 	if (ft_strchr(all->line, '|'))
 	{
-		replace_quote(all->line);
+		// replace_quote(all->line);
 		if (!ft_strchr(all->line, ' '))
 		{
-			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
-			while (j < ft_count_split(all->line))
-			{
-				all->w_line[0] = ft_split(all->line, '|');
-				j++;
-			}
-			all->w_line[1] = 0;
+			// all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
+			// // ft_dup_char(all->line, all);
+			// while (j < ft_count_split(all->line))
+			// {
+			// 	// all->tmp = ft_dup_char(all->line, all);
+			// 	// all->w_line[0] = ft_split(all->tmp, '|');
+
+			// 	all->w_line[0] = ft_split(all->line, '|');
+			// 	// free(all->tmp);
+			// 	j++;
+			// }
+			// all->w_line[1] = 0;
+			// trim_tab(all->w_line);
+			// ft_print_megatab(all->w_line);
+
+
+
+			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
+			/////////
+			is_pipe_inhib(all->line);
+			// all->tmp = ft_dup_char(all->line);
+
+			// all->splt_line = ft_split(all->tmp, '|');
+			all->splt_line = ft_split(all->line, '|');
+
+			reverse_pipe(all->splt_line);
+			all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
+			all->w_line[1] = (char **)malloc(sizeof(char *) * 2);
+			all->w_line[2] = (char **)malloc(sizeof(char *) * 1);
+	
+			all->w_line[0][0] = ft_strdup(all->splt_line[0]);
+			all->w_line[0][1] = 0;
+
+			all->w_line[1][0] = ft_strdup(all->splt_line[1]);
+			all->w_line[1][1] = 0;
+
+			all->w_line[2] = 0;
+
+			ft_free_tab(all->splt_line);
 			trim_tab(all->w_line);
 			ft_print_megatab(all->w_line);
 		}
@@ -92,7 +127,11 @@ int	parse_line(t_all *all)
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
 			/////////
 			is_pipe_inhib(all->line);
+			// ft_dup_char(all->line, all);
+
+			// all->splt_line = ft_split(all->tmp, '|');
 			all->splt_line = ft_split(all->line, '|');
+
 			reverse_pipe(all->splt_line);
 			
 			while (all->splt_line[j])
@@ -106,8 +145,8 @@ int	parse_line(t_all *all)
 			ft_print_megatab(all->w_line);
 		}
 	}
-	if (!all->w_line)
-		ft_free_megatab(all->w_line);
+	// if (!all->w_line)
+	// 	ft_free_megatab(all->w_line);
 	return (1);
 }
 

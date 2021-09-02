@@ -45,3 +45,31 @@ void	ft_print_megatab(char ***t)
 		j++;
 	}
 }
+
+char	*ft_dup_char(const char *s)
+{
+	char	*str;
+	int		i;
+	int		j;
+	int		count;
+
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!str)
+		return (NULL);
+	
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] == '\'')
+			count++;
+		if ((s[i] == '|' || s[i] == '<' || s[i] == '>') && (count % 2 != 0))
+			i++;
+		str[j] = (char)s[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
