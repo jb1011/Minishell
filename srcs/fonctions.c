@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 21:40:43 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/02 14:16:19 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	_fct(char *todo[], char *env[])
 	 	waitpid(id, 0, 0);
 	else
 		execve(*todo, todo, env); // le bin ou le nom du fichier todo0 la suite de todo c'est les params , env on verra apres
-	if (!id) // Si le fils est tjr la c'est au'il y'a erreur
+	if (!id)
+	{ // Si le fils est tjr la c'est au'il y'a erreur
 		printf("Error, wrong file/function\n");
+		close(id);
+	}
 }

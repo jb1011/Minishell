@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 13:18:30 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/02 16:55:18 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,21 @@ int     begin(t_all *all)
 	add_history(all->line);
     printf("%s", all->line);
     return (1);
+}
+
+int     init(t_all *all)
+{
+    ft_strlcpy(all->path, "/home/",7);
+	ft_strlcat(all->path, getenv("USER"), 393);
+	chdir(all->path);
+    all->env = NULL;
+    advar(&all->env, "PATH", getenv("PATH"));
+    all->exec_paths = ft_split(all->env->val, ':');
+    // int i = -1;
+    // while(all->exec_paths[++i])
+        // printf("%s\n",all->exec_paths[i]);
+    advar(&all->env, "USER", getenv("USER"));
+    advar(&all->env, "SHELL", "minishell");
+    // printenv(all->env);
+    
 }
