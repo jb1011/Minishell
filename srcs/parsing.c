@@ -48,6 +48,7 @@ int	parse_line(t_all *all)
 {
 	int j;
 
+	count_pipe_croc(all->line, all);
 	if (!ft_strchr(all->line, '|'))
 	{
 		replace_quote(all->line);
@@ -124,7 +125,6 @@ void	trim_tab(char ***t)
 		{
 			if (ft_strchr(t[j][i], ' ') || ft_strchr(t[j][i], '\''))
 			{
-				// replace_quote(t[j][i]);
 				tmp = ft_strtrim(t[j][i], " ");
 				free(t[j][i]);
 				t[j][i] = ft_strdup(tmp);
@@ -194,4 +194,68 @@ void	replace_quote(char *str)
 		}
 		i++;
 	}
+}
+
+void count_pipe_croc(char *str, t_all *all)
+{
+	int i;
+	int count;
+	int j;
+
+	count = 0;
+	i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+			count++;
+		i++;
+	}
+	// printf("COUNT PIPESCROCS : %d\n", count);
+	all->pipendirect = malloc(sizeof(char) * count + 1);
+	i = 0;
+	count = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			count++;
+		if (str[i] == '|' && (count % 2 == 0))
+		{
+			all->pipendirect[j] = str[i];
+			j++;
+		}
+		if (str[i] == '<' && str[i + 1] == '<' && (count % 2 == 0))
+		{
+			all->pipendirect[j] = 'p';
+			j++;
+			i++;
+		}
+		if (str[i] == '>' && str[i + 1] == '>' && (count % 2 == 0))
+		{
+			all->pipendirect[j] = 'g';
+			j++;
+			i++;
+		}
+		if (str[i] == '<' && (count % 2 == 0))
+		{
+			if (str[i - 1] != '<')
+			{
+				all->pipendirect[j] = str[i];
+				j++;
+			}
+		}
+		if (str[i] == '>' && (count % 2 == 0))
+		{
+			if (str[i - 1] != '>')
+			{
+				all->pipendirect[j] = str[i];
+				j++;
+			}
+		}
+		
+		i++;
+	}
+	all->pipendirect[j] = 0;
+	printf("PILELINE : %s\n", all->pipendirect);
 }

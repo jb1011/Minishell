@@ -31,6 +31,7 @@ typedef struct s_all
 	char	*path;
 	char	**splt_line;
 	char	***w_line;
+	char	*pipendirect;
 }	t_all;
 
 int		_fct(char *todo[], char *env[]);
@@ -46,6 +47,7 @@ int		ft_count_spaces(char *line);
 int		is_pipe_inhib(char *str);
 void 	reverse_pipe(char **str);
 void	replace_quote(char *str);
+void	count_pipe_croc(char *str,t_all *all);
 
 
 #endif
