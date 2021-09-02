@@ -28,21 +28,21 @@ int	ft_count_split(char *line)
 	return (count + 1);
 }
 
-int	ft_count_spaces(char *line)
-{
-	int i;
-	int count;
+// // int	ft_count_spaces(char *line)
+// // {
+// // 	int i;
+// // 	int count;
 
-	count = 1;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ')
-			count++;
-		i++;
-	}
-	return (count);
-}
+// // 	count = 1;
+// // 	i = 0;
+// // 	while (line[i])
+// // 	{
+// // 		if (line[i] == ' ')
+// // 			count++;
+// // 		i++;
+// // 	}
+// // 	return (count);
+// // }
 
 int	parse_line(t_all *all)
 {
@@ -120,8 +120,9 @@ void	trim_tab(char ***t)
 		i = 0;
 		while (t[j][i])
 		{
-			if (ft_strchr(t[j][i], ' '))
+			if (ft_strchr(t[j][i], ' ') || ft_strchr(t[j][i], '\''))
 			{
+				replace_quote(t[j][i]);
 				tmp = ft_strtrim(t[j][i], " ");
 				free(t[j][i]);
 				t[j][i] = ft_strdup(tmp);
@@ -137,37 +138,9 @@ int	is_pipe_inhib(char *str)
 {
 	int i;
 	int count;
-	// int pipes;
 
-	// i = 0;
 	count = 0;
-	// pipes = 0;
-	// while (str[i])
-	// {
-	// 	if (str[i] == '|')
-	// 		pipes++;
-	// 	i++;
-	// }
-	// i = 0;
-	// while (str[i] && str[i] != '|')
-	// {
-	// 	if (str[i] == '\'')
-	// 		count++;
-	// 	i++;
-	// }
 	i = 0;
-	// if (pipes == 1)
-	// {
-	// 	while (str[i])
-	// 	{
-	// 		if (str[i] == '|' && (count % 2 != 0))
-	// 		{
-	// 			//alors il faut ignorer le pipe
-	// 			return (0);
-	// 		}
-	// 		i++;
-	// 	}
-	// }
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -195,5 +168,18 @@ void reverse_pipe(char **str)
 			i++;
 		}
 		j++;
+	}
+}
+
+void	replace_quote(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			str[i] = ' ';
+		i++;
 	}
 }

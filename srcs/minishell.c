@@ -35,5 +35,6 @@ int main(int argc, char **argv)
 	while(42)
 	{
 		begin(&all);
+		parse_line(&all);
 	}
 }

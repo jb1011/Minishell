@@ -45,6 +45,7 @@ void	trim_tab(char ***t);
 int		ft_count_spaces(char *line);
 int		is_pipe_inhib(char *str);
 void 	reverse_pipe(char **str);
+void	replace_quote(char *str);
 
 
 #endif
