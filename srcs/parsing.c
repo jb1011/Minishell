@@ -50,6 +50,7 @@ int	parse_line(t_all *all)
 
 	if (!ft_strchr(all->line, '|'))
 	{
+		replace_quote(all->line);
 		if (ft_strchr(all->line, ' '))
 		{
 			all->w_line = malloc(sizeof(char **) * 2);
@@ -72,6 +73,7 @@ int	parse_line(t_all *all)
 	j = 0;
 	if (ft_strchr(all->line, '|'))
 	{
+		replace_quote(all->line);
 		if (!ft_strchr(all->line, ' '))
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
@@ -122,7 +124,7 @@ void	trim_tab(char ***t)
 		{
 			if (ft_strchr(t[j][i], ' ') || ft_strchr(t[j][i], '\''))
 			{
-				replace_quote(t[j][i]);
+				// replace_quote(t[j][i]);
 				tmp = ft_strtrim(t[j][i], " ");
 				free(t[j][i]);
 				t[j][i] = ft_strdup(tmp);
@@ -174,12 +176,22 @@ void reverse_pipe(char **str)
 void	replace_quote(char *str)
 {
 	int	i;
+	int mybol;
 
 	i = 0;
+	mybol = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (mybol)
+		{
 			str[i] = ' ';
+			mybol = 0;
+		}
+		if (str[i] == '\'' && str[i + 1] == '\'')
+		{
+			str[i] = ' ';
+			mybol = 1;
+		}
 		i++;
 	}
 }
