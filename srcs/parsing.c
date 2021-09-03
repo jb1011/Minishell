@@ -64,9 +64,10 @@ int	parse_line(t_all *all)
 		replace_quote(all->line);
 		if (ft_strchr(all->line, ' '))
 		{
-			// replace_inib_space(all->line);
+			replace_inib_space(all->line);
 			all->w_line = malloc(sizeof(char **) * 2);
 			all->w_line[0] = ft_split(all->line, ' ');
+			replace_back_inib_space(all->w_line[0][0]);
 			all->w_line[1] = 0;
 		}
 		else
@@ -95,8 +96,9 @@ int	parse_line(t_all *all)
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
 			/////////
-			is_pipe_inhib(all->line);
+			// // is_pipe_inhib(all->line);
 			replace_crocs(all->line);
+			replace_inib_space(all->line);
 
 			// ft_dup_char(all->line, all);
 
@@ -371,7 +373,7 @@ void	replace_inib_space(char *str)
 		if (str[i] == '\'')
 			count++;
 		if (str[i] == ' ' && (count % 2 != 0))
-			str[i] = '@';
+			str[i] = '`';
 		i++;
 	}
 }
@@ -385,10 +387,13 @@ void	replace_back_inib_space(char *str)
 	i = 0;
 	while (str[i])
 	{
+		ft_putstr("YYY");
 		if (str[i] == '\'')
 			count++;
-		if (str[i] == '@' && (count % 2 != 0))
+		if (str[i] == '`' && (count % 2 != 0))
+		{
 			str[i] = ' ';
+		}
 		i++;
 	}
 }
