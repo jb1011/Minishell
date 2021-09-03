@@ -55,6 +55,10 @@ int	parse_line(t_all *all)
 
 	// check_tilde(all->line);
 	count_pipe_croc(all->line, all);
+	replace_double_croc(all->line);
+	if (!ft_check_error(all->line))
+		printf("ERRRROOROOOOOOORRRRR");
+	
 	if (!is_separator(all->line))
 	{
 		replace_quote(all->line);
@@ -299,3 +303,61 @@ void	replace_crocs(char *str)
 // 		free(temp);
 // 	}
 // }
+
+int	ft_check_error(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!quote_is_odd(s, i))
+		{
+			if (s[i] == '|' && s[i + 1] == '|')
+				return (0);
+			if (is_char_separator(s[i]))
+				if (is_only_space(s, i))
+					return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	is_only_space(char *s, int start)
+{
+	start++;
+	while (s[start])
+	{
+		if (is_char_separator(s[start]))
+		{
+			return (1);
+		}
+		if (s[start] != ' ')
+			return (0);
+		start++;
+	}
+	return (1);
+}
+
+void	replace_double_croc(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '<' && s[i + 1] == '<')
+		{
+			s[i] = '|';
+			s[i + 1] = ' ';
+		}
+		if (s[i] == '>' && s[i + 1] == '>')
+		{
+			s[i] = '|';
+			s[i + 1] = ' ';
+		}
+		i++;
+	}
+	printf("line replaced : %s\n", s);
+}

@@ -66,6 +66,10 @@ int		is_separator(char *s);
 int		quote_is_odd(char *s, int end);
 void	check_tilde(char *path);
 void	megatab_malloc_simple(t_all *all);
+int		ft_check_error(char *s);
+int		is_only_space(char *s, int start);
+int		is_char_separator(char c);
+void	replace_double_croc(char *s);
 
 int	ft_count_spaces(char *line);
 int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);

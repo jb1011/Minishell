@@ -135,6 +135,13 @@ int	is_separator(char *s)
 	return (0);
 }
 
+int	is_char_separator(char c)
+{
+	if (c == '|' || c == '>' || c == '<')
+		return (1);
+	return (0);
+}
+
 int	quote_is_odd(char *s, int end)
 {
 	int i;
