@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 16:49:25 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/03 16:22:24 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int _cd(char *path);
 int     init(t_all *all);
 t_env     *vardo(t_env *list, char *tofind, char *ch_val, char del);
 int     advar(t_env **list, char *var, char *val);
-int         printenv(t_env *list);
+int         printenv(t_env *env);
+int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes);
 
 #endif
