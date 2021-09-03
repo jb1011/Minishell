@@ -42,6 +42,7 @@ typedef struct s_all
 	char	*pipendirect;
 	char	**exec_paths;
 	t_env	*env;
+	char	*tmp;
 }	t_all;
 
 int		_fct(char *todo[], char *env[]);
@@ -58,6 +59,13 @@ int		is_pipe_inhib(char *str);
 void 	reverse_pipe(char **str);
 void	replace_quote(char *str);
 void	count_pipe_croc(char *str,t_all *all);
+char	*ft_dup_char(const char *s);
+void	replace_crocs(char *str);
+void	ft_malloc_tab(char ***t, int size, char **s);
+int		is_separator(char *s);
+int		quote_is_odd(char *s, int end);
+void	check_tilde(char *path);
+void	megatab_malloc_simple(t_all *all);
 
 int	ft_count_spaces(char *line);
 int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
