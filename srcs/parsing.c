@@ -53,7 +53,7 @@ int	parse_line(t_all *all)
 {
 	int j;
 
-	check_tilde(all->line);
+	// check_tilde(all->line);
 	count_pipe_croc(all->line, all);
 	if (!is_separator(all->line))
 	{
@@ -285,20 +285,20 @@ void	replace_crocs(char *str)
 	}
 }
 
-void	check_tilde(char *path)
-{
-	char	*temp;
+// void	check_tilde(char *path)
+// {
+// 	char	*temp;
 
-	if (ft_strncmp(path, "~", ft_strlen(path)) && !quote_is_odd(path, ft_strlen(path)))
-	{
-		temp = ft_join_free("/home/", getenv("USER"), 0);
-		temp = ft_join_free(temp, path + 1, 0);
-		printf("%s\n", temp);
-		if (chdir(temp) == -1)
-		{
-			free(temp);
-			return(ft_err_msg("Wrong path"));
-		}
-		free(temp);
-	}
-}
+// 	if (ft_strncmp(path, "~", ft_strlen(path)) && !quote_is_odd(path, ft_strlen(path)))
+// 	{
+// 		temp = ft_join_free("/home/", getenv("USER"), 0);
+// 		temp = ft_join_free(temp, path + 1, 0);
+// 		printf("%s\n", temp);
+// 		if (chdir(temp) == -1)
+// 		{
+// 			free(temp);
+// 			return(ft_err_msg("Wrong path"));
+// 		}
+// 		free(temp);
+// 	}
+// }
