@@ -53,11 +53,10 @@ int	parse_line(t_all *all)
 {
 	int j;
 
+	// // check_tilde(all->line);
 	count_pipe_croc(all->line, all);
 	if (!is_separator(all->line))
 	{
-			ft_putstr("ZZZZ");
-
 		replace_quote(all->line);
 		if (ft_strchr(all->line, ' '))
 		{
@@ -103,6 +102,8 @@ int	parse_line(t_all *all)
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
 			/////////
 			is_pipe_inhib(all->line);
+			replace_crocs(all->line);
+
 			// ft_dup_char(all->line, all);
 
 			// all->splt_line = ft_split(all->tmp, '|');
@@ -229,46 +230,46 @@ void count_pipe_croc(char *str, t_all *all)
 	}
 	all->pipendirect = malloc(sizeof(char) * count + 1);
 	i = 0;
-	count = 0;
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-			count++;
-		if (str[i] == '|' && (count % 2 == 0))
+		if (!quote_is_odd(str, i))
 		{
-			all->pipendirect[j] = str[i];
-			j++;
-		}
-		if (str[i] == '<' && str[i + 1] == '<' && (count % 2 == 0))
-		{
-			all->pipendirect[j] = 'p';
-			j++;
-			i++;
-		}
-		if (str[i] == '>' && str[i + 1] == '>' && (count % 2 == 0))
-		{
-			all->pipendirect[j] = 'g';
-			j++;
-			i++;
-		}
-		if (str[i] == '<' && (count % 2 == 0))
-		{
-			if (str[i - 1] != '<')
+
+			if (str[i] == '|')
 			{
 				all->pipendirect[j] = str[i];
 				j++;
 			}
-		}
-		if (str[i] == '>' && (count % 2 == 0))
-		{
-			if (str[i - 1] != '>')
+			if (str[i] == '<' && str[i + 1] == '<')
 			{
-				all->pipendirect[j] = str[i];
+				all->pipendirect[j] = 'p';
 				j++;
+				i++;
+			}
+			if (str[i] == '>' && str[i + 1] == '>')
+			{
+				all->pipendirect[j] = 'g';
+				j++;
+				i++;
+			}
+			if (str[i] == '<')
+			{
+				if (str[i - 1] != '<')
+				{
+					all->pipendirect[j] = str[i];
+					j++;
+				}
+			}
+			if (str[i] == '>')
+			{
+				if (str[i - 1] != '>')
+				{
+					all->pipendirect[j] = str[i];
+					j++;
+				}
 			}
 		}
-		
 		i++;
 	}
 	all->pipendirect[j] = 0;
@@ -278,18 +279,30 @@ void count_pipe_croc(char *str, t_all *all)
 void	replace_crocs(char *str)
 {
 	int i;
-	int count;
 
-	count = 0;
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-			count++;
-		if ((str[i] == '<' || str[i] == '>') && (count % 2 == 0))
-		{
+		if ((str[i] == '<' || str[i] == '>') && !quote_is_odd(str, i))
 			str[i] = '|';
-		}
 		i++;
 	}
 }
+
+// void	check_tilde(char *path)
+// {
+// 	char	*temp;
+
+// 	if (path == "~" && !quote_is_odd(path))
+// 	{
+// 		temp = ft_join_free("/home/", getenv("USER"), 0);
+// 		temp = ft_join_free(temp, path + 1, 0);
+// 		printf("%s\n", temp);
+// 		if (chdir(temp) == -1)
+// 		{
+// 			free(temp);
+// 			return(ft_err_msg("Wrong path"));
+// 		}
+// 		free(temp);
+// 	}
+// }

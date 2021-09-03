@@ -134,3 +134,21 @@ int	is_separator(char *s)
 	}
 	return (0);
 }
+
+int	quote_is_odd(char *s, int end)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while(i < end)
+	{
+		if (s[i] == '\'')
+			count ++;
+		i++;
+	}
+	if (count % 2 == 0)
+		return (0);
+	return (1);
+}

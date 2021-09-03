@@ -53,5 +53,7 @@ char	*ft_dup_char(const char *s);
 void	replace_crocs(char *str);
 void	ft_malloc_tab(char ***t, int size, char **s);
 int		is_separator(char *s);
+int		quote_is_odd(char *s, int end);
+void	check_tilde(char *path);
 
 #endif
