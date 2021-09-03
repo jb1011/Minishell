@@ -54,8 +54,10 @@ int	parse_line(t_all *all)
 	int j;
 
 	count_pipe_croc(all->line, all);
-	if (!ft_strchr(all->line, '|'))
+	if (!is_separator(all->line))
 	{
+			ft_putstr("ZZZZ");
+
 		replace_quote(all->line);
 		if (ft_strchr(all->line, ' '))
 		{
@@ -77,50 +79,21 @@ int	parse_line(t_all *all)
 		}
 	}
 	j = 0;
-	if (ft_strchr(all->line, '|'))
+	if (is_separator(all->line))
 	{
 		// replace_quote(all->line);
 		if (!ft_strchr(all->line, ' '))
 		{
-			// all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
-			// // ft_dup_char(all->line, all);
-			// while (j < ft_count_split(all->line))
-			// {
-			// 	// all->tmp = ft_dup_char(all->line, all);
-			// 	// all->w_line[0] = ft_split(all->tmp, '|');
-
-			// 	all->w_line[0] = ft_split(all->line, '|');
-			// 	// free(all->tmp);
-			// 	j++;
-			// }
-			// all->w_line[1] = 0;
-			// trim_tab(all->w_line);
-			// ft_print_megatab(all->w_line);
-
-
-
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
 			/////////
 			is_pipe_inhib(all->line);
 			// all->tmp = ft_dup_char(all->line);
-
 			// all->splt_line = ft_split(all->tmp, '|');
+			replace_crocs(all->line);
 			all->splt_line = ft_split(all->line, '|');
-
-			reverse_pipe(all->splt_line);
-			// // all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
-			// // all->w_line[1] = (char **)malloc(sizeof(char *) * 2);
-			// // all->w_line[2] = (char **)malloc(sizeof(char *) * 1);
-	
-			// // all->w_line[0][0] = ft_strdup(all->splt_line[0]);
-			// // all->w_line[0][1] = 0;
-
-			// // all->w_line[1][0] = ft_strdup(all->splt_line[1]);
-			// // all->w_line[1][1] = 0;
-
-			// // all->w_line[2] = 0;
-			// ft_putnbr_fd(ft_count_split(all->line), 0);
+			// reverse_pipe(all->splt_line);
 			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
+			
 			ft_free_tab(all->splt_line);
 			trim_tab(all->w_line);
 			ft_print_megatab(all->w_line);
@@ -313,8 +286,10 @@ void	replace_crocs(char *str)
 	{
 		if (str[i] == '\'')
 			count++;
-		if ((str[i] == '<' || str[i] == '>') && (count % 2 != 0))
+		if ((str[i] == '<' || str[i] == '>') && (count % 2 == 0))
+		{
 			str[i] = '|';
+		}
 		i++;
 	}
 }

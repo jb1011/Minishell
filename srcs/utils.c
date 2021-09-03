@@ -120,3 +120,17 @@ int	ft_get_nb_strs(char *s, char c)
 		nb_strs++;
 	return (nb_strs);
 }
+
+int	is_separator(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '|' || s[i] == '>' || s[i] == '<')
+			return (1);
+		i++;
+	}
+	return (0);
+}
