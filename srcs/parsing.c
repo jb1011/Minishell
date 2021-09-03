@@ -20,14 +20,16 @@ int	ft_count_split(char *line)
 
 	count = 1;
 	i = 0;
+	c = 0;
 	while (line[i])
 	{
 		if (line[i] == '\'')
 			c++;
-		if ((line[i] == '|' || line[i] == '<' || line[i] == '>') && (c % 2 != 0))
+		if ((line[i] == '|' || line[i] == '<' || line[i] == '>') && (c % 2 == 0))
 			count++;
 		i++;
 	}
+
 	return (count + 1);
 }
 
@@ -117,6 +119,7 @@ int	parse_line(t_all *all)
 			// // all->w_line[1][1] = 0;
 
 			// // all->w_line[2] = 0;
+			// ft_putnbr_fd(ft_count_split(all->line), 0);
 			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
 			ft_free_tab(all->splt_line);
 			trim_tab(all->w_line);

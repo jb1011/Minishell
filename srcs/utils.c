@@ -77,7 +77,6 @@ char	*ft_dup_char(const char *s)
 void	ft_malloc_tab(char ***t, int size, char **s)
 {
 	int i;
-	int j;
 
 	i = 0;
 	while (i < size)
@@ -88,10 +87,8 @@ void	ft_malloc_tab(char ***t, int size, char **s)
 	i = 0;
 	while (s[i])
 	{
-		j = 0;
-		t[i][j] = ft_strdup(s[i]);
-		j++;
-		t[i][j] = 0;
+		t[i][0] = ft_strdup(s[i]);
+		t[i][1] = 0;
 		i++;
 	}
 	t[i] = 0;
