@@ -72,6 +72,7 @@ int		is_char_separator(char c);
 void	replace_double_croc(char *s);
 void	replace_back_inib_space(char *str);
 void	replace_inib_space(char *str);
+void	replace_doubleback_inib_space(char **str);
 
 int	ft_count_spaces(char *line);
 int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);

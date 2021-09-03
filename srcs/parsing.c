@@ -96,8 +96,9 @@ int	parse_line(t_all *all)
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
 			/////////
-			// // is_pipe_inhib(all->line);
+			is_pipe_inhib(all->line);
 			replace_crocs(all->line);
+
 			replace_inib_space(all->line);
 
 			// ft_dup_char(all->line, all);
@@ -111,6 +112,7 @@ int	parse_line(t_all *all)
 			while (all->splt_line[j])
 			{
 				all->w_line[j] = ft_split(all->splt_line[j], ' ');
+				replace_doubleback_inib_space(all->w_line[j]);
 				j++;
 			}
 			all->w_line[j] = 0;
@@ -395,5 +397,27 @@ void	replace_back_inib_space(char *str)
 			str[i] = ' ';
 		}
 		i++;
+	}
+}
+
+void	replace_doubleback_inib_space(char **str)
+{
+	int i;
+	int j;
+
+	j = 0;
+	while (str[j])
+	{
+		i = 0;
+		while (str[j][i])
+		{
+			if (str[j][i] == '`')
+			{
+				str[j][i] = ' ';
+				ft_putstr("Z");
+			}
+			i++;
+		}
+		j++;
 	}
 }
