@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 16:55:18 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/03 15:59:37 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int     begin(t_all *all)
     printf("%s %s", all->path, SHELL_PROMPT);
     all->line = readline("-> ");
 	add_history(all->line);
-    printf("%s", all->line);
+    printf("%s\n", all->line);
     return (1);
 }
 

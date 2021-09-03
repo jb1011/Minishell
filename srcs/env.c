@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 15:39:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 16:50:35 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/03 16:23:03 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,7 @@ t_env     *vardo(t_env *list, char *tofind, char *ch_val, char del)
     return (NULL);
 }
 
-int         printenv(t_env *list)
+int         printenv(t_env *env)
 {
-    t_env *ptr;
-
-    ptr = list;
-    while (ptr)
-    {
-        printf("%s=%s\n", ptr->var, ptr->val);
-        ptr = ptr->nxt;
-    }
+    printf("%s=%s\n", env->var, env->val);
 }

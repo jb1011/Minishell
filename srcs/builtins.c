@@ -55,3 +55,26 @@ int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes)
         ft_putstr(s.stra);
     free(s.stra);
 }
+
+int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes)
+{
+    t_env   *ptr;
+    t_slv   s;
+
+    if (opts[1])
+        return (ft_err_msg("Env treated alone"));
+    if ((!redirection_or_pipes || ft_strlen(redirection_or_pipes) < place))
+        s.k = 1;
+    else
+        s.k = 0;;
+    ptr = all->env;
+    s.stra = ft_strdup("");
+    while (ptr)
+    {
+        if (s.k)
+            printenv(ptr);
+        else
+            printf("af faire plus tard\n");
+        ptr = ptr->nxt;
+    }
+}

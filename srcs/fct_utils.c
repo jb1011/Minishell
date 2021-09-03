@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 00:56:20 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 13:33:02 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/03 15:48:14 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,4 @@ void quotes_bool(int *boolean)
     else
         *boolean = 0;
 }
+
