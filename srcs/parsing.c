@@ -64,16 +64,14 @@ int	parse_line(t_all *all)
 		replace_quote(all->line);
 		if (ft_strchr(all->line, ' '))
 		{
+			// replace_inib_space(all->line);
 			all->w_line = malloc(sizeof(char **) * 2);
 			all->w_line[0] = ft_split(all->line, ' ');
 			all->w_line[1] = 0;
-			trim_tab(all->w_line);
 		}
 		else
-		{
 			megatab_malloc_simple(all);
-			trim_tab(all->w_line);
-		}
+		trim_tab(all->w_line);
 	}
 	else
 	{
@@ -92,9 +90,8 @@ int	parse_line(t_all *all)
 			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
 			
 			ft_free_tab(all->splt_line);
-			trim_tab(all->w_line);
 		}
-		if (ft_strchr(all->line, ' '))
+		else
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
 			/////////
@@ -116,8 +113,8 @@ int	parse_line(t_all *all)
 			}
 			all->w_line[j] = 0;
 			ft_free_tab(all->splt_line);
-			trim_tab(all->w_line);
 		}
+		trim_tab(all->w_line);
 	}
 	ft_print_megatab(all->w_line);
 	// if (!all->w_line)
@@ -360,4 +357,38 @@ void	replace_double_croc(char *s)
 		i++;
 	}
 	printf("line replaced : %s\n", s);
+}
+
+void	replace_inib_space(char *str)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			count++;
+		if (str[i] == ' ' && (count % 2 != 0))
+			str[i] = '@';
+		i++;
+	}
+}
+
+void	replace_back_inib_space(char *str)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			count++;
+		if (str[i] == '@' && (count % 2 != 0))
+			str[i] = ' ';
+		i++;
+	}
 }
