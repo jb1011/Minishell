@@ -64,18 +64,16 @@ int	parse_line(t_all *all)
 			all->w_line[0] = ft_split(all->line, ' ');
 			all->w_line[1] = 0;
 			trim_tab(all->w_line);
-			// ft_print_megatab(all->w_line);
 		}
 		else
 		{
 			megatab_malloc_simple(all);
 			trim_tab(all->w_line);
-			// ft_print_megatab(all->w_line);
 		}
 	}
-	j = 0;
-	if (is_separator(all->line))
+	else
 	{
+		j = 0;
 		// replace_quote(all->line);
 		if (!ft_strchr(all->line, ' '))
 		{
@@ -91,7 +89,6 @@ int	parse_line(t_all *all)
 			
 			ft_free_tab(all->splt_line);
 			trim_tab(all->w_line);
-			ft_print_megatab(all->w_line);
 		}
 		if (ft_strchr(all->line, ' '))
 		{
@@ -116,9 +113,9 @@ int	parse_line(t_all *all)
 			all->w_line[j] = 0;
 			ft_free_tab(all->splt_line);
 			trim_tab(all->w_line);
-			ft_print_megatab(all->w_line);
 		}
 	}
+	ft_print_megatab(all->w_line);
 	// if (!all->w_line)
 	// 	ft_free_megatab(all->w_line);
 	return (1);
