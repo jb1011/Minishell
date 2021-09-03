@@ -55,5 +55,7 @@ void	ft_malloc_tab(char ***t, int size, char **s);
 int		is_separator(char *s);
 int		quote_is_odd(char *s, int end);
 void	check_tilde(char *path);
+void	megatab_malloc_simple(t_all *all);
+
 
 #endif

@@ -152,3 +152,12 @@ int	quote_is_odd(char *s, int end)
 		return (0);
 	return (1);
 }
+
+void	megatab_malloc_simple(t_all *all)
+{
+	all->w_line = malloc(sizeof(char **) * 2);
+	all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
+	all->w_line[0][0] = ft_strdup(all->line);
+	all->w_line[0][1] = 0;
+	all->w_line[1] = 0;
+}
