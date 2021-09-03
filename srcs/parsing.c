@@ -106,18 +106,18 @@ int	parse_line(t_all *all)
 			all->splt_line = ft_split(all->line, '|');
 
 			reverse_pipe(all->splt_line);
-			all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
-			all->w_line[1] = (char **)malloc(sizeof(char *) * 2);
-			all->w_line[2] = (char **)malloc(sizeof(char *) * 1);
+			// // all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
+			// // all->w_line[1] = (char **)malloc(sizeof(char *) * 2);
+			// // all->w_line[2] = (char **)malloc(sizeof(char *) * 1);
 	
-			all->w_line[0][0] = ft_strdup(all->splt_line[0]);
-			all->w_line[0][1] = 0;
+			// // all->w_line[0][0] = ft_strdup(all->splt_line[0]);
+			// // all->w_line[0][1] = 0;
 
-			all->w_line[1][0] = ft_strdup(all->splt_line[1]);
-			all->w_line[1][1] = 0;
+			// // all->w_line[1][0] = ft_strdup(all->splt_line[1]);
+			// // all->w_line[1][1] = 0;
 
-			all->w_line[2] = 0;
-
+			// // all->w_line[2] = 0;
+			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
 			ft_free_tab(all->splt_line);
 			trim_tab(all->w_line);
 			ft_print_megatab(all->w_line);
@@ -130,6 +130,7 @@ int	parse_line(t_all *all)
 			// ft_dup_char(all->line, all);
 
 			// all->splt_line = ft_split(all->tmp, '|');
+			// replace_crocs(all->line);
 			all->splt_line = ft_split(all->line, '|');
 
 			reverse_pipe(all->splt_line);
@@ -296,4 +297,21 @@ void count_pipe_croc(char *str, t_all *all)
 	}
 	all->pipendirect[j] = 0;
 	printf("PILELINE : %s\n", all->pipendirect);
+}
+
+void	replace_crocs(char *str)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			count++;
+		if ((str[i] == '<' || str[i] == '>') && (count % 2 != 0))
+			str[i] = '|';
+		i++;
+	}
 }

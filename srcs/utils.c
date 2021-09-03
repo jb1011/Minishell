@@ -73,3 +73,53 @@ char	*ft_dup_char(const char *s)
 	str[j] = '\0';
 	return (str);
 }
+
+void	ft_malloc_tab(char ***t, int size, char **s)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < size)
+	{
+		t[i] = (char **)malloc(sizeof(char *) * 2);
+		i++;
+	}
+	i = 0;
+	while (s[i])
+	{
+		j = 0;
+		t[i][j] = ft_strdup(s[i]);
+		j++;
+		t[i][j] = 0;
+		i++;
+	}
+	t[i] = 0;
+}
+
+int	ft_get_nb_strs(char *s, char c)
+{
+	int	i;
+	int	nb_strs;
+
+	if (!s[0])
+		return (0);
+	i = 0;
+	nb_strs = 0;
+	while (s[i] && s[i] == c)
+		i++;
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			nb_strs++;
+			while (s[i] && s[i] == c)
+				i++;
+			continue ;
+		}
+		i++;
+	}
+	if (s[i - 1] != c)
+		nb_strs++;
+	return (nb_strs);
+}

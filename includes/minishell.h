@@ -50,6 +50,8 @@ void 	reverse_pipe(char **str);
 void	replace_quote(char *str);
 void	count_pipe_croc(char *str,t_all *all);
 char	*ft_dup_char(const char *s);
+void	replace_crocs(char *str);
+void	ft_malloc_tab(char ***t, int size, char **s);
 
 
 
