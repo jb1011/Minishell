@@ -90,6 +90,8 @@ void	replace_doubleback_inib_space(char **str);
 void	ft_sigint(int num, t_all *all);
 int		db_quote_open(char *str, int end);
 void	trim_quote(char ***t);
+char	*ft_dup(const char *s, char c);
+char	*delete_quote_nospace(char *str);
 
 
 

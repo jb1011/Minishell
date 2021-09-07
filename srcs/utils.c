@@ -58,7 +58,6 @@ char	*ft_dup_char(const char *s)
 	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!str)
 		return (NULL);
-	
 	count = 0;
 	while (s[i])
 	{

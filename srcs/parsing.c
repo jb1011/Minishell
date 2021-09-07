@@ -37,7 +37,10 @@ int	parse_line(t_all *all)
 			all->w_line[1] = 0;
 		}
 		else
+		{
 			megatab_malloc_simple(all);
+			all->w_line[0][0] = delete_quote_nospace(all->w_line[0][0]);
+		}
 		trim_tab(all->w_line);
 		trim_quote(all->w_line);
 	}
@@ -54,7 +57,7 @@ int	parse_line(t_all *all)
 			// all->splt_line = ft_split(all->tmp, '|');
 			replace_crocs(all->line);
 			all->splt_line = ft_split(all->line, '|');
-			// reverse_pipe(all->splt_line);
+			reverse_pipe(all->splt_line);
 			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
 			ft_free_tab(all->splt_line);
 		}
