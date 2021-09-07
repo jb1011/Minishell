@@ -23,7 +23,7 @@ int	ft_count_split(char *line)
 	c = 0;
 	while (line[i])
 	{
-		if (line[i] == '\'')
+		if (line[i] == '\'' || line[i] == '"')
 			c++;
 		if ((line[i] == '|' || line[i] == '<' || line[i] == '>') && (c % 2 == 0))
 			count++;
@@ -40,7 +40,7 @@ int	ft_check_error(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (!quote_is_odd(s, i))
+		if (!db_quote_open(s, i) && !quote_is_odd(s, i))
 		{
 			if (s[i] == '|' && s[i + 1] == '|')
 				return (0);

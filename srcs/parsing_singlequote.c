@@ -16,14 +16,18 @@ int	is_pipe_inhib(char *str)
 {
 	int i;
 	int count;
+	int	count2;
 
 	count = 0;
+	count2 = 0;
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '\'')
 			count++;
-		if (str[i] == '|' && (count % 2 != 0))
+		if (str[i] == '"')
+			count2++;
+		if (str[i] == '|' && ((count2 % 2 != 0) || (count % 2 != 0)))
 			str[i] = '^';
 		i++;
 	}
@@ -64,6 +68,11 @@ void	replace_quote(char *str)
 			mybol = 0;
 		}
 		if (str[i] == '\'' && str[i + 1] == '\'')
+		{
+			str[i] = ' ';
+			mybol = 1;
+		}
+		if (str[i] == '"' && str[i + 1] == '"')
 		{
 			str[i] = ' ';
 			mybol = 1;

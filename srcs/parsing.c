@@ -25,7 +25,6 @@ int	parse_line(t_all *all)
 		printf("ERRRROOROOOOOOORRRRR\n");
 		return (0);
 	}
-	
 	if (!is_separator(all->line))
 	{
 		replace_quote(all->line);
@@ -34,7 +33,6 @@ int	parse_line(t_all *all)
 			replace_inib_space(all->line);
 			all->w_line = malloc(sizeof(char **) * 2);
 			all->w_line[0] = ft_split(all->line, ' ');
-			// replace_back_inib_space(all->w_line[0][0]);
 			replace_doubleback_inib_space(all->w_line[0]);
 			all->w_line[1] = 0;
 		}
@@ -42,7 +40,6 @@ int	parse_line(t_all *all)
 			megatab_malloc_simple(all);
 		trim_tab(all->w_line);
 		trim_quote(all->w_line);
-
 	}
 	else
 	{
@@ -59,26 +56,16 @@ int	parse_line(t_all *all)
 			all->splt_line = ft_split(all->line, '|');
 			// reverse_pipe(all->splt_line);
 			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
-			
 			ft_free_tab(all->splt_line);
 		}
 		else
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
-			/////////
 			is_pipe_inhib(all->line);
 			replace_crocs(all->line);
-
 			replace_inib_space(all->line);
-
-			// ft_dup_char(all->line, all);
-
-			// all->splt_line = ft_split(all->tmp, '|');
-			// replace_crocs(all->line);
 			all->splt_line = ft_split(all->line, '|');
-
 			reverse_pipe(all->splt_line);
-			
 			while (all->splt_line[j])
 			{
 				all->w_line[j] = ft_split(all->splt_line[j], ' ');
@@ -143,7 +130,7 @@ void count_pipe_croc(char *str, t_all *all)
 	j = 0;
 	while (str[i])
 	{
-		if (!quote_is_odd(str, i) && !db_quote_open(str, i))
+		if (!db_quote_open(str, i))
 		{
 
 			if (str[i] == '|')

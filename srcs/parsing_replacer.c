@@ -16,15 +16,19 @@ void	replace_inib_space(char *str)
 {
 	int i;
 	int count;
+	int count2;
 
 	count = 0;
+	count2 = 0;
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '\'')
 			count++;
-		if (str[i] == ' ' && (count % 2 != 0))
-			str[i] = '`';
+		if (str[i] == '"')
+			count2++;
+		if (str[i] == ' ' && ((count2 % 2 != 0) || (count % 2 != 0)))
+				str[i] = '`';
 		i++;
 	}
 }
@@ -38,7 +42,7 @@ void	replace_back_inib_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '"')
 			count++;
 		if (str[i] == '`' && (count % 2 != 0))
 		{
@@ -75,8 +79,11 @@ void	replace_crocs(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i] == '<' || str[i] == '>') && !quote_is_odd(str, i))
+		if ((str[i] == '<' || str[i] == '>') && !db_quote_open(str, i) && !quote_is_odd(str, i))
+		{
+			ft_putstr("!!!!!!!");
 			str[i] = '|';
+		}
 		i++;
 	}
 }
