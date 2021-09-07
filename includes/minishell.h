@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/03 16:22:24 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/06 18:58:43 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ typedef struct s_all
 	t_env	*env;
 	char	*tmp;
 }	t_all;
+
+typedef struct s_commands
+{
+	char	**list_of_targets;
+	char 	**list_of_redirections;
+	char	**orders;
+}	t_commands;
+
+typedef	struct	s_pipenodes
+{
+	struct	s_pipenode *left;
+	struct	s_pipenode *right;
+	t_commands 			*commands;
+} t_pipenodes;
 
 int		_fct(char *todo[], char *env[]);
 int		begin(t_all *all);
