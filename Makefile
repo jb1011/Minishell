@@ -14,7 +14,11 @@ FILES   =       minishell.c \
 				utils.c \
 				builtins.c \
 				fct_utils.c \
-				env.c
+				env.c \
+				parsing_replacer.c \
+				parsing_singlequote.c \
+				parsing_check_error.c \
+				parsing_check_doublequote.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 

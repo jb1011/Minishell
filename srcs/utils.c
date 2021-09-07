@@ -168,3 +168,16 @@ void	megatab_malloc_simple(t_all *all)
 	all->w_line[0][1] = 0;
 	all->w_line[1] = 0;
 }
+
+void	ft_sigint(int num, t_all *all)
+{
+	if (num == SIGINT)
+	{
+		// ft_putstr("HEEEYYOOO");
+		// init(all);
+		// begin(all);
+		// main(0,0);
+		// signal(SIGINT, ft_sigint);
+	}
+	// SIGQUIT pour ctrl D
+}
