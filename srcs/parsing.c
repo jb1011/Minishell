@@ -33,22 +33,6 @@ int	ft_count_split(char *line)
 	return (count + 1);
 }
 
-// // int	ft_count_spaces(char *line)
-// // {
-// // 	int i;
-// // 	int count;
-
-// // 	count = 1;
-// // 	i = 0;
-// // 	while (line[i])
-// // 	{
-// // 		if (line[i] == ' ')
-// // 			count++;
-// // 		i++;
-// // 	}
-// // 	return (count);
-// // }
-
 int	parse_line(t_all *all)
 {
 	int j;
