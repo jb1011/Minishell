@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 00:56:20 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/03 15:48:14 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 11:08:44 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int dollar_case(char **buffer, char *object, int *index)
 {
     int k;
     char    *temp;
+    t_env   *env;
     
      if (object[*index + 1] == '$' && ++*index)
         *buffer = ft_join_free(*buffer, ft_itoa(getpid()), 3);
@@ -27,6 +28,7 @@ int dollar_case(char **buffer, char *object, int *index)
         while (!ft_strchr(STOP_DOLLAR, object[++*index]))
             ;
         temp = extractstr(&object[k], STOP_DOLLAR);
+        env = getenv(temp), 1);
         *buffer = ft_join_free(*buffer, getenv(temp), 1);
         free(temp);
         --*index;
