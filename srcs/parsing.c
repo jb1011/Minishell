@@ -33,22 +33,6 @@ int	ft_count_split(char *line)
 	return (count + 1);
 }
 
-// // int	ft_count_spaces(char *line)
-// // {
-// // 	int i;
-// // 	int count;
-
-// // 	count = 1;
-// // 	i = 0;
-// // 	while (line[i])
-// // 	{
-// // 		if (line[i] == ' ')
-// // 			count++;
-// // 		i++;
-// // 	}
-// // 	return (count);
-// // }
-
 int	parse_line(t_all *all)
 {
 	int j;
@@ -389,7 +373,6 @@ void	replace_back_inib_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		ft_putstr("YYY");
 		if (str[i] == '\'')
 			count++;
 		if (str[i] == '`' && (count % 2 != 0))
@@ -414,10 +397,22 @@ void	replace_doubleback_inib_space(char **str)
 			if (str[j][i] == '`')
 			{
 				str[j][i] = ' ';
-				ft_putstr("Z");
 			}
 			i++;
 		}
 		j++;
+	}
+}
+
+void	ignore_quote(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+
+		
+		i++;
 	}
 }
