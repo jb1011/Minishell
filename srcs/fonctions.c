@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 15:00:01 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 16:49:15 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	_fct(char *todo[], char *env[])
 	int		i;
 	pid_t	id;
 
+	
 	id = fork();
 	if (id) // si c'est pas le processus fils , on attend aue le processus fils se finisse
 	 	waitpid(id, 0, 0);

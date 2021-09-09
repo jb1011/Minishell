@@ -6,14 +6,14 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 15:39:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 14:56:36 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 21:51:16 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <stdlib.h>
 
-int     advar(t_env **list, char *var, char *val)
+int     advar(t_env **list, char *var, char *val, char is_env)
 {
     t_slv s;
     t_env *ret;
@@ -22,11 +22,13 @@ int     advar(t_env **list, char *var, char *val)
     ret->var = ft_strdup(var);
     ret->val = ft_strdup(val);
     ret->nxt = *list;
+    ret->is_env = is_env;
     *list = ret;
     return (1);
 }
 
-t_env     *vardo(t_env **list, char *tofind, char *ch_val, char del)
+
+t_env     *vardo(t_env **list, char *tofind, char *ch_val, char do_what)
 {
     t_env *ret;
     t_env   *temp;
@@ -45,9 +47,10 @@ t_env     *vardo(t_env **list, char *tofind, char *ch_val, char del)
         free(ret->val);
         ret->val = ft_strdup(ch_val);
     }
-    if (!del)
+    if (ret && do_what == EXPORT)
+        ret->is_env = 1;
+    if (do_what != UNSET)
         return (ret);
-    
     if (ret)
     {
         if (!temp)

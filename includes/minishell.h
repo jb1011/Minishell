@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 15:00:34 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 21:57:57 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,20 @@
 # define STOP_STR "\"\'$"
 # define STOP_DBLQUOTE "\"$"
 # define STOP_QUOTE "\'\""
+# define DEL_ALL 1
+# define UNSET 2
+# define EXPORT 3
+# define PRINT	4
 
 typedef struct s_env
 {
 	char	*var;
 	char	*val;
+	char	is_env;
 	struct	s_env *nxt;
 }	t_env;
 
-typedef	struct	s_pip
+typedef	struct	s_pipenode
 {
 	struct	s_pipenode *next;
 	char	**list_of_targets;
@@ -92,15 +97,17 @@ void quotes_bool(int *boolean);
 int     treat_orders(t_all *all, char **opts);
 /* ENVIRONNEMENT GESTION */
 int     init(t_all *all);
-t_env     *vardo(t_env **list, char *tofind, char *ch_val, char del);
-int     advar(t_env **list, char *var, char *val);
+t_env     *vardo(t_env **list, char *tofind, char *ch_val, char do_what);
+int     advar(t_env **list, char *var, char *val, char is_env);
 int         printenv(t_env *env);
 char    **env_to_strtab(t_env *list);
+int     assign_var(t_all *all, char *assignation, char export);
 /* BUILTINS */
 int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
 int _cd(char *path);
 int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes);
 int     _unset(t_env **list, char **opts);
 int _pwd(t_all *all);
+int     _export(t_all *all, char **opts);
 
 #endif

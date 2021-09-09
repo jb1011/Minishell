@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 13:35:11 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 22:01:06 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int     init(t_all *all)
 	ft_strlcat(all->path, getenv("USER"), 393);
 	chdir(all->path);
     all->env = NULL;
-    advar(&all->env, "PATH", getenv("PATH"));
+    advar(&all->env, "PATH", getenv("PATH"), EXPORT);
     all->exec_paths = ft_split(all->env->val, ':');
-    advar(&all->env, "USER", getenv("USER"));
-    advar(&all->env, "SHELL", "minishell");
-    advar(&all->env, "DESKTOP_SESSION", getenv("DESKTOP_SESSION"));
+    advar(&all->env, "USER", getenv("USER"), EXPORT);
+    advar(&all->env, "SHELL", "minishell", EXPORT);
+    advar(&all->env, "DESKTOP_SESSION", getenv("DESKTOP_SESSION"), EXPORT);
 }

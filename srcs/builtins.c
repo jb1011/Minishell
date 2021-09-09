@@ -19,36 +19,13 @@ int _pwd(t_all *all)
 int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes)
 {
     t_slv s;
+    char *temp;
 
-    s = (t_slv){-1, 0, 0, 0, 0, 0, ft_strdup(""), 0, 0};
-    ++opts;
-    if (!ft_memcmp(*opts, "-n", 3) && ++opts)
-        s.da = 1;
-    if (!opts)
-        return (0);
-    s.strb = *opts;
-    while (s.strb[++s.i])
-    {
-        if (s.strb[s.i] == '\"' && !s.j)
-            quotes_bool(&s.k);
-        else if (s.strb[s.i] == '\'' && !s.k) 
-            quotes_bool(&s.j);
-        else if (s.j) // s.j --->> apostrophe !!!!!!
-            str_case(&s.stra, s.strb, &s.i, STOP_QUOTE);
-        else if (s.strb[s.i] == '$')
-            dollar_case(&s.stra, s.strb, &s.i, all);
-        else if (s.k) // s.k -->>> GUILLEMETS
-            str_case(&s.stra, s.strb, &s.i, STOP_DBLQUOTE);
-        else
-        {
-            str_case(&s.stra, s.strb, &s.i, STOP_STR);
-        }
-        if (!s.strb[s.i + 1] && ++opts && *opts && assign(&s.i, -1) == - 1)
-        {
-            s.stra = ft_join_free(s.stra, " ", 1);
-            s.strb = *opts;
-        }
-    }
+    s = (t_slv){0, 0, 0, 0, 0, 0, ft_strdup(""), 0, 0};
+    if (!ft_memcmp(*opts, "-n", 3) && ++s.i)
+        s.k = 1;
+    while (opts[++s.i])
+        s.stra = ft_join_free(ft_join_free(s.stra, " ", 1), opts[s.i], 1);
     if (!s.da)
         s.stra = ft_join_free(s.stra, "\n", 1);
     if (!redirection_or_pipes || ft_strlen(redirection_or_pipes) < place)
@@ -72,19 +49,28 @@ int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes)
     s.stra = ft_strdup("");
     while (ptr)
     {
-        if (s.k)
+        if (s.k && ptr->is_env)
             printenv(ptr);
-        else
+        else if (ptr->is_env)
             printf("af faire plus tard\n");
         ptr = ptr->nxt;
     }
     return (1);
 }
 
+int     _export(t_all *all, char **opts)
+{
+    int i;
+
+    i = 0;
+    while (opts[++i])
+        assign_var(all, opts[i], EXPORT);
+}
 int     _unset(t_env **list, char **opts)
 {
     int i;
     i = 0;
     while (opts[++i])
-        vardo(list, opts[i], 0, 1);
+        vardo(list, opts[i], 0, UNSET);
+    return (1);
 }
