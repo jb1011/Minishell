@@ -490,52 +490,25 @@ void	split_target(t_all *all)
 {
 	int	i;
 	int	j;
-	int	k;
-
-	i = 0;
-				// ft_putnbr_fd(all->size_redir , 0);
-	all->target_cpy = malloc(sizeof(char *) * (all->size_redir * 2));
-	j = 0;
-	// // // while (all->line[i])
-	// // // {
-
-	// // // 	if (is_redir(all->line[i]))
-	// // // 	{
-	// // // 		k = 0;
-	// // // 		// while (is_redir(all->line[i]))
-	// // // 		// 	i++;
-	// // // 			all->target_cpy[j] = malloc(sizeof(char) * 1100);
-	// // // 		while (!is_char_separator(all->line[i]))
-	// // // 		{
-	// // // 		ft_putstr("I = ");
-	// // // 		write(0, &all->line[i], 1);
-	// // // 			all->target_cpy[j][k] = all->line[i];
-	// // // 			k++;
-	// // // 			i++;
-	// // // 		}
-	// // // 		all->target_cpy[j][k] = 0;
-	// // // 	}
-	// // // 	j++;
-	// // // 	i++;
-	// // // }
 	int start;
 	int	len;
-		j = 0;
+
+	all->target_cpy = malloc(sizeof(char *) * (all->size_redir * 2));
+	i = 0;
+	j = 0;
 	while (all->line[i])
 	{
 		if (is_redir(all->line[i]))
 		{
-			start = i;
+			if (is_redir(all->line[i + 1]))
 				i++;
+			start = i;
+			i++;
 			while (all->line[i] && !is_char_separator(all->line[i + 1]))
 				i++;
 			len = i - start;
-			printf("LEN : %d\n", len);
-			printf("START : %d\n", start);
-			printf("I : %d\n", i);
-			start ++;
+			start++;
 			all->target_cpy[j] = ft_substr(all->line, start, len);
-			// i--;
 			j++;
 		}
 		if (i < ft_strlen(all->line))
@@ -546,3 +519,35 @@ void	split_target(t_all *all)
 	ft_print_tab(all->target_cpy);
 
 }
+
+// void	split_orders(t_all *all)
+// {
+// 	int	i;
+// 	int	j;
+// 	int start;
+// 	int	len;
+
+// 	all->order_cpy = malloc(sizeof(char *) * (ft_count_split(all->line) + 2));
+// 	i = 0;
+// 	j = 0;
+// 	start = 0;
+// 	while (all->line[i])
+// 	{
+// 		if (is_char_separator(all->line[i]))
+// 		{
+// 			all->order_cpy[j] = ft_substr(all->line, start, i);
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// 	while (all->line[i])
+// 	{
+// 		if (all->line[i] == '|')
+// 		{
+// 			start = i;
+// 			i++;
+// 		}
+// 		i++;
+// 	}
+	
+// }
