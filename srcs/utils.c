@@ -199,3 +199,10 @@ char	*ft_dup(const char *s, char c)
 
 	return (str);
 }
+
+int	is_redir(char s)
+{
+	if (s == '>' || s == '<')
+		return (1);
+	return (0);
+}

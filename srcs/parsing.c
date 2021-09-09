@@ -41,6 +41,12 @@ int	parse_line(t_all *all)
 	all->line = ignore_quote(all->line);
 	all->line = ignore_quote_word(all->line);
 	count_pipe_croc(all->line, all);
+
+
+	split_redir(all->pipendirect, all);
+	split_target(all);
+	
+	
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
@@ -107,7 +113,7 @@ int	parse_line(t_all *all)
 		trim_tab(all->w_line);
 	}
 	ft_print_megatab(all->w_line);
-	split_redir(all->pipendirect, all);
+	
 	// if (!all->w_line)
 	// 	ft_free_megatab(all->w_line);
 	return (1);
@@ -475,11 +481,68 @@ void	split_redir(char *str, t_all *all)
 		all->redir_cpy[i][1] = 0;
 		i++;
 	}
+	all->size_redir = i;
 	all->redir_cpy[i] = 0;
-	ft_print_tab(all->redir_cpy);
+	// ft_print_tab(all->redir_cpy);
 }
 
-// void	split_target(char ***t)
-// {
+void	split_target(t_all *all)
+{
+	int	i;
+	int	j;
+	int	k;
 
-// }
+	i = 0;
+				// ft_putnbr_fd(all->size_redir , 0);
+	all->target_cpy = malloc(sizeof(char *) * (all->size_redir * 2));
+	j = 0;
+	// // // while (all->line[i])
+	// // // {
+
+	// // // 	if (is_redir(all->line[i]))
+	// // // 	{
+	// // // 		k = 0;
+	// // // 		// while (is_redir(all->line[i]))
+	// // // 		// 	i++;
+	// // // 			all->target_cpy[j] = malloc(sizeof(char) * 1100);
+	// // // 		while (!is_char_separator(all->line[i]))
+	// // // 		{
+	// // // 		ft_putstr("I = ");
+	// // // 		write(0, &all->line[i], 1);
+	// // // 			all->target_cpy[j][k] = all->line[i];
+	// // // 			k++;
+	// // // 			i++;
+	// // // 		}
+	// // // 		all->target_cpy[j][k] = 0;
+	// // // 	}
+	// // // 	j++;
+	// // // 	i++;
+	// // // }
+	int start;
+	int	len;
+		j = 0;
+	while (all->line[i])
+	{
+		if (is_redir(all->line[i]))
+		{
+			start = i;
+				i++;
+			while (all->line[i] && !is_char_separator(all->line[i + 1]))
+				i++;
+			len = i - start;
+			printf("LEN : %d\n", len);
+			printf("START : %d\n", start);
+			printf("I : %d\n", i);
+			start ++;
+			all->target_cpy[j] = ft_substr(all->line, start, len);
+			// i--;
+			j++;
+		}
+		if (i < ft_strlen(all->line))
+			i++;
+	}
+	all->target_cpy[j] = 0;
+	printf("TABBB : ");
+	ft_print_tab(all->target_cpy);
+
+}

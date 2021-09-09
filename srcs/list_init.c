@@ -20,8 +20,8 @@ t_pipenodes	*createCell(char **orders, char **targets, char **redir)
 	if (!cell)
 		return (NULL);
 	cell->orders = orders; 
-	cell->list_of_redirections = redir;
-	cell->list_of_targets = targets;
+	cell->redir = redir;
+	cell->targets = targets;
 	cell->next = NULL;
 	return (cell);
 }
@@ -60,9 +60,9 @@ void	print_linked_list(t_pipenodes *stack)
 		printf("ORDERS :\n");
 		ft_print_tab(stack->orders);
 		printf("REDIRECTION :\n");
-		ft_print_tab(stack->list_of_redirections);
+		ft_print_tab(stack->redir);
 		printf("TARGETS :\n");
-		ft_print_tab(stack->list_of_targets);
+		ft_print_tab(stack->targets);
 		tmp = tmp->next;
 	}
 	ft_putstr("\n");
