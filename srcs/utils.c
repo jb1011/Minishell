@@ -19,7 +19,7 @@ void	ft_print_tab(char **t)
 	j = 0;
 	while (t[j])
 	{
-		printf("%s\n", t[j]);
+		printf("\t%s\n", t[j]);
 		j++;
 	}
 }
@@ -193,9 +193,9 @@ char	*ft_dup(const char *s, char c)
 		j++;
 	}
 	str[j] = '\0';
-	ft_putstr("ligne : ");
-	ft_putstr(str);
-	ft_putstr("\n");
+	// ft_putstr("ligne : ");
+	// ft_putstr(str);
+	// ft_putstr("\n");
 
 	return (str);
 }
@@ -224,4 +224,18 @@ char **mall_doubletab(char **t)
 	}
 	new[j] = 0;
 	return (new);
+}
+
+int	is_redir_str(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '>' || s[i] == '<')
+			return (1);
+		i++;
+	}
+	return (0);
 }

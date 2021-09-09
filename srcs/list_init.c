@@ -22,6 +22,8 @@ t_pipenodes	*createCell(char **orders, char **targets, char **redir)
 	// cell->orders = orders; 
 	// cell->redir = redir;
 	// cell->targets = targets;
+	ft_putstr(">>>>");
+	ft_print_tab(orders);
 	cell->orders = mall_doubletab(orders);
 	cell->redir = mall_doubletab(redir);
 	cell->targets = mall_doubletab(targets);
@@ -60,12 +62,14 @@ void	print_linked_list(t_pipenodes *stack)
 	tmp = stack;
 	while (tmp)
 	{
+		ft_putstr("===============\n");
 		printf("ORDERS :\n");
-		ft_print_tab(stack->orders);
+		ft_print_tab(tmp->orders);
 		printf("REDIRECTION :\n");
-		ft_print_tab(stack->redir);
+		ft_print_tab(tmp->redir);
 		printf("TARGETS :\n");
-		ft_print_tab(stack->targets);
+		ft_print_tab(tmp->targets);
+		ft_putstr("===============\n");
 		tmp = tmp->next;
 	}
 	ft_putstr("\n");

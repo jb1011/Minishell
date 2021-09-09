@@ -33,9 +33,9 @@ typedef struct s_env
 	struct	s_env *nxt;
 }	t_env;
 
-typedef	struct	s_pip
+typedef	struct	s_pipenodes
 {
-	struct	s_pipenode *next;
+	struct	s_pipenodes *next;
 	char	**targets;
 	char 	**redir;
 	char	**orders;
@@ -93,11 +93,12 @@ char	*ignore_quote(char *str);
 void	split_redir(t_all *all);
 char	*ignore_quote_word(char *str);
 int		is_redir(char s);
-void	split_target(t_all *all);
-void	split_orders(t_all *all);
+void	split_target(t_all *all, char *str);
+void	split_orders(t_all *all, char *str);
 void	init_list_var(t_all *all);
 void	print_linked_list(t_pipenodes *stack);
 char	**mall_doubletab(char **t);
+int		is_redir_str(char *s);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *stack);

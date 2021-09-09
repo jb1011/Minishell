@@ -110,7 +110,7 @@ int	parse_line(t_all *all)
 		}
 		trim_tab(all->w_line);
 	}
-	ft_print_megatab(all->w_line);
+	// ft_print_megatab(all->w_line);
 	
 	// if (!all->w_line)
 	// 	ft_free_megatab(all->w_line);
@@ -351,7 +351,7 @@ void	replace_double_croc(char *s)
 		}
 		i++;
 	}
-	printf("line replaced : %s\n", s);
+	// printf("line replaced : %s\n", s);
 }
 
 void	replace_inib_space(char *str)
@@ -461,10 +461,28 @@ char	*ignore_quote_word(char *str)
 }
 void	init_list_var(t_all *all)
 {
-	split_redir(all);
-	split_target(all);
-	split_orders(all);
-	addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
+	int	i;
+	all->splt_line = ft_split(all->line, '|');
+
+
+	all->stack = NULL;
+	i = 0;
+	while (all->splt_line[i])
+	{
+		printf("###%s###\n", all->splt_line[i]);
+		split_redir(all);
+		split_target(all, all->splt_line[i]);
+		split_orders(all, all->splt_line[i]);
+		// printf("TARGET : \n");
+		// ft_print_tab(all->target_cpy);
+		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
+		ft_free_tab(all->order_cpy);
+		ft_free_tab(all->target_cpy);
+		ft_free_tab(all->redir_cpy);
+
+		i++;
+	}
+
 	//penser à free les order_cpy...
 	print_linked_list(all->stack);
 }
@@ -489,7 +507,7 @@ void	split_redir(t_all *all)
 	// ft_print_tab(all->redir_cpy);
 }
 
-void	split_target(t_all *all)
+void	split_target(t_all *all, char *str)
 {
 	int	i;
 	int	j;
@@ -499,68 +517,82 @@ void	split_target(t_all *all)
 	all->target_cpy = malloc(sizeof(char *) * (all->size_redir * 2));
 	i = 0;
 	j = 0;
-	while (all->line[i])
+	// if (!is_redir_str(str))
+	// {
+	// 	all->target_cpy[0] = ft_strdup(str);
+	// 	all->target_cpy[1] = 0;
+	// 	return ;
+	// }
+	while (str[i])
 	{
-		if (is_redir(all->line[i]))
+		if (is_redir(str[i]))
 		{
-			if (is_redir(all->line[i + 1]))
+			if (is_redir(str[i + 1]))
 				i++;
 			start = i;
 			i++;
-			while (all->line[i] && !is_char_separator(all->line[i + 1]))
+			while (str[i] && !is_char_separator(str[i + 1]))
 				i++;
 			len = i - start;
 			start++;
-			all->target_cpy[j] = ft_substr(all->line, start, len);
+			all->target_cpy[j] = ft_substr(str, start, len);
 			j++;
 		}
-		if (i < ft_strlen(all->line))
+		if (i < ft_strlen(str))
 			i++;
 	}
 	all->target_cpy[j] = 0;
-	printf("TABBB : ");
-	ft_print_tab(all->target_cpy);
+	// printf("TABBB : ");
+	// ft_print_tab(all->target_cpy);
 
 }
 
-void	split_orders(t_all *all)
+void	split_orders(t_all *all, char *str)
 {
 	int	i;
 	int	j;
 	int start;
 	int	len;
 
-	all->order_cpy = malloc(sizeof(char *) * (ft_count_split(all->line) + 2));
+	all->order_cpy = malloc(sizeof(char *) * (ft_count_split(str) + 2));
 	i = 0;
 	j = 0;
 	start = 0;
-	while (all->line[i])
+	// printf("===%s===\n", str);
+	if (!is_redir_str(str))
 	{
-		if (is_char_separator(all->line[i]))
+		// ft_putstr("999");
+		all->order_cpy[0] = ft_strdup(str);
+		all->order_cpy[1] = 0;
+		return ;
+	}
+	while (str[i])
+	{
+		if (is_char_separator(str[i]))
 		{
-			all->order_cpy[j] = ft_substr(all->line, start, i);
+			all->order_cpy[j] = ft_substr(str, start, i);
 			j++;
 			break ;
 		}
 		i++;
 	}
-	while (all->line[i])
+	while (str[i])
 	{
-		if (all->line[i] == '|')
+		if (str[i] == '|')
 		{
 			start = i;
 			i++;
-			while (all->line[i] && !is_char_separator(all->line[i + 1]))
+			while (str[i] && !is_char_separator(str[i + 1]))
 				i++;
 			len = i - start;
 			start++;
-			all->order_cpy[j] = ft_substr(all->line, start, len);
+			all->order_cpy[j] = ft_substr(str, start, len);
 			j++;
 		}
-		if (i < ft_strlen(all->line))
+		if (i < ft_strlen(str))
 			i++;
 	}
 	all->order_cpy[j] = 0;
-	printf("ORDERRR : ");
-	ft_print_tab(all->order_cpy);
+	// printf("ORDERRR : ");
+	// ft_print_tab(all->order_cpy);
 }
