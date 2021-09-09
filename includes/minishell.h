@@ -94,6 +94,7 @@ void	split_redir(char *str, t_all *all);
 char	*ignore_quote_word(char *str);
 int		is_redir(char s);
 void	split_target(t_all *all);
+void	split_orders(t_all *all);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *stack);

@@ -45,7 +45,7 @@ int	parse_line(t_all *all)
 
 	split_redir(all->pipendirect, all);
 	split_target(all);
-	
+	split_orders(all);
 	
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
@@ -520,34 +520,44 @@ void	split_target(t_all *all)
 
 }
 
-// void	split_orders(t_all *all)
-// {
-// 	int	i;
-// 	int	j;
-// 	int start;
-// 	int	len;
+void	split_orders(t_all *all)
+{
+	int	i;
+	int	j;
+	int start;
+	int	len;
 
-// 	all->order_cpy = malloc(sizeof(char *) * (ft_count_split(all->line) + 2));
-// 	i = 0;
-// 	j = 0;
-// 	start = 0;
-// 	while (all->line[i])
-// 	{
-// 		if (is_char_separator(all->line[i]))
-// 		{
-// 			all->order_cpy[j] = ft_substr(all->line, start, i);
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	while (all->line[i])
-// 	{
-// 		if (all->line[i] == '|')
-// 		{
-// 			start = i;
-// 			i++;
-// 		}
-// 		i++;
-// 	}
-	
-// }
+	all->order_cpy = malloc(sizeof(char *) * (ft_count_split(all->line) + 2));
+	i = 0;
+	j = 0;
+	start = 0;
+	while (all->line[i])
+	{
+		if (is_char_separator(all->line[i]))
+		{
+			all->order_cpy[j] = ft_substr(all->line, start, i);
+			j++;
+			break ;
+		}
+		i++;
+	}
+	while (all->line[i])
+	{
+		if (all->line[i] == '|')
+		{
+			start = i;
+			i++;
+			while (all->line[i] && !is_char_separator(all->line[i + 1]))
+				i++;
+			len = i - start;
+			start++;
+			all->order_cpy[j] = ft_substr(all->line, start, len);
+			j++;
+		}
+		if (i < ft_strlen(all->line))
+			i++;
+	}
+	all->order_cpy[j] = 0;
+	printf("ORDERRR : ");
+	ft_print_tab(all->order_cpy);
+}
