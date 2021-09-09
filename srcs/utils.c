@@ -206,3 +206,22 @@ int	is_redir(char s)
 		return (1);
 	return (0);
 }
+
+char **mall_doubletab(char **t)
+{
+	int	j;
+	char **new;
+
+	j = 0;
+	while(t[j])
+		j++;
+	new = malloc(sizeof(char *) * (j + 1));
+	j = 0;
+	while (t[j])
+	{
+		new[j] = ft_strdup(t[j]);
+		j++;
+	}
+	new[j] = 0;
+	return (new);
+}

@@ -90,11 +90,14 @@ void	replace_inib_space(char *str);
 void	replace_doubleback_inib_space(char **str);
 char	*ft_dup(const char *s, char c);
 char	*ignore_quote(char *str);
-void	split_redir(char *str, t_all *all);
+void	split_redir(t_all *all);
 char	*ignore_quote_word(char *str);
 int		is_redir(char s);
 void	split_target(t_all *all);
 void	split_orders(t_all *all);
+void	init_list_var(t_all *all);
+void	print_linked_list(t_pipenodes *stack);
+char	**mall_doubletab(char **t);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *stack);

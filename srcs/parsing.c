@@ -42,10 +42,8 @@ int	parse_line(t_all *all)
 	all->line = ignore_quote_word(all->line);
 	count_pipe_croc(all->line, all);
 
-
-	split_redir(all->pipendirect, all);
-	split_target(all);
-	split_orders(all);
+	init_list_var(all);
+	
 	
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
@@ -461,23 +459,28 @@ char	*ignore_quote_word(char *str)
 	free(tmp);
 	return (str);
 }
-// void	init_list_var(t_all *all)
-// {
+void	init_list_var(t_all *all)
+{
+	split_redir(all);
+	split_target(all);
+	split_orders(all);
+	addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
+	//penser à free les order_cpy...
+	print_linked_list(all->stack);
+}
 
-// }
-
-void	split_redir(char *str, t_all *all)
+void	split_redir(t_all *all)
 {
 	int	i;
 	int	size;
 
 	i = 0;
-	size = ft_strlen(str) + 1;
+	size = ft_strlen(all->pipendirect) + 1;
 	all->redir_cpy = malloc(sizeof(char *) * size);
-	while (str[i])
+	while (all->pipendirect[i])
 	{
 		all->redir_cpy[i] = malloc(sizeof(char) * 2);
-		all->redir_cpy[i][0] = str[i];
+		all->redir_cpy[i][0] = all->pipendirect[i];
 		all->redir_cpy[i][1] = 0;
 		i++;
 	}
