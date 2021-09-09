@@ -38,6 +38,7 @@ int	parse_line(t_all *all)
 	int j;
 
 	// check_tilde(all->line);
+	all->line = ignore_quote(all->line);
 	count_pipe_croc(all->line, all);
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
@@ -45,7 +46,7 @@ int	parse_line(t_all *all)
 	
 	if (!is_separator(all->line))
 	{
-		replace_quote(all->line);
+		// // replace_quote(all->line);
 		if (ft_strchr(all->line, ' '))
 		{
 			replace_inib_space(all->line);
@@ -61,7 +62,7 @@ int	parse_line(t_all *all)
 	else
 	{
 		j = 0;
-		// replace_quote(all->line);
+		// // replace_quote(all->line);
 		if (!ft_strchr(all->line, ' '))
 		{
 			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
@@ -404,15 +405,33 @@ void	replace_doubleback_inib_space(char **str)
 	}
 }
 
-void	ignore_quote(char *str)
+char	*ignore_quote(char *str)
 {
 	int	i;
+	char	*tmp;
 
 	i = 0;
 	while (str[i])
 	{
+		if ((str[i] == '\'' && str[i - 1] == '`') || (str[i] == '"' && str[i - 1] == '`'))
+		{
+			ft_putstr("!!");
+			ft_putnbr_fd(i, 0);
 
-		
+			str[i] = '`';
+		}
+		if ((str[i] == '\'' && str[i + 1] == '\'') || (str[i] == '"' && str[i + 1] == '"'))
+		{
+			ft_putstr("??");
+			ft_putnbr_fd(i, 0);
+			str[i] = '`';
+		}
+
 		i++;
 	}
+	tmp = ft_dup(str, '`');
+	free(str);
+	str = ft_strdup(tmp);
+	free(tmp);
+	return (str);
 }

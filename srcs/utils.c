@@ -168,3 +168,35 @@ void	megatab_malloc_simple(t_all *all)
 	all->w_line[0][1] = 0;
 	all->w_line[1] = 0;
 }
+
+char	*ft_dup(const char *s, char c)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!str)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == c && s[i + 1] == 0)
+		{
+			ft_putstr("!!!!!");
+			break ;
+		}
+		while (s[i] == c)
+			i++;
+		str[j] = (char)s[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	ft_putstr("ligne : ");
+	ft_putstr(str);
+	ft_putstr("\n");
+
+	return (str);
+}
