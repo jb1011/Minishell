@@ -39,6 +39,7 @@ int	parse_line(t_all *all)
 
 	// check_tilde(all->line);
 	all->line = ignore_quote(all->line);
+	all->line = ignore_quote_word(all->line);
 	count_pipe_croc(all->line, all);
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
@@ -106,6 +107,7 @@ int	parse_line(t_all *all)
 		trim_tab(all->w_line);
 	}
 	ft_print_megatab(all->w_line);
+	split_redir(all->pipendirect, all);
 	// if (!all->w_line)
 	// 	ft_free_megatab(all->w_line);
 	return (1);
@@ -414,19 +416,9 @@ char	*ignore_quote(char *str)
 	while (str[i])
 	{
 		if ((str[i] == '\'' && str[i - 1] == '`') || (str[i] == '"' && str[i - 1] == '`'))
-		{
-			ft_putstr("!!");
-			ft_putnbr_fd(i, 0);
-
 			str[i] = '`';
-		}
 		if ((str[i] == '\'' && str[i + 1] == '\'') || (str[i] == '"' && str[i + 1] == '"'))
-		{
-			ft_putstr("??");
-			ft_putnbr_fd(i, 0);
 			str[i] = '`';
-		}
-
 		i++;
 	}
 	tmp = ft_dup(str, '`');
@@ -435,3 +427,59 @@ char	*ignore_quote(char *str)
 	free(tmp);
 	return (str);
 }
+char	*ignore_quote_word(char *str)
+{
+	int	i;
+	int	mybol;
+	char	*tmp;
+
+	i = 0;
+	mybol = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\'' && str[i - 1] != ' ') || (str[i] == '"' && str[i - 1] == ' '))
+		{
+			str[i] = '`';
+			mybol = 1;
+		}
+		if (((str[i] == '\'' && str[i + 1] != ' ') && mybol == 1) || ((str[i] == '"' && str[i + 1] != ' ') && mybol == 1))
+		{
+			str[i] = '`';
+			mybol = 0;
+		}
+		i++;
+	}
+	tmp = ft_dup(str, '`');
+	free(str);
+	str = ft_strdup(tmp);
+	free(tmp);
+	return (str);
+}
+// void	init_list_var(t_all *all)
+// {
+
+// }
+
+void	split_redir(char *str, t_all *all)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	size = ft_strlen(str) + 1;
+	all->redir_cpy = malloc(sizeof(char *) * size);
+	while (str[i])
+	{
+		all->redir_cpy[i] = malloc(sizeof(char) * 2);
+		all->redir_cpy[i][0] = str[i];
+		all->redir_cpy[i][1] = 0;
+		i++;
+	}
+	all->redir_cpy[i] = 0;
+	ft_print_tab(all->redir_cpy);
+}
+
+// void	split_target(char ***t)
+// {
+
+// }

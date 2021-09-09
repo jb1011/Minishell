@@ -17,7 +17,6 @@ void	ft_print_tab(char **t)
 	int j;
 
 	j = 0;
-	printf("**TAB :\n");
 	while (t[j])
 	{
 		printf("%s\n", t[j]);

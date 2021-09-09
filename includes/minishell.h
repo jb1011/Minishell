@@ -36,8 +36,8 @@ typedef struct s_env
 typedef	struct	s_pip
 {
 	struct	s_pipenode *next;
-	char	**list_of_targets;
-	char 	**list_of_redirections;
+	char	**targets;
+	char 	**redir;
 	char	**orders;
 } t_pipenodes;
 
@@ -52,7 +52,11 @@ typedef struct s_all
 	char	**exec_paths;
 	t_env	*env;
 	char	*tmp;
-	t_pipenodes *binary;
+	char	**redir_cpy;
+	char	**target_cpy;
+	char	**order_cpy;
+
+	t_pipenodes *stack;
 	
 }	t_all;
 
@@ -86,6 +90,12 @@ void	replace_inib_space(char *str);
 void	replace_doubleback_inib_space(char **str);
 char	*ft_dup(const char *s, char c);
 char	*ignore_quote(char *str);
+void	split_redir(char *str, t_all *all);
+char	*ignore_quote_word(char *str);
+
+t_pipenodes	*createCell(char **orders, char **targets, char **redir);
+int	is_empty(t_pipenodes *stack);
+void	addnew(t_all *all, char **orders, char **targets, char **redir);
 
 int	ft_count_spaces(char *line);
 int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
