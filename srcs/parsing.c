@@ -517,12 +517,6 @@ void	split_target(t_all *all, char *str)
 	all->target_cpy = malloc(sizeof(char *) * (all->size_redir * 2));
 	i = 0;
 	j = 0;
-	// if (!is_redir_str(str))
-	// {
-	// 	all->target_cpy[0] = ft_strdup(str);
-	// 	all->target_cpy[1] = 0;
-	// 	return ;
-	// }
 	while (str[i])
 	{
 		if (is_redir(str[i]))
@@ -538,6 +532,19 @@ void	split_target(t_all *all, char *str)
 			all->target_cpy[j] = ft_substr(str, start, len);
 			j++;
 		}
+		// if (str[i] ==  '>')
+		// {
+		// 	if (is_redir(str[i + 1]))
+		// 		i++;
+		// 	start = i;
+		// 	i++;
+		// 	while (str[i] && !is_char_separator(str[i + 1]))
+		// 		i++;
+		// 	len = i - start;
+		// 	start++;
+		// 	all->target_cpy[j] = ft_substr(str, start, len);
+		// 	j++;
+		// }
 		if (i < ft_strlen(str))
 			i++;
 	}
@@ -558,10 +565,8 @@ void	split_orders(t_all *all, char *str)
 	i = 0;
 	j = 0;
 	start = 0;
-	// printf("===%s===\n", str);
 	if (!is_redir_str(str))
 	{
-		// ft_putstr("999");
 		all->order_cpy[0] = ft_strdup(str);
 		all->order_cpy[1] = 0;
 		return ;
