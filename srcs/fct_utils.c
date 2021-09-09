@@ -6,13 +6,13 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 00:56:20 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 11:08:44 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 12:57:50 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int dollar_case(char **buffer, char *object, int *index)
+int dollar_case(char **buffer, char *object, int *index, t_all *all)
 {
     int k;
     char    *temp;
@@ -28,8 +28,9 @@ int dollar_case(char **buffer, char *object, int *index)
         while (!ft_strchr(STOP_DOLLAR, object[++*index]))
             ;
         temp = extractstr(&object[k], STOP_DOLLAR);
-        env = getenv(temp), 1);
-        *buffer = ft_join_free(*buffer, getenv(temp), 1);
+        env = vardo(&all->env, temp, 0, 0);
+        if (env)
+            *buffer = ft_join_free(*buffer, env->val, 1);
         free(temp);
         --*index;
         return (0);

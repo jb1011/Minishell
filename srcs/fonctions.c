@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 14:16:19 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 15:00:01 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 vu aue la fonction execve() stop le programme on envoie le fils le faire"*/
 int	_fct(char *todo[], char *env[])
 {
+	int		i;
 	pid_t	id;
 
 	id = fork();
@@ -27,5 +28,14 @@ int	_fct(char *todo[], char *env[])
 	{ // Si le fils est tjr la c'est au'il y'a erreur
 		printf("Error, wrong file/function\n");
 		close(id);
+		return(-1);
 	}
+	i = 0;
+	if (!env)
+		return (1);
+	while (env[++i])
+		free(env[i]);
+	free(env[i]);
+	free(env);
+	return (1);
 }

@@ -36,7 +36,7 @@ int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes)
         else if (s.j) // s.j --->> apostrophe !!!!!!
             str_case(&s.stra, s.strb, &s.i, STOP_QUOTE);
         else if (s.strb[s.i] == '$')
-            dollar_case(&s.stra, s.strb, &s.i);
+            dollar_case(&s.stra, s.strb, &s.i, all);
         else if (s.k) // s.k -->>> GUILLEMETS
             str_case(&s.stra, s.strb, &s.i, STOP_DBLQUOTE);
         else
@@ -54,6 +54,7 @@ int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes)
     if (!redirection_or_pipes || ft_strlen(redirection_or_pipes) < place)
         ft_putstr(s.stra);
     free(s.stra);
+    return (1);
 }
 
 int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes)
@@ -77,4 +78,13 @@ int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes)
             printf("af faire plus tard\n");
         ptr = ptr->nxt;
     }
+    return (1);
+}
+
+int     _unset(t_env **list, char **opts)
+{
+    int i;
+    i = 0;
+    while (opts[++i])
+        vardo(list, opts[i], 0, 1);
 }

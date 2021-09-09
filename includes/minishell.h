@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/07 17:12:40 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 15:00:34 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,21 @@ void	replace_inib_space(char *str);
 void	replace_doubleback_inib_space(char **str);
 
 int	ft_count_spaces(char *line);
-int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
-int dollar_case(char **buffer, char *object, int *index);
+int dollar_case(char **buffer, char *object, int *index, t_all *all);
 int str_case(char **buffer, char *object, int *index, char *stops);
 void quotes_bool(int *boolean);
-int _cd(char *path);
+int     treat_orders(t_all *all, char **opts);
+/* ENVIRONNEMENT GESTION */
 int     init(t_all *all);
-t_env     *vardo(t_env *list, char *tofind, char *ch_val, char del);
+t_env     *vardo(t_env **list, char *tofind, char *ch_val, char del);
 int     advar(t_env **list, char *var, char *val);
 int         printenv(t_env *env);
+char    **env_to_strtab(t_env *list);
+/* BUILTINS */
+int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
+int _cd(char *path);
 int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes);
+int     _unset(t_env **list, char **opts);
+int _pwd(t_all *all);
 
 #endif

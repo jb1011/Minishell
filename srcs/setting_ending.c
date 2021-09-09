@@ -6,11 +6,12 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 11:00:23 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/09 13:35:11 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <stdlib.h>
 
 int     begin(t_all *all)
 {
@@ -30,11 +31,7 @@ int     init(t_all *all)
     all->env = NULL;
     advar(&all->env, "PATH", getenv("PATH"));
     all->exec_paths = ft_split(all->env->val, ':');
-    // int i = -1;
-    // while(all->exec_paths[++i])
-        // printf("%s\n",all->exec_paths[i]);
     advar(&all->env, "USER", getenv("USER"));
     advar(&all->env, "SHELL", "minishell");
-    // printenv(all->env);
-    
+    advar(&all->env, "DESKTOP_SESSION", getenv("DESKTOP_SESSION"));
 }

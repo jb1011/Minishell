@@ -38,7 +38,11 @@ void	ft_putnbr_fd(int n, int fd)
 
 int	ft_err_msg(char *s)
 {
-	write(2, s, ft_strlen(s));
+	char *temp;
+
+	temp = ft_strjoin(s, '\n');
+	write(2, temp, ft_strlen(temp));
+	free(temp);
 	return (0);
 }
 

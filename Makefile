@@ -14,7 +14,8 @@ FILES   =       minishell.c \
 				utils.c \
 				builtins.c \
 				fct_utils.c \
-				env.c
+				env.c \
+				builtins_utils.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 
