@@ -278,24 +278,6 @@ void	replace_crocs(char *str)
 	}
 }
 
-// void	check_tilde(char *path)
-// {
-// 	char	*temp;
-
-// 	if (ft_strncmp(path, "~", ft_strlen(path)) && !quote_is_odd(path, ft_strlen(path)))
-// 	{
-// 		temp = ft_join_free("/home/", getenv("USER"), 0);
-// 		temp = ft_join_free(temp, path + 1, 0);
-// 		printf("%s\n", temp);
-// 		if (chdir(temp) == -1)
-// 		{
-// 			free(temp);
-// 			return(ft_err_msg("Wrong path"));
-// 		}
-// 		free(temp);
-// 	}
-// }
-
 int	ft_check_error(char *s)
 {
 	int i;
