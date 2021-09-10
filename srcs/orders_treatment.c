@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 13:52:40 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:14:47 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,30 @@ int     isfct(char **path, char **fct)
     return (1);
 }
 
-int     treat_orders(t_all *all, char **opts)
+int     treat_orders(t_all *all, t_pipenodes *node)
 {
     char *msg;
     int i;
-
+    
     i = -1;
-    while(opts[++i])
-        changeline(all, &opts[i]);
+    while(node->orders[++i])
+        changeline(all, &node->orders[i]);
     i = -1;
-    while (opts[++i] && ft_strchr(opts[i], '='))
+    while (node->orders[++i] && ft_strchr(node->orders[i], '='))
         ;
-    if (!opts[i])
+    if (!node->orders[i])
     {
         i = -1;
-        while (opts[++i])
-            assign_var(all, opts[i], 0);
+        while (node->orders[++i])
+            assign_var(all, node->orders[i], 0);
         return (1);  
     }
-    if (do_builtins(all, opts))
+    //printf("lool%s\n", *node->orders);
+    if (do_builtins(all, node->orders))
         return (1);
-    if (isfct(all->exec_paths, opts))
-        return (_fct(opts, env_to_strtab(all->env)));
-    msg = ft_strjoin("minishell : command not found: ",*opts);
+    if (isfct(all->exec_paths, node->orders))
+        return (redirect_fcts(node->redir, node->targets, node->orders, env_to_strtab(all->env)));
+    msg = ft_strjoin("minishell : command not found: ",*node->orders);
     ft_err_msg(msg);
     free (msg);
     return (-1);

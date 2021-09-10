@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 13:27:35 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/10 16:52:30 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int     init(t_all *all)
     advar(&all->env, "USER", getenv("USER"), EXPORT);
     advar(&all->env, "SHELL", "minishell", EXPORT);
     advar(&all->env, "DESKTOP_SESSION", getenv("DESKTOP_SESSION"), EXPORT);
+    // printf("%s\n%sifhjweuifhweuifhwefuh\n", all->env->var, all->env->val);
 }
 
 int     begin(t_all *all)

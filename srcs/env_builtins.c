@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:37:55 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 13:50:45 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:27:24 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@ int     _env(t_all *all,char **opts)
 
     if (opts[1])
         return (ft_err_msg("Env treated alone"));
-    else
-        s.k = 0;;
     ptr = all->env;
     s.stra = ft_strdup("");
     while (ptr)
     {
-        if (s.k && ptr->is_env)
-            printenv(ptr);
-        else if (ptr->is_env)
-            printf("af faire plus tard\n");
+        if (ptr->is_env)
+        {
+            s.stra = ft_join_free(s.stra, ft_join_free(ptr->var, "=", 0), 3);
+            s.stra = ft_join_free(ft_join_free(s.stra, ptr->val,1), "\n", 1);
+        }
         ptr = ptr->nxt;
     }
+    ft_putstr(s.stra);
+    free (s.stra);
     return (1);
 }
 

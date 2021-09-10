@@ -1,7 +1,4 @@
 #include "../includes/minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
-
 
 int _cd(char *path)
 {
@@ -44,7 +41,7 @@ int _echo(t_all *all,char **opts)
         s.k = 1;
     while (opts[++s.i])
         s.stra = ft_join_free(ft_join_free(s.stra, " ", 1), opts[s.i], 1);
-    if (!s.da)
+    if (!s.k)
         s.stra = ft_join_free(s.stra, "\n", 1);
     ft_putstr(s.stra);
     free(s.stra);

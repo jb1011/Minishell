@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 13:35:15 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:29:02 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,4 @@ int	_fct(char *todo[], char *env[])
 	free(env);
 	return (1);
 }
+

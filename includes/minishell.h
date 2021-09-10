@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 13:49:49 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:12:06 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,12 @@ int	ft_count_spaces(char *line);
 int dollar_case(char **buffer, char *object, int *index, t_all *all);
 int str_case(char **buffer, char *object, int *index, char *stops);
 void quotes_bool(int *boolean);
-int     treat_orders(t_all *all, char **opts);
 
 /* ENVIRONNEMENT GESTION */
 t_env	*vardo(t_env **list, char *tofind, char *ch_val, char do_what);
 int		advar(t_env **list, char *var, char *val, char is_env);
 int		assign_var(t_all *all, char *assignation, char export);
 char	**env_to_strtab(t_env *list);
-int		printenv(t_env *env);
 int		init(t_all *all);
 
 
@@ -106,5 +104,7 @@ int     assign_var(t_all *all, char *assignation, char export);
 int		changeline(t_all *all, char **line);
 int		do_builtins(t_all *all, char **opts);
 int		isfct(char **path, char **fct);
-int		treat_orders(t_all *all, char **opts);
+int     treat_orders(t_all *all, t_pipenodes *node);
+/* REDIRECTIONS !!!!!!!!!!! */
+int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[]);
 #endif
