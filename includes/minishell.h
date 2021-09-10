@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/09 21:57:57 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/10 13:49:49 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define SHELL_PROMPT "MINISHELL:: "
 
 # include "libft.h"
+# include "structs.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <curses.h>
@@ -30,40 +31,6 @@
 # define EXPORT 3
 # define PRINT	4
 
-typedef struct s_env
-{
-	char	*var;
-	char	*val;
-	char	is_env;
-	struct	s_env *nxt;
-}	t_env;
-
-typedef	struct	s_pipenodes
-{
-	struct	s_pipenodes *next;
-	char	**targets;
-	char 	**redir;
-	char	**orders;
-} t_pipenodes;
-
-
-typedef struct s_all
-{
-	char	*line;
-	char	path[400];
-	char	**splt_line;
-	char	***w_line;
-	char	*pipendirect;
-	char	**exec_paths;
-	t_env	*env;
-	char	*tmp;
-	char	**redir_cpy;
-	char	**target_cpy;
-	char	**order_cpy;
-	int		size_redir;
-	t_pipenodes *stack;
-	
-}	t_all;
 
 int		_fct(char *todo[], char *env[]);
 int		begin(t_all *all);
@@ -114,19 +81,30 @@ int dollar_case(char **buffer, char *object, int *index, t_all *all);
 int str_case(char **buffer, char *object, int *index, char *stops);
 void quotes_bool(int *boolean);
 int     treat_orders(t_all *all, char **opts);
-/* ENVIRONNEMENT GESTION */
-int     init(t_all *all);
-t_env     *vardo(t_env **list, char *tofind, char *ch_val, char do_what);
-int     advar(t_env **list, char *var, char *val, char is_env);
-int         printenv(t_env *env);
-char    **env_to_strtab(t_env *list);
-int     assign_var(t_all *all, char *assignation, char export);
-/* BUILTINS */
-int _echo(t_all *all,char **opts, int place, char *redirection_or_pipes);
-int _cd(char *path);
-int     _env(t_all *all,char **opts, int place, char *redirection_or_pipes);
-int     _unset(t_env **list, char **opts);
-int _pwd(t_all *all);
-int     _export(t_all *all, char **opts);
 
+/* ENVIRONNEMENT GESTION */
+t_env	*vardo(t_env **list, char *tofind, char *ch_val, char do_what);
+int		advar(t_env **list, char *var, char *val, char is_env);
+int		assign_var(t_all *all, char *assignation, char export);
+char	**env_to_strtab(t_env *list);
+int		printenv(t_env *env);
+int		init(t_all *all);
+
+
+/* BUILTINS */
+int		_echo(t_all *all,char **opts);
+int		_env(t_all *all,char **opts);
+int		_unset(t_env **list, char **opts);
+int		_export(t_all *all, char **opts);
+int		_pwd(t_all *all);
+int		_cd(char *path);
+
+/* BUILTINS UTILS*/
+int     assign_var(t_all *all, char *assignation, char export);
+
+/*ORDERS TREATMENT*/
+int		changeline(t_all *all, char **line);
+int		do_builtins(t_all *all, char **opts);
+int		isfct(char **path, char **fct);
+int		treat_orders(t_all *all, char **opts);
 #endif

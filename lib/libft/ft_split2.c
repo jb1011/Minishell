@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting&ending.c                                   :+:      :+:    :+:   */
+/*   ft_split2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 21:47:51 by lgelinet         ###   ########.fr       */
+/*   Created: 2021/09/10 13:54:28 by lgelinet          #+#    #+#             */
+/*   Updated: 2021/09/10 13:54:57 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+# include "libft.h"
 
 static char	**ft_malloc_error(char **tab)
 {
@@ -75,7 +75,7 @@ static void	ft_get_next_str(char **next_str, unsigned int *next_str_len, char c)
 	}
 }
 
-char	**ft_split(char const *s, char c, char d, char f)
+char	**ft_split2(char const *s, char c, char d, char f)
 {
 	char			**tab;
 	char			*next_str;
