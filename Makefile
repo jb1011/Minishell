@@ -15,7 +15,11 @@ FILES   =       minishell.c \
 				builtins.c \
 				fct_utils.c \
 				env.c \
+<<<<<<< HEAD
 				builtins_utils.c
+=======
+				list_init.c
+>>>>>>> jb2
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 

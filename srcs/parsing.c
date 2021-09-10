@@ -33,94 +33,85 @@ int	ft_count_split(char *line)
 	return (count + 1);
 }
 
-// // int	ft_count_spaces(char *line)
-// // {
-// // 	int i;
-// // 	int count;
-
-// // 	count = 1;
-// // 	i = 0;
-// // 	while (line[i])
-// // 	{
-// // 		if (line[i] == ' ')
-// // 			count++;
-// // 		i++;
-// // 	}
-// // 	return (count);
-// // }
-
 int	parse_line(t_all *all)
 {
 	int j;
 
 	// check_tilde(all->line);
+	all->line = ignore_quote(all->line);
+	all->line = ignore_quote_word(all->line);
 	count_pipe_croc(all->line, all);
+
+	init_list_var(all);
+	
+	
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
 	
-	if (!is_separator(all->line))
-	{
-		replace_quote(all->line);
-		if (ft_strchr(all->line, ' '))
-		{
-			replace_inib_space(all->line);
-			all->w_line = malloc(sizeof(char **) * 2);
-			all->w_line[0] = ft_split(all->line, ' ');
-			replace_back_inib_space(all->w_line[0][0]);
-			all->w_line[1] = 0;
-		}
-		else
-			megatab_malloc_simple(all);
-		trim_tab(all->w_line);
-	}
-	else
-	{
-		j = 0;
-		// replace_quote(all->line);
-		if (!ft_strchr(all->line, ' '))
-		{
-			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
-			/////////
-			is_pipe_inhib(all->line);
-			// all->tmp = ft_dup_char(all->line);
-			// all->splt_line = ft_split(all->tmp, '|');
-			replace_crocs(all->line);
-			all->splt_line = ft_split(all->line, '|');
-			// reverse_pipe(all->splt_line);
-			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
+	// // if (!is_separator(all->line))
+	// // {
+	// // 	// // replace_quote(all->line);
+	// // 	if (ft_strchr(all->line, ' '))
+	// // 	{
+	// // 		replace_inib_space(all->line);
+	// // 		all->w_line = malloc(sizeof(char **) * 2);
+	// // 		all->w_line[0] = ft_split(all->line, ' ');
+	// // 		replace_back_inib_space(all->w_line[0][0]);
+	// // 		all->w_line[1] = 0;
+	// // 	}
+	// // 	else
+	// // 		megatab_malloc_simple(all);
+	// // 	trim_tab(all->w_line);
+	// // }
+	// // else
+	// // {
+	// // 	j = 0;
+	// // 	// // replace_quote(all->line);
+	// // 	if (!ft_strchr(all->line, ' '))
+	// // 	{
+	// // 		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
+	// // 		/////////
+	// // 		is_pipe_inhib(all->line);
+	// // 		// all->tmp = ft_dup_char(all->line);
+	// // 		// all->splt_line = ft_split(all->tmp, '|');
+	// // 		replace_crocs(all->line);
+	// // 		all->splt_line = ft_split(all->line, '|');
+	// // 		// reverse_pipe(all->splt_line);
+	// // 		ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
 			
-			ft_free_tab(all->splt_line);
-		}
-		else
-		{
-			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
-			/////////
-			is_pipe_inhib(all->line);
-			replace_crocs(all->line);
+	// // 		ft_free_tab(all->splt_line);
+	// // 	}
+	// // 	else
+	// // 	{
+	// // 		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
+	// // 		/////////
+	// // 		is_pipe_inhib(all->line);
+	// // 		replace_crocs(all->line);
 
-			replace_inib_space(all->line);
+	// // 		replace_inib_space(all->line);
 
-			// ft_dup_char(all->line, all);
+	// // 		// ft_dup_char(all->line, all);
 
-			// all->splt_line = ft_split(all->tmp, '|');
-			// replace_crocs(all->line);
-			all->splt_line = ft_split(all->line, '|');
+	// // 		// all->splt_line = ft_split(all->tmp, '|');
+	// // 		// replace_crocs(all->line);
+	// // 		all->splt_line = ft_split(all->line, '|');
 
-			reverse_pipe(all->splt_line);
+	// // 		reverse_pipe(all->splt_line);
 			
-			while (all->splt_line[j])
-			{
-				all->w_line[j] = ft_split(all->splt_line[j], ' ');
-				replace_doubleback_inib_space(all->w_line[j]);
-				j++;
-			}
-			all->w_line[j] = 0;
-			ft_free_tab(all->splt_line);
-		}
-		trim_tab(all->w_line);
-	}
-	ft_print_megatab(all->w_line);
+	// // 		while (all->splt_line[j])
+	// // 		{
+	// // 			all->w_line[j] = ft_split(all->splt_line[j], ' ');
+	// // 			replace_doubleback_inib_space(all->w_line[j]);
+	// // 			j++;
+	// // 		}
+	// // 		all->w_line[j] = 0;
+	// // 		ft_free_tab(all->splt_line);
+	// // 	}
+	// // 	trim_tab(all->w_line);
+	// // }
+	// ft_print_megatab(all->w_line);
+	
 	// if (!all->w_line)
 	// 	ft_free_megatab(all->w_line);
 	return (1);
@@ -271,7 +262,7 @@ void count_pipe_croc(char *str, t_all *all)
 		i++;
 	}
 	all->pipendirect[j] = 0;
-	printf("PILELINE : %s\n", all->pipendirect);
+	// printf("PILELINE : %s\n", all->pipendirect);
 }
 
 void	replace_crocs(char *str)
@@ -360,7 +351,7 @@ void	replace_double_croc(char *s)
 		}
 		i++;
 	}
-	printf("line replaced : %s\n", s);
+	// printf("line replaced : %s\n", s);
 }
 
 void	replace_inib_space(char *str)
@@ -389,7 +380,6 @@ void	replace_back_inib_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		ft_putstr("YYY");
 		if (str[i] == '\'')
 			count++;
 		if (str[i] == '`' && (count % 2 != 0))
@@ -414,10 +404,235 @@ void	replace_doubleback_inib_space(char **str)
 			if (str[j][i] == '`')
 			{
 				str[j][i] = ' ';
-				ft_putstr("Z");
 			}
 			i++;
 		}
 		j++;
 	}
+}
+
+char	*ignore_quote(char *str)
+{
+	int	i;
+	char	*tmp;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\'' && str[i - 1] == '`') || (str[i] == '"' && str[i - 1] == '`'))
+			str[i] = '`';
+		if ((str[i] == '\'' && str[i + 1] == '\'') || (str[i] == '"' && str[i + 1] == '"'))
+			str[i] = '`';
+		i++;
+	}
+	tmp = ft_dup(str, '`');
+	free(str);
+	str = ft_strdup(tmp);
+	free(tmp);
+	return (str);
+}
+char	*ignore_quote_word(char *str)
+{
+	int	i;
+	int	mybol;
+	char	*tmp;
+
+	i = 0;
+	mybol = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\'' && str[i - 1] != ' ') || (str[i] == '"' && str[i - 1] == ' '))
+		{
+			str[i] = '`';
+			mybol = 1;
+		}
+		if (((str[i] == '\'' && str[i + 1] != ' ') && mybol == 1) || ((str[i] == '"' && str[i + 1] != ' ') && mybol == 1))
+		{
+			str[i] = '`';
+			mybol = 0;
+		}
+		i++;
+	}
+	tmp = ft_dup(str, '`');
+	free(str);
+	str = ft_strdup(tmp);
+	free(tmp);
+	return (str);
+}
+void	init_list_var(t_all *all)
+{
+	int	i;
+
+
+	all->stack = NULL;
+	i = 0;
+	all->splt_line = ft_split(all->line, '|');
+	while (all->splt_line[i])
+	{
+		// printf("###%s###\n", all->splt_line[i]);
+		split_redir(all);
+		split_target(all, all->splt_line[i]);
+		split_orders(all, all->splt_line[i]);
+		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
+		ft_free_tab(all->order_cpy);
+		ft_free_tab(all->target_cpy);
+		ft_free_tab(all->redir_cpy);
+
+		i++;
+	}
+
+	print_linked_list(all->stack);
+}
+
+void	split_redir(t_all *all)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	size = ft_strlen(all->pipendirect) + 1;
+	all->redir_cpy = malloc(sizeof(char *) * size);
+	while (all->pipendirect[i])
+	{
+		all->redir_cpy[i] = malloc(sizeof(char) * 2);
+		all->redir_cpy[i][0] = all->pipendirect[i];
+		all->redir_cpy[i][1] = 0;
+		i++;
+	}
+	all->size_redir = i + 1;
+	all->redir_cpy[i] = 0;
+	// ft_print_tab(all->redir_cpy);
+}
+
+void	split_target(t_all *all, char *str)
+{
+	int	i;
+	int	j;
+	int start;
+	int	len;
+
+	all->target_cpy = malloc(sizeof(char *) * (all->size_redir * 2));
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		// // if (is_redir(str[i]))
+		// // {
+		// // 	if (is_redir(str[i + 1]))
+		// // 		i++;
+		// // 	start = i;
+		// // 	i++;
+		// // 	while (str[i] && !is_char_separator(str[i + 1]))
+		// // 		i++;
+		// // 	len = i - start;
+		// // 	start++;
+		// // 	all->target_cpy[j] = ft_substr(str, start, len);
+		// // 	j++;
+		// // }
+		if (str[i] ==  '>')
+		{
+			if (is_redir(str[i + 1]))
+				i++;
+			start = i;
+			i++;
+			while (str[i] && !is_char_separator(str[i + 1]))
+				i++;
+			len = i - start;
+			start++;
+			all->target_cpy[j] = ft_substr(str, start, len);
+			j++;
+		}
+		if (str[i] ==  '<')
+		{
+			// if (is_redir(str[i + 1]))
+			// 	i++;
+			// start = i;
+			// i++;
+			// while (str[i] && !is_char_separator(str[i + 1]))
+			// 	i++;
+			// len = i;
+			// start++;
+			all->target_cpy[j] = ft_substr(str, 0, i);
+			j++;
+			break ;
+		}
+		if (i < ft_strlen(str))
+			i++;
+	}
+	all->target_cpy[j] = 0;
+	// printf("TABBB : ");
+	// ft_print_tab(all->target_cpy);
+
+}
+
+void	split_orders(t_all *all, char *str)
+{
+	int	i;
+	int	j;
+	int start;
+	int	len;
+
+	all->order_cpy = malloc(sizeof(char *) * (ft_count_split(str) + 2));
+	i = 0;
+	j = 0;
+	start = 0;
+	if (!is_redir_str(str))
+	{
+		all->order_cpy[0] = ft_strdup(str);
+		all->order_cpy[1] = 0;
+		return ;
+	}
+	// // while (str[i])
+	// // {
+	// // 	if (is_char_separator(str[i]))
+	// // 	{
+	// // 		all->order_cpy[j] = ft_substr(str, start, i);
+	// // 		j++;
+	// // 		break ;
+	// // 	}
+	// // 	i++;
+	// // }
+	while (str[i])
+	{
+		if (str[i] == '>')
+		{
+			all->order_cpy[j] = ft_substr(str, start, i);
+			j++;
+			break ;
+		}
+		if (str[i] ==  '<')
+		{
+			if (is_redir(str[i + 1]))
+				i++;
+			start = i;
+			i++;
+			while (str[i] && !is_char_separator(str[i + 1]))
+				i++;
+			len = i - start;
+			start++;
+			all->order_cpy[j] = ft_substr(str, start, len);
+			j++;
+			break ;
+		}
+		i++;
+	}
+	while (str[i])
+	{
+		if (str[i] == '|')
+		{
+			start = i;
+			i++;
+			while (str[i] && !is_char_separator(str[i + 1]))
+				i++;
+			len = i - start;
+			start++;
+			all->order_cpy[j] = ft_substr(str, start, len);
+			j++;
+		}
+		if (i < ft_strlen(str))
+			i++;
+	}
+	all->order_cpy[j] = 0;
+	// printf("ORDERRR : ");
+	// ft_print_tab(all->order_cpy);
 }

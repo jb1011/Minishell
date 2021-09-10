@@ -38,11 +38,11 @@ typedef struct s_env
 	struct	s_env *nxt;
 }	t_env;
 
-typedef	struct	s_pipenode
+typedef	struct	s_pipenodes
 {
-	struct	s_pipenode *next;
-	char	**list_of_targets;
-	char 	**list_of_redirections;
+	struct	s_pipenodes *next;
+	char	**targets;
+	char 	**redir;
 	char	**orders;
 } t_pipenodes;
 
@@ -57,7 +57,11 @@ typedef struct s_all
 	char	**exec_paths;
 	t_env	*env;
 	char	*tmp;
-	t_pipenodes *binary;
+	char	**redir_cpy;
+	char	**target_cpy;
+	char	**order_cpy;
+	int		size_redir;
+	t_pipenodes *stack;
 	
 }	t_all;
 
@@ -89,6 +93,21 @@ void	replace_double_croc(char *s);
 void	replace_back_inib_space(char *str);
 void	replace_inib_space(char *str);
 void	replace_doubleback_inib_space(char **str);
+char	*ft_dup(const char *s, char c);
+char	*ignore_quote(char *str);
+void	split_redir(t_all *all);
+char	*ignore_quote_word(char *str);
+int		is_redir(char s);
+void	split_target(t_all *all, char *str);
+void	split_orders(t_all *all, char *str);
+void	init_list_var(t_all *all);
+void	print_linked_list(t_pipenodes *stack);
+char	**mall_doubletab(char **t);
+int		is_redir_str(char *s);
+
+t_pipenodes	*createCell(char **orders, char **targets, char **redir);
+int	is_empty(t_pipenodes *stack);
+void	addnew(t_all *all, char **orders, char **targets, char **redir);
 
 int	ft_count_spaces(char *line);
 int dollar_case(char **buffer, char *object, int *index, t_all *all);

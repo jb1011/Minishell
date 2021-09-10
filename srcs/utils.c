@@ -17,10 +17,9 @@ void	ft_print_tab(char **t)
 	int j;
 
 	j = 0;
-	printf("**TAB :\n");
 	while (t[j])
 	{
-		printf("%s\n", t[j]);
+		printf("\t%s\n", t[j]);
 		j++;
 	}
 }
@@ -167,4 +166,76 @@ void	megatab_malloc_simple(t_all *all)
 	all->w_line[0][0] = ft_strdup(all->line);
 	all->w_line[0][1] = 0;
 	all->w_line[1] = 0;
+}
+
+char	*ft_dup(const char *s, char c)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!str)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == c && s[i + 1] == 0)
+		{
+			// ft_putstr("!!!!!");
+			break ;
+		}
+		while (s[i] == c)
+			i++;
+		str[j] = (char)s[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	// ft_putstr("ligne : ");
+	// ft_putstr(str);
+	// ft_putstr("\n");
+
+	return (str);
+}
+
+int	is_redir(char s)
+{
+	if (s == '>' || s == '<')
+		return (1);
+	return (0);
+}
+
+char **mall_doubletab(char **t)
+{
+	int	j;
+	char **new;
+
+	j = 0;
+	while(t[j])
+		j++;
+	new = malloc(sizeof(char *) * (j + 1));
+	j = 0;
+	while (t[j])
+	{
+		new[j] = ft_strdup(t[j]);
+		j++;
+	}
+	new[j] = 0;
+	return (new);
+}
+
+int	is_redir_str(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '>' || s[i] == '<')
+			return (1);
+		i++;
+	}
+	return (0);
 }
