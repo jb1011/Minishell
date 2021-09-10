@@ -19,11 +19,6 @@ t_pipenodes	*createCell(char **orders, char **targets, char **redir)
 	cell = malloc(sizeof(t_pipenodes));
 	if (!cell)
 		return (NULL);
-	// cell->orders = orders; 
-	// cell->redir = redir;
-	// cell->targets = targets;
-	ft_putstr(">>>>");
-	ft_print_tab(orders);
 	cell->orders = mall_doubletab(orders);
 	cell->redir = mall_doubletab(redir);
 	cell->targets = mall_doubletab(targets);

@@ -49,67 +49,67 @@ int	parse_line(t_all *all)
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
 	
-	if (!is_separator(all->line))
-	{
-		// // replace_quote(all->line);
-		if (ft_strchr(all->line, ' '))
-		{
-			replace_inib_space(all->line);
-			all->w_line = malloc(sizeof(char **) * 2);
-			all->w_line[0] = ft_split(all->line, ' ');
-			replace_back_inib_space(all->w_line[0][0]);
-			all->w_line[1] = 0;
-		}
-		else
-			megatab_malloc_simple(all);
-		trim_tab(all->w_line);
-	}
-	else
-	{
-		j = 0;
-		// // replace_quote(all->line);
-		if (!ft_strchr(all->line, ' '))
-		{
-			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
-			/////////
-			is_pipe_inhib(all->line);
-			// all->tmp = ft_dup_char(all->line);
-			// all->splt_line = ft_split(all->tmp, '|');
-			replace_crocs(all->line);
-			all->splt_line = ft_split(all->line, '|');
-			// reverse_pipe(all->splt_line);
-			ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
+	// // if (!is_separator(all->line))
+	// // {
+	// // 	// // replace_quote(all->line);
+	// // 	if (ft_strchr(all->line, ' '))
+	// // 	{
+	// // 		replace_inib_space(all->line);
+	// // 		all->w_line = malloc(sizeof(char **) * 2);
+	// // 		all->w_line[0] = ft_split(all->line, ' ');
+	// // 		replace_back_inib_space(all->w_line[0][0]);
+	// // 		all->w_line[1] = 0;
+	// // 	}
+	// // 	else
+	// // 		megatab_malloc_simple(all);
+	// // 	trim_tab(all->w_line);
+	// // }
+	// // else
+	// // {
+	// // 	j = 0;
+	// // 	// // replace_quote(all->line);
+	// // 	if (!ft_strchr(all->line, ' '))
+	// // 	{
+	// // 		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line) * 2);
+	// // 		/////////
+	// // 		is_pipe_inhib(all->line);
+	// // 		// all->tmp = ft_dup_char(all->line);
+	// // 		// all->splt_line = ft_split(all->tmp, '|');
+	// // 		replace_crocs(all->line);
+	// // 		all->splt_line = ft_split(all->line, '|');
+	// // 		// reverse_pipe(all->splt_line);
+	// // 		ft_malloc_tab(all->w_line, ft_count_split(all->line), all->splt_line);
 			
-			ft_free_tab(all->splt_line);
-		}
-		else
-		{
-			all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
-			/////////
-			is_pipe_inhib(all->line);
-			replace_crocs(all->line);
+	// // 		ft_free_tab(all->splt_line);
+	// // 	}
+	// // 	else
+	// // 	{
+	// // 		all->w_line = malloc(sizeof(char **) * ft_count_split(all->line));
+	// // 		/////////
+	// // 		is_pipe_inhib(all->line);
+	// // 		replace_crocs(all->line);
 
-			replace_inib_space(all->line);
+	// // 		replace_inib_space(all->line);
 
-			// ft_dup_char(all->line, all);
+	// // 		// ft_dup_char(all->line, all);
 
-			// all->splt_line = ft_split(all->tmp, '|');
-			// replace_crocs(all->line);
-			all->splt_line = ft_split(all->line, '|');
+	// // 		// all->splt_line = ft_split(all->tmp, '|');
+	// // 		// replace_crocs(all->line);
+	// // 		all->splt_line = ft_split(all->line, '|');
 
-			reverse_pipe(all->splt_line);
+	// // 		reverse_pipe(all->splt_line);
 			
-			while (all->splt_line[j])
-			{
-				all->w_line[j] = ft_split(all->splt_line[j], ' ');
-				replace_doubleback_inib_space(all->w_line[j]);
-				j++;
-			}
-			all->w_line[j] = 0;
-			ft_free_tab(all->splt_line);
-		}
-		trim_tab(all->w_line);
-	}
+	// // 		while (all->splt_line[j])
+	// // 		{
+	// // 			all->w_line[j] = ft_split(all->splt_line[j], ' ');
+	// // 			replace_doubleback_inib_space(all->w_line[j]);
+	// // 			j++;
+	// // 		}
+	// // 		all->w_line[j] = 0;
+	// // 		ft_free_tab(all->splt_line);
+	// // 	}
+	// // 	trim_tab(all->w_line);
+	// // }
 	// ft_print_megatab(all->w_line);
 	
 	// if (!all->w_line)
@@ -262,7 +262,7 @@ void count_pipe_croc(char *str, t_all *all)
 		i++;
 	}
 	all->pipendirect[j] = 0;
-	printf("PILELINE : %s\n", all->pipendirect);
+	// printf("PILELINE : %s\n", all->pipendirect);
 }
 
 void	replace_crocs(char *str)
@@ -469,12 +469,10 @@ void	init_list_var(t_all *all)
 	all->splt_line = ft_split(all->line, '|');
 	while (all->splt_line[i])
 	{
-		printf("###%s###\n", all->splt_line[i]);
+		// printf("###%s###\n", all->splt_line[i]);
 		split_redir(all);
 		split_target(all, all->splt_line[i]);
 		split_orders(all, all->splt_line[i]);
-		// printf("TARGET : \n");
-		// ft_print_tab(all->target_cpy);
 		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
 		ft_free_tab(all->order_cpy);
 		ft_free_tab(all->target_cpy);
