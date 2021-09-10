@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 		// _echo(&all, all.w_line[0], 0, 0);
 		// _cd("~");
 		// _env(&all, all.w_line[0], 0, 0);
-		printf("|%s|\n",  all.stack->orders[1]);
+		// printf("|%s|\n",  all.stack->orders[1]);
 		//treat_orders(&all, all.stack->orders);
 	}
 }

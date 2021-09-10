@@ -59,11 +59,14 @@ void	print_linked_list(t_pipenodes *stack)
 	{
 		ft_putstr("===============\n");
 		printf("ORDERS :\n");
-		ft_print_tab(tmp->orders);
+		if (tmp->orders)
+			ft_print_tab(tmp->orders);
 		printf("REDIRECTION :\n");
-		ft_print_tab(tmp->redir);
+		if (tmp->redir)
+			ft_print_tab(tmp->redir);
 		printf("TARGETS :\n");
-		ft_print_tab(tmp->targets);
+		if (tmp->targets)
+			ft_print_tab(tmp->targets);
 		ft_putstr("===============\n");
 		tmp = tmp->next;
 	}

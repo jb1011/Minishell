@@ -213,6 +213,8 @@ char **mall_doubletab(char **t)
 	char **new;
 
 	j = 0;
+	if (t[0] == 0)
+		return (0);
 	while(t[j])
 		j++;
 	new = malloc(sizeof(char *) * (j + 1));
