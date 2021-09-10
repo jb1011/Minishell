@@ -462,11 +462,11 @@ char	*ignore_quote_word(char *str)
 void	init_list_var(t_all *all)
 {
 	int	i;
-	all->splt_line = ft_split(all->line, '|');
 
 
 	all->stack = NULL;
 	i = 0;
+	all->splt_line = ft_split(all->line, '|');
 	while (all->splt_line[i])
 	{
 		printf("###%s###\n", all->splt_line[i]);
@@ -483,7 +483,6 @@ void	init_list_var(t_all *all)
 		i++;
 	}
 
-	//penser à free les order_cpy...
 	print_linked_list(all->stack);
 }
 
@@ -502,7 +501,7 @@ void	split_redir(t_all *all)
 		all->redir_cpy[i][1] = 0;
 		i++;
 	}
-	all->size_redir = i;
+	all->size_redir = i + 1;
 	all->redir_cpy[i] = 0;
 	// ft_print_tab(all->redir_cpy);
 }
@@ -519,7 +518,20 @@ void	split_target(t_all *all, char *str)
 	j = 0;
 	while (str[i])
 	{
-		if (is_redir(str[i]))
+		// // if (is_redir(str[i]))
+		// // {
+		// // 	if (is_redir(str[i + 1]))
+		// // 		i++;
+		// // 	start = i;
+		// // 	i++;
+		// // 	while (str[i] && !is_char_separator(str[i + 1]))
+		// // 		i++;
+		// // 	len = i - start;
+		// // 	start++;
+		// // 	all->target_cpy[j] = ft_substr(str, start, len);
+		// // 	j++;
+		// // }
+		if (str[i] ==  '>')
 		{
 			if (is_redir(str[i + 1]))
 				i++;
@@ -532,19 +544,20 @@ void	split_target(t_all *all, char *str)
 			all->target_cpy[j] = ft_substr(str, start, len);
 			j++;
 		}
-		// if (str[i] ==  '>')
-		// {
-		// 	if (is_redir(str[i + 1]))
-		// 		i++;
-		// 	start = i;
-		// 	i++;
-		// 	while (str[i] && !is_char_separator(str[i + 1]))
-		// 		i++;
-		// 	len = i - start;
-		// 	start++;
-		// 	all->target_cpy[j] = ft_substr(str, start, len);
-		// 	j++;
-		// }
+		if (str[i] ==  '<')
+		{
+			// if (is_redir(str[i + 1]))
+			// 	i++;
+			// start = i;
+			// i++;
+			// while (str[i] && !is_char_separator(str[i + 1]))
+			// 	i++;
+			// len = i;
+			// start++;
+			all->target_cpy[j] = ft_substr(str, 0, i);
+			j++;
+			break ;
+		}
 		if (i < ft_strlen(str))
 			i++;
 	}
@@ -571,11 +584,35 @@ void	split_orders(t_all *all, char *str)
 		all->order_cpy[1] = 0;
 		return ;
 	}
+	// // while (str[i])
+	// // {
+	// // 	if (is_char_separator(str[i]))
+	// // 	{
+	// // 		all->order_cpy[j] = ft_substr(str, start, i);
+	// // 		j++;
+	// // 		break ;
+	// // 	}
+	// // 	i++;
+	// // }
 	while (str[i])
 	{
-		if (is_char_separator(str[i]))
+		if (str[i] == '>')
 		{
 			all->order_cpy[j] = ft_substr(str, start, i);
+			j++;
+			break ;
+		}
+		if (str[i] ==  '<')
+		{
+			if (is_redir(str[i + 1]))
+				i++;
+			start = i;
+			i++;
+			while (str[i] && !is_char_separator(str[i + 1]))
+				i++;
+			len = i - start;
+			start++;
+			all->order_cpy[j] = ft_substr(str, start, len);
 			j++;
 			break ;
 		}
