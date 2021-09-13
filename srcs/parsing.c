@@ -460,7 +460,26 @@ void	split_target(t_all *all, char *str)
 		j = 0;
 		while (str[i])
 		{
-			if (str[i] == '>')
+			// if (str[i] == '>')
+			// {
+			// 	if (is_redir(str[i + 1]))
+			// 		i++;
+			// 	start = i;
+			// 	i++;
+			// 	while (str[i] && !is_char_separator(str[i + 1]))
+			// 		i++;
+			// 	len = i - start;
+			// 	start++;
+			// 	all->tmp = ft_substr(str, start, len);
+			// 	j++;
+			// }
+			// if (str[i] == '<')
+			// {
+			// 	all->tmp = ft_substr(str, 0, i);
+			// 	j++;
+			// 	break;
+			// }
+			if (str[i] == '>' || str[i] == '<')
 			{
 				if (is_redir(str[i + 1]))
 					i++;
@@ -472,12 +491,6 @@ void	split_target(t_all *all, char *str)
 				start++;
 				all->tmp = ft_substr(str, start, len);
 				j++;
-			}
-			if (str[i] == '<')
-			{
-				all->tmp = ft_substr(str, 0, i);
-				j++;
-				break;
 			}
 			if (i < ft_strlen(str))
 				i++;
@@ -510,21 +523,27 @@ void	split_orders(t_all *all, char *str)
 	}
 	while (str[i])
 	{
-		if (str[i] == '>')
+		// if (str[i] == '>')
+		// {
+		// 	all->tmp = ft_substr(str, start, i);
+		// 	j++;
+		// 	break ;
+		// }
+		// if (str[i] ==  '<')
+		// {
+		// 	if (is_redir(str[i + 1]))
+		// 		i++;
+		// 	start = i;
+		// 	i++;
+		// 	while (str[i] && !is_char_separator(str[i + 1]))
+		// 		i++;
+		// 	start++;
+		// 	all->tmp = ft_substr(str, start, i);
+		// 	j++;
+		// 	break ;
+		// }
+		if (str[i] == '>' || str[i] == '<')
 		{
-			all->tmp = ft_substr(str, start, i);
-			j++;
-			break ;
-		}
-		if (str[i] ==  '<')
-		{
-			if (is_redir(str[i + 1]))
-				i++;
-			start = i;
-			i++;
-			while (str[i] && !is_char_separator(str[i + 1]))
-				i++;
-			start++;
 			all->tmp = ft_substr(str, start, i);
 			j++;
 			break ;

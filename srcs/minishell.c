@@ -26,9 +26,9 @@ int main(int argc, char **argv)
 	init(&all);
 	while(42)
 	{
+		signal(SIGINT, ft_sigint);
 		begin(&all);
 		parse_line(&all);
-		signal(SIGINT, ft_sigint);
 		//  printf("%s\n", all.w_line[0][1]);
 		// _echo(0, all.w_line[0], 0, 0);
 		//printf("%s\n", all.w_line[0][1]);

@@ -22,4 +22,9 @@ void	ft_sigint(int signum, t_all *all)
 		getcwd(all->path, BUFFER_SIZE - 1);
 		printf("%s %s-> ", all->path, SHELL_PROMPT);
 	}
+	if (signum == SIGQUIT)
+	{
+		ft_putstr("\n");
+
+	}
 }
