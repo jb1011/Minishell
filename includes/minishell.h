@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 18:12:06 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/13 17:44:51 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PRINT	4
 
 
-int		_fct(char *todo[], char *env[]);
+int		_fct(char *todo[], char *env[], int stdin , int stdout);
 int		begin(t_all *all);
 int		parse_line(t_all *all);
 void	ft_print_tab(char **t);
