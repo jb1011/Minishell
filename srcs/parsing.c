@@ -56,10 +56,13 @@ int	ft_count_space(char *line)
 int	parse_line(t_all *all)
 {
 	all->line = ignore_quote(all->line);
-	all->line = ignore_quote_word(all->line);
+	// all->line = ignore_quote_word(all->line);
+	replace_inib_space(all->line);
+	is_pipe_inhib(all->line);
+	// printf("line after : %s", all->line);
 	count_pipe_croc(all->line, all);
 	init_list_var(all);
-	replace_double_croc(all->line);
+	// replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
 	return (1);
@@ -99,7 +102,7 @@ int	is_pipe_inhib(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '"')
 			count++;
 		if (str[i] == '|' && (count % 2 != 0))
 			str[i] = '@';
@@ -293,7 +296,7 @@ void	replace_inib_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '"')
 			count++;
 		if (str[i] == ' ' && (count % 2 != 0))
 			str[i] = '`';
@@ -310,7 +313,7 @@ void	replace_back_inib_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '"')
 			count++;
 		if (str[i] == '`' && (count % 2 != 0))
 		{
@@ -332,9 +335,7 @@ void	replace_doubleback_inib_space(char **str)
 		while (str[j][i])
 		{
 			if (str[j][i] == '`')
-			{
 				str[j][i] = ' ';
-			}
 			i++;
 		}
 		j++;
@@ -345,13 +346,17 @@ char	*ignore_quote(char *str)
 {
 	int	i;
 	char	*tmp;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (str[i])
 	{
-		if ((str[i] == '\'' && str[i - 1] == '`') || (str[i] == '"' && str[i - 1] == '`'))
+		if (str[i] == '"')
+			count++;
+		if (((str[i] == '\'' && str[i - 1] == '`') || (str[i] == '"' && str[i - 1] == '`')) && (count % 2 == 0))
 			str[i] = '`';
-		if ((str[i] == '\'' && str[i + 1] == '\'') || (str[i] == '"' && str[i + 1] == '"'))
+		if (((str[i] == '\'' && str[i + 1] == '\'') || (str[i] == '"' && str[i + 1] == '"')) && (count % 2 == 0))
 			str[i] = '`';
 		i++;
 	}
@@ -388,6 +393,7 @@ char	*ignore_quote_word(char *str)
 	free(str);
 	str = ft_strdup(tmp);
 	free(tmp);
+	printf("LIGNE : %s", str);
 	return (str);
 }
 
@@ -403,6 +409,10 @@ void	init_list_var(t_all *all)
 		split_redir(all);
 		split_target(all, all->splt_line[i]);
 		split_orders(all, all->splt_line[i]);
+		replace_doubleback_inib_space(all->order_cpy);
+		replace_doubleback_inib_space(all->target_cpy);
+		reverse_pipe(all->target_cpy);
+		reverse_pipe(all->order_cpy);
 		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
 		ft_free_tab(all->order_cpy);
 		ft_free_tab(all->target_cpy);

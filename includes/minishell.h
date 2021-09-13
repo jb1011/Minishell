@@ -71,6 +71,7 @@ void	init_list_var(t_all *all);
 void	print_linked_list(t_pipenodes *stack);
 char	**mall_doubletab(char **t);
 int		is_redir_str(char *s);
+void    ft_sigint(int signum, t_all *all);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *stack);
