@@ -62,7 +62,7 @@ int	parse_line(t_all *all)
 	// printf("line after : %s", all->line);
 	count_pipe_croc(all->line, all);
 	init_list_var(all);
-	// replace_double_croc(all->line);
+	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
 	return (1);
@@ -242,7 +242,10 @@ int	ft_check_error(char *s)
 				return (0);
 			if (is_char_separator(s[i]))
 				if (is_only_space(s, i))
-					return (0);
+				{
+				printf("########");
+				return (0);
+			}
 		}
 		i++;
 	}
