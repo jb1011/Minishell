@@ -18,7 +18,8 @@ FILES   =       minishell.c \
 				env_builtins.c \
 				list_init.c \
 				orders_treatment.c \
-				redirections.c
+				redirections.c \
+				signals.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 

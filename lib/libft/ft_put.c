@@ -40,7 +40,7 @@ int	ft_err_msg(char *s)
 {
 	char *temp;
 
-	temp = ft_strjoin(s, '\n');
+	temp = ft_strjoin(s, "\n");
 	write(2, temp, ft_strlen(temp));
 	free(temp);
 	return (0);
