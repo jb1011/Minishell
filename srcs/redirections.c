@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 17:00:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/13 18:00:07 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:15:39 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[
 	int id;
 	int stdout;
 	int stdin;
+	char	buff[BUFFER_SIZE];
+	char	*str;
+	int		size;
 
 	i = -1;
 	stdout = 1;
@@ -30,7 +33,16 @@ int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[
 		if (redirections[i][0] == 'g')
 			stdout = open(targets[i],O_CREAT | O_WRONLY |  O_APPEND, S_IRUSR | S_IWUSR);
 		else if (redirections[i][0] == 'p')
-			printf("CEST PAS ENCORE AU POINT");
+		{
+			str = ft_strdup("");
+			while (42)
+			{
+				size = read(0, buff, BUFFER_SIZE - 1);
+				buff[BUFFER_SIZE - 1] = 0;
+				str = ft_join_free(str, buff, 1);
+
+			} 
+		} 
 		else if (redirections[i][0] == '>')
 			stdout = open(targets[i],O_CREAT | O_WRONLY |  O_TRUNC, S_IRUSR | S_IWUSR);
 		else
