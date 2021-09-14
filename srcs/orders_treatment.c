@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/14 12:16:14 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:21:53 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int     treat_orders(t_all *all, t_pipenodes *node)
     int i;
     
     i = -1;
-    if (!(node->orders))
+    if (!node || !(node->orders))
         return  (0);
     while(node->orders[++i])
         changeline(all, &node->orders[i]);
