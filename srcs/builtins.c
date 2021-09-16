@@ -47,3 +47,14 @@ int _echo(t_all *all,char **opts)
     free(s.stra);
     return (1);
 }
+
+int _myexit(t_all *all)
+{
+	ft_free_tab(all->order_cpy);
+	ft_free_tab(all->redir_cpy);
+	ft_free_tab(all->target_cpy);
+
+    printf("exit\n");
+    exit(1);
+    return (0);
+}
