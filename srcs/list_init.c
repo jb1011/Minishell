@@ -73,11 +73,20 @@ void	print_linked_list(t_pipenodes *stack)
 	ft_putstr("\n");
 }
 
-// void	free_list(t_pipenodes *st)
-// {
-// 	t_pipenodes	*tmp;
-// 	t_pipenodes	*to_del;
+void	free_list(t_pipenodes *st)
+{
+	t_pipenodes	*tmp;
+	t_pipenodes	*to_del;
 
-// 	tmp = st->orders;
-// 	if (!is)
-// }
+	tmp = st->orders;
+	if (!is_empty(tmp))
+	{
+		while (tmp)
+		{
+			to_del = tmp;
+			tmp = tmp->next;
+			free(to_del);
+		}
+	}
+	st->orders = NULL;
+}

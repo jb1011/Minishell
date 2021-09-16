@@ -48,13 +48,15 @@ int _echo(t_all *all,char **opts)
     return (1);
 }
 
-int _myexit(t_all *all)
-{
-	ft_free_tab(all->order_cpy);
-	ft_free_tab(all->redir_cpy);
-	ft_free_tab(all->target_cpy);
+// int _myexit(t_all *all)
+// {
+// 	// ft_free_tab(all->order_cpy);
+// 	// ft_free_tab(all->redir_cpy);
+// 	// ft_free_tab(all->target_cpy);
 
-    printf("exit\n");
-    exit(1);
-    return (0);
-}
+//     // free_list(all->stack->orders);
+//     free_for_all(all);
+//     printf("exit\n");
+//     exit(1);
+//     return (0);
+// }

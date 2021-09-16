@@ -441,7 +441,6 @@ void	init_list_var(t_all *all)
 
 		i++;
 	}
-
 	print_linked_list(all->stack);
 }
 
@@ -453,6 +452,7 @@ void	split_redir(t_all *all)
 	i = 0;
 	size = ft_strlen(all->pipendirect) + 1;
 	all->redir_cpy = malloc(sizeof(char *) * size);
+	// // // reorder_tabs(all->pipendirect);
 	while (all->pipendirect[i])
 	{
 		all->redir_cpy[i] = malloc(sizeof(char) * 2);
@@ -516,12 +516,11 @@ void	split_target(t_all *all, char *str)
 				{
 					if (is_redir(str[i + 1]))
 						i++;
-
 					start = i;
 					i++;
 					while (str[i] == ' ')
 						i++;
-					while (str[i] && str[i + 1] != ' ')
+					while (str[i + 1] != 0 && str[i + 1] != ' ')
 						i++;
 					len = i - start;
 					start++;
@@ -651,4 +650,55 @@ void	split_orders(t_all *all, char *str)
 	all->order_cpy = ft_split(str, ' ');
 	// // all->order_cpy = ft_split(all->tmp, ' ');
 	// // free(all->tmp);
+}
+
+// // void	reorder_tabs(t_all *all)
+// // {
+// // 	int	i;
+// // 	t_pipenodes	*tmp;
+// // 	t_pipenodes	*new;
+
+// // 	all->stack = tmp;
+// // 	new = NULL;
+// // 	i = 0;
+// // 	while (tmp)
+// // 	{
+// // 		if (tmp->redir[i] == "<" || tmp->redir[i] == "p")
+// // 		{
+// // 			new = tmp;
+// // 			all->stack = new;
+// // 		}
+// // 		i++;
+// // 		tmp = tmp->next;
+// // 	}
+// // }
+
+void	reorder_tabs(char *str)
+{
+	int	i;
+	int c;
+	char	tmp;
+	int k;
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (str[i] == '<' || str[i] == 'p')
+		{
+			// tmp = str[c];
+			// str[c] = str[i];
+			// str[i] = tmp;
+			// c++;
+			k = c;
+			tmp = str[i];
+			while (str[k + 1] != 0)
+			{
+				str[k + 1] = str[k];
+				k++;
+			}
+			str[c] = tmp;
+			c++;
+		}
+		i++;
+	}
 }
