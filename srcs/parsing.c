@@ -521,7 +521,7 @@ void	split_target(t_all *all, char *str)
 					i++;
 					while (str[i] == ' ')
 						i++;
-					while (str[i + 1] != 0 && str[i + 1] != ' ')
+					while (str[i] && str[i + 1] != ' ')
 						i++;
 					len = i - start;
 					start++;

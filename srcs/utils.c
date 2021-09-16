@@ -226,7 +226,8 @@ char **mall_doubletab(char **t)
 	j = 0;
 	while (t[j])
 	{
-		new[j] = ft_strdup(t[j]);
+		// new[j] = ft_strdup(t[j]);
+		new[j] = ft_strtrim(t[j], " ");
 		j++;
 	}
 	new[j] = 0;
