@@ -73,6 +73,8 @@ int		is_redir_str(char *s);
 void	ft_sigint(int signum, t_all *all);
 int		ft_count_redir(char *line);
 void	rpl_space(char *str, int start, int len);
+int		_myexit(t_all *all);
+void	ft_putchar(char c);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *stack);

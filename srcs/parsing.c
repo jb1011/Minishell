@@ -544,19 +544,16 @@ void	split_target(t_all *all, char *str)
 				{
 					if (is_redir(str[i + 1]))
 						i++;
-
 					start = i;
 					i++;
 					while (str[i] == ' ')
 						i++;
-					while (str[i] && str[i + 1] != ' ')
+					while (str[i + 1] != 0 && str[i + 1] != ' ')
 						i++;
 					len = i - start;
 					start++;
 					all->target_cpy[j] = ft_substr(str, start, len);
-					// printf("LINE : %s\n", all->tmp);
 					rpl_space(str, start, len);
-
 					j++;
 				}
 				if (i < ft_strlen(str))
@@ -583,7 +580,6 @@ void	rpl_space(char *str, int start, int len)
 		start++;
 		len--;
 	}
-	printf("STR : %s\n", str);
 }
 
 void	split_orders(t_all *all, char *str)

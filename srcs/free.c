@@ -17,7 +17,7 @@ void	ft_free_tab(char **t)
 	int j;
 
 	j = 0;
-	if (t[j])
+	if (t)
 	{
 		while (t[j])
 		{
