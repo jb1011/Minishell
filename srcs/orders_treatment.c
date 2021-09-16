@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/14 12:21:53 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/14 16:06:36 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int     do_builtins(t_all *all, char **opts)
         return (_env(all, opts));
     if (!ft_strncmp(*opts, "env", ft_strlen(*opts)))
         return (_env(all, opts));
+    // printf("not a builtins\n");
     return (0);
 }
 

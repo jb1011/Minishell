@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/13 17:44:51 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/14 16:43:02 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # define PRINT	4
 
 
-int		_fct(char *todo[], char *env[], int stdin , int stdout);
 int		begin(t_all *all);
 int		parse_line(t_all *all);
 void	ft_print_tab(char **t);
@@ -95,6 +94,7 @@ int		_echo(t_all *all,char **opts);
 int		_env(t_all *all,char **opts);
 int		_unset(t_env **list, char **opts);
 int		_export(t_all *all, char **opts);
+int     my_exit(t_all *all, char **order);
 int		_pwd(t_all *all);
 int		_cd(char *path);
 
@@ -107,5 +107,6 @@ int		do_builtins(t_all *all, char **opts);
 int		isfct(char **path, char **fct);
 int     treat_orders(t_all *all, t_pipenodes *node);
 /* REDIRECTIONS !!!!!!!!!!! */
+int		_fct(char *todo[], char *env[], int stdin , int stdout, char *quote);
 int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[]);
 #endif
