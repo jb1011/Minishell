@@ -22,13 +22,13 @@ typedef struct s_env
 	struct	s_env *nxt;
 }	t_env;
 
-typedef	struct	s_pipenodes
+typedef	struct s_pipenodes
 {
 	struct	s_pipenodes *next;
 	char	**targets;
 	char 	**redir;
 	char	**orders;
-} t_pipenodes;
+}	t_pipenodes;
 
 
 typedef struct s_all
