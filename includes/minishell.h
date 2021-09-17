@@ -115,6 +115,6 @@ int		do_builtins(t_all *all, char **opts);
 int		isfct(char **path, char **fct);
 int     treat_orders(t_all *all, t_pipenodes *node);
 /* REDIRECTIONS !!!!!!!!!!! */
-int		_fct(char *todo[], char *env[], int stdin , int stdout, char *quote);
-int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[]);
+int		_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout);
+int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[]);
 #endif

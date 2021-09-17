@@ -12,7 +12,7 @@
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-# define BUFFER_SIZE 400
+# define BUFFER_SIZE 4000
 
 typedef struct s_env
 {

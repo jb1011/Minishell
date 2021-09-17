@@ -112,10 +112,8 @@ int     treat_orders(t_all *all, t_pipenodes *node)
         return (1);  
     }
     //printf("lool%s\n", *node->orders);
-    if (do_builtins(all, node->orders))
-        return (1);
     if (isfct(all->exec_paths, node->orders))
-        return (redirect_fcts(node->redir, node->targets, node->orders, env_to_strtab(all->env)));
+        return (redirect_fcts(all, node->redir, node->targets, node->orders, env_to_strtab(all->env)));
     msg = ft_strjoin("minishell : command not found: ",*node->orders);
     ft_err_msg(msg);
     free (msg);
