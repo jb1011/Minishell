@@ -29,7 +29,7 @@ CC              = gcc
 
 RM              = rm -f
 
-CFLAGS  = -Wall -Wextra   -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)
+CFLAGS  = -Wall -Wextra -g3   -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)
 
 FLAGS = -L $(LIB)libft -lft -L/usr/includes -lcurses 
 

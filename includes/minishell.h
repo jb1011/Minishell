@@ -30,6 +30,7 @@
 # define UNSET 2
 # define EXPORT 3
 # define PRINT	4
+# define PURPLE
 
 
 int		begin(t_all *all);

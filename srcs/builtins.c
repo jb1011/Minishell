@@ -45,11 +45,12 @@ int _echo(t_all *all,char **opts)
     // printf("opts[0] == %s\n opts[1] == %s\n opts[2] == %s\n", opts[0], opts[1], opts[2]);
     if (!ft_memcmp(opts[1], "-n", 3) && ++s.i)
         s.k = 1;
-    if (!opts[s.i + 2]) 
-        s.stra = ft_join_free(s.stra, opts[s.i + 1], 1);
-    else
-        while (opts[++s.i])
-            s.stra = ft_join_free(ft_join_free(s.stra, " ", 1), opts[s.i], 1);
+    while (opts[++s.i])
+    {
+        s.stra = ft_join_free(s.stra , opts[s.i], 1);
+        if (opts[s.i + 1])
+            s.stra = ft_join_free(s.stra, " ", 1);
+    }
     if (!s.k)
         s.stra = ft_join_free(s.stra, "\n", 1);
     write(1, s.stra, ft_strlen(s.stra));
