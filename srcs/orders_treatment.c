@@ -37,10 +37,31 @@ int changeline(t_all *all, char **line)
     return (1);
 }
 
+int     is_builtins(t_all *all, char **opts)
+{
+    if (!ft_strncmp(*opts, "export", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "unset", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "exit", ft_strlen(*opts)))
+        return (1);
+        // return (_myexit(all));
+    if (!ft_strncmp(*opts, "/usr/bin/echo", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "echo", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "/usr/bin/pwd", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "pwd", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "/usr/bin/env", ft_strlen(*opts)))
+        return (1);
+    if (!ft_strncmp(*opts, "env", ft_strlen(*opts)))
+        return (1);
+    return (0);
+}
 int     do_builtins(t_all *all, char **opts)
 {
-    if (!ft_strncmp(*opts, "cd", ft_strlen(*opts)))
-        return (_cd(opts[1]));
     if (!ft_strncmp(*opts, "export", ft_strlen(*opts)))
         return (_export(all, opts));
     if (!ft_strncmp(*opts, "unset", ft_strlen(*opts)))
@@ -60,7 +81,6 @@ int     do_builtins(t_all *all, char **opts)
         return (_env(all, opts));
     if (!ft_strncmp(*opts, "env", ft_strlen(*opts)))
         return (_env(all, opts));
-    // printf("not a builtins\n");
     return (0);
 }
 
@@ -82,6 +102,7 @@ int     isfct(char **path, char **fct)
     {
         free(buff);
         buff = ft_join_free(ft_strjoin(path[i], "/"), *fct, 1);
+        close (fd);
     }
     free (buff);
     if (!path[i])
@@ -110,12 +131,9 @@ int     treat_orders(t_all *all, t_pipenodes *node)
         while (node->orders[++i])
             assign_var(all, node->orders[i], 0);
         return (1);  
-    }
-    //printf("lool%s\n", *node->orders);
-    if (isfct(all->exec_paths, node->orders))
-        return (redirect_fcts(all, node->redir, node->targets, node->orders, env_to_strtab(all->env)));
-    msg = ft_strjoin("minishell : command not found: ",*node->orders);
-    ft_err_msg(msg);
-    free (msg);
+    }    
+    if (!ft_strncmp(node->orders[0], "cd", node->orders[0]))
+        return (_cd(node->orders[1]));
+    redirect_fcts(all, node->redir, node->targets, node->orders, env_to_strtab(all->env));
     return (-1);
 }

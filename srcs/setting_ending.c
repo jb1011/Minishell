@@ -35,6 +35,6 @@ int     begin(t_all *all)
     printf("%s %s", all->path, SHELL_PROMPT);
     all->line = readline("-> ");
 	add_history(all->line);
-    printf("%s\n", all->line);
+    // printf("%s\n", all->line);
     return (1);
 }

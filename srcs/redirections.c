@@ -30,9 +30,9 @@ int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[]
 
 	i = -1;
 	stdin = 0;
-	pipe(fd);
 	if (!redirections)
 		return (_fct(all, todo, env, 0, 1));
+	pipe(fd);
 	while (targets[++i])
 	{
 		if (redirections[i][0] == 'p')
@@ -58,8 +58,6 @@ int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[]
 			}
 			close(stdin);
 		}
-		else
-			continue;
 	}
 	close(fd[1]);
 	i = -1;

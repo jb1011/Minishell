@@ -19,7 +19,7 @@
 # include "structs.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <curses.h>
+// # include <curses.h>
 # include <sys/wait.h>
 # include <term.h>
 # define STOP_DOLLAR "\"\'$"
@@ -108,6 +108,7 @@ int		_cd(char *path);
 
 /* BUILTINS UTILS*/
 int     assign_var(t_all *all, char *assignation, char export);
+int     is_builtins(t_all *all, char **opts);
 
 /*ORDERS TREATMENT*/
 int		changeline(t_all *all, char **line);
