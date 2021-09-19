@@ -46,8 +46,8 @@ int     do_builtins(t_all *all, char **opts)
     if (!ft_strncmp(*opts, "unset", ft_strlen(*opts)))
         return (_unset(&all->env, opts));
     if (!ft_strncmp(*opts, "exit", ft_strlen(*opts)))
-        return (1);
-        // return (_myexit(all));
+        return (_myexit(all));
+        // return (1);
     if (!ft_strncmp(*opts, "/usr/bin/echo", ft_strlen(*opts)))
         return(_echo(all, opts));
     if (!ft_strncmp(*opts, "echo", ft_strlen(*opts)))

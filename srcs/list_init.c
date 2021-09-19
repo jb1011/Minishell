@@ -78,7 +78,7 @@ void	free_list(t_pipenodes *st)
 	t_pipenodes	*tmp;
 	t_pipenodes	*to_del;
 
-	tmp = st->orders;
+	tmp = st;
 	if (!is_empty(tmp))
 	{
 		while (tmp)
@@ -88,5 +88,5 @@ void	free_list(t_pipenodes *st)
 			free(to_del);
 		}
 	}
-	st->orders = NULL;
+	st = NULL;
 }

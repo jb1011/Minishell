@@ -186,7 +186,7 @@ void count_pipe_croc(char *str, t_all *all)
 			count++;
 		i++;
 	}
-	all->pipendirect = malloc(sizeof(char) * count + 1);
+	all->pipendirect = malloc(sizeof(char) * count + 2);
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -441,6 +441,9 @@ void	init_list_var(t_all *all)
 
 		i++;
 	}
+		// ft_free_tab(all->order_cpy);
+
+	ft_free_tab(all->splt_line);
 	print_linked_list(all->stack);
 }
 
@@ -452,7 +455,7 @@ void	split_redir(t_all *all)
 	i = 0;
 	size = ft_strlen(all->pipendirect) + 1;
 	all->redir_cpy = malloc(sizeof(char *) * size);
-	// // // reorder_tabs(all->pipendirect);
+	reorder_tabs(all->pipendirect);
 	while (all->pipendirect[i])
 	{
 		all->redir_cpy[i] = malloc(sizeof(char) * 2);
@@ -462,6 +465,7 @@ void	split_redir(t_all *all)
 	}
 	all->size_redir = i + 1;
 	all->redir_cpy[i] = 0;
+	free(all->pipendirect);
 }
 
 void	split_target(t_all *all, char *str)
@@ -652,27 +656,6 @@ void	split_orders(t_all *all, char *str)
 	// // free(all->tmp);
 }
 
-// // void	reorder_tabs(t_all *all)
-// // {
-// // 	int	i;
-// // 	t_pipenodes	*tmp;
-// // 	t_pipenodes	*new;
-
-// // 	all->stack = tmp;
-// // 	new = NULL;
-// // 	i = 0;
-// // 	while (tmp)
-// // 	{
-// // 		if (tmp->redir[i] == "<" || tmp->redir[i] == "p")
-// // 		{
-// // 			new = tmp;
-// // 			all->stack = new;
-// // 		}
-// // 		i++;
-// // 		tmp = tmp->next;
-// // 	}
-// // }
-
 void	reorder_tabs(char *str)
 {
 	int	i;
@@ -689,16 +672,29 @@ void	reorder_tabs(char *str)
 			// str[c] = str[i];
 			// str[i] = tmp;
 			// c++;
-			k = c;
+			// tmp = str[i];
+			// // str[c] = tmp;
+			// c++;
+			// k = ft_strlen(str);
+			// while (k > c)
+			// {
+			// 	str[k] = str[k - 1];
+			// 	k--;
+			// }
+			// str[k] = tmp;
 			tmp = str[i];
-			while (str[k + 1] != 0)
+			k = ft_strlen(str) - 1;
+			while (k > c)
 			{
-				str[k + 1] = str[k];
-				k++;
+				str[k] = str[k - 1];
+				ft_putnbr_fd(k, 0);
+				k--;
 			}
+			
 			str[c] = tmp;
 			c++;
 		}
 		i++;
 	}
+			printf("LINE : %s\n", str);
 }

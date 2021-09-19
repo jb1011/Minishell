@@ -48,15 +48,23 @@ int _echo(t_all *all,char **opts)
     return (1);
 }
 
-// int _myexit(t_all *all)
-// {
-// 	// ft_free_tab(all->order_cpy);
-// 	// ft_free_tab(all->redir_cpy);
-// 	// ft_free_tab(all->target_cpy);
-
-//     // free_list(all->stack->orders);
-//     free_for_all(all);
-//     printf("exit\n");
-//     exit(1);
-//     return (0);
-// }
+int _myexit(t_all *all)
+{
+    int status;
+	// ft_free_tab(all->order_cpy);
+	// ft_free_tab(all->redir_cpy);
+	// ft_free_tab(all->target_cpy);
+    if (all->stack->orders[1] != NULL)
+    {
+        ft_atoi(all->stack->orders[1]);
+        ft_putstr("!!!");
+    }
+    else
+        status = 0;
+    // ft_print_tab(all->order_cpy);
+    free_list(all->stack);
+    // free_for_all(all);
+    // printf("exit\n");
+    exit(status);
+    return (0);
+}
