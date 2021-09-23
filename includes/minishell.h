@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/14 16:43:02 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		is_redir(char s);
 void	split_target(t_all *all, char *str);
 void	split_orders(t_all *all, char *str);
 void	init_list_var(t_all *all);
-void	print_linked_list(t_pipenodes *stack);
+void	print_linked_list(t_pipenodes *pipelist);
 char	**mall_doubletab(char **t);
 int		is_redir_str(char *s);
 void	ft_sigint(int signum, t_all *all);
@@ -84,7 +84,7 @@ int 	ft_get_nb_strs(char *s, char c);
 
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
-int	is_empty(t_pipenodes *stack);
+int	is_empty(t_pipenodes *pipelist);
 void	addnew(t_all *all, char **orders, char **targets, char **redir);
 
 int	ft_count_spaces(char *line);
@@ -122,4 +122,7 @@ int     treat_orders(t_all *all, t_pipenodes *node);
 /* REDIRECTIONS !!!!!!!!!!! */
 int		_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout);
 int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[]);
+
+/* PIPES */
+int     treatall(t_all *all, t_env *env, t_pipenodes *nd);
 #endif

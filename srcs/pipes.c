@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/23 17:19:43 by lgelinet         ###   ########.fr       */
+/*   Created: 2021/09/23 17:11:42 by lgelinet          #+#    #+#             */
+/*   Updated: 2021/09/23 17:16:00 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <term.h>
-#include <unistd.h>
 
-
-int main(int argc, char **argv)
+int     treatall(t_all *all, t_env *env, t_pipenodes *nd)
 {
-	t_all all;
-	char *test;
-	t_slv s;
-
-	init(&all);
-	while(42)
-	{
-		signal(SIGINT, ft_sigint);
-		begin(&all);
-		parse_line(&all);
-		treatall(&all, all.env, all.pipelist);
-		printf("END ORDER \n");
-	}
+    if (!nd->next)
+        redirect_fcts(all, nd->redir, nd->targets, nd->orders, env_to_strtab(env));
 }

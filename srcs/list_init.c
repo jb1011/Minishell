@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting&ending.c                                   :+:      :+:    :+:   */
+/*   list_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/08/30 21:47:51 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_pipenodes	*createCell(char **orders, char **targets, char **redir)
 	return (cell);
 }
 
-int	is_empty(t_pipenodes *stack)
+int	is_empty(t_pipenodes *pipelist)
 {
-	if (stack == NULL)
+	if (pipelist == NULL)
 		return (1);
 	return (0);
 }
@@ -39,22 +39,22 @@ void	addnew(t_all *all, char **orders, char **targets, char **redir)
 	t_pipenodes *tmp;
 
 	cell = createCell(orders, targets, redir);
-	if (is_empty(all->stack))
+	if (is_empty(all->pipelist))
 	{
-		all->stack = cell;
+		all->pipelist = cell;
 		return ;
 	}
-	tmp = all->stack;
+	tmp = all->pipelist;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = cell;
 }
 
-void	print_linked_list(t_pipenodes *stack)
+void	print_linked_list(t_pipenodes *pipelist)
 {
 	t_pipenodes	*tmp;
 
-	tmp = stack;
+	tmp = pipelist;
 	while (tmp)
 	{
 		ft_putstr("===============\n");

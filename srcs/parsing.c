@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/02 13:17:28 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	ft_count_space(char *line)
 
 int	parse_line(t_all *all)
 {
-	all->stack = NULL;
-	free_list(all->stack);
+	all->pipelist = NULL;
+	free_list(all->pipelist);
 
 	all->line = ignore_quote(all->line);
 	// all->line = ignore_quote_word(all->line);
@@ -423,7 +423,7 @@ void	init_list_var(t_all *all)
 {
 	int	i;
 
-	all->stack = NULL;
+	all->pipelist = NULL;
 	i = 0;
 	all->splt_line = ft_split(all->line, '|');
 	while (all->splt_line[i])
@@ -447,7 +447,7 @@ void	init_list_var(t_all *all)
 		// ft_free_tab(all->order_cpy);
 
 	ft_free_tab(all->splt_line);
-	print_linked_list(all->stack);
+	print_linked_list(all->pipelist);
 }
 
 void	split_redir(t_all *all, char *str)

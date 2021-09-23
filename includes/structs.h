@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:21:52 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 13:23:52 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_all
 	char	**order_cpy;
 	int		size_redir;
 	int		to_free;
-	t_pipenodes *stack;
+	t_pipenodes *pipelist;
 	
 }	t_all;
 

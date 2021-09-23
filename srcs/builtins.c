@@ -64,15 +64,15 @@ int _myexit(t_all *all)
 	// ft_free_tab(all->order_cpy);
 	// ft_free_tab(all->redir_cpy);
 	// ft_free_tab(all->target_cpy);
-    if (all->stack->orders[1] != NULL)
+    if (all->pipelist->orders[1] != NULL)
     {
-        ft_atoi(all->stack->orders[1]);
+        ft_atoi(all->pipelist->orders[1]);
         ft_putstr("!!!");
     }
     else
         status = 0;
     // ft_print_tab(all->order_cpy);
-    free_list(all->stack);
+    free_list(all->pipelist);
     // free_for_all(all);
     // printf("exit\n");
     exit(status);
