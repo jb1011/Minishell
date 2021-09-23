@@ -121,6 +121,8 @@ int     treat_orders(t_all *all, t_pipenodes *node)
         return  (0);
     while(node->orders[++i])
         changeline(all, &node->orders[i]);
+    if (!ft_strncmp("exit", node->orders[0], 4))
+        return (_myexit(all));
     i = -1;
     while (node->orders[++i] && ft_strchr(node->orders[i], '='))
         ;
