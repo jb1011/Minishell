@@ -62,7 +62,7 @@ void	replace_inib_space(char *str);
 void	replace_doubleback_inib_space(char **str);
 char	*ft_dup(const char *s, char c);
 char	*ignore_quote(char *str);
-void	split_redir(t_all *all);
+void	split_redir(t_all *all, char *str);
 char	*ignore_quote_word(char *str);
 int		is_redir(char s);
 void	split_target(t_all *all, char *str);
