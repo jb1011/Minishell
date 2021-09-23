@@ -29,7 +29,7 @@ CC              = gcc
 
 RM              = rm -f
 
-CFLAGS  = -Wall -Wextra -g3 -fsanitize=address  -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)
+CFLAGS  = -Wall -Wextra -g3 -fsanitize=address -I $(HEAD)
 
 FLAGS = -L $(LIB)libft -lft -L/usr/includes -lcurses 
 
@@ -38,17 +38,15 @@ LINUX_MACRO = -D LINUX
 
 MACOS_FLAGS = 
 
-LINUX_FLAGS = -L/usr/includes -lreadline -lpthread
+LINUX_FLAGS = -L/usr/includes -lreadline
 
 UNAME := $(shell uname)
 
 ifeq ($(UNAME),Darwin)
-        NUM_THREADS = $(shell sysctl -n hw.ncpu)
         CFLAGS += $(MACOS_MACRO)
         FLAGS += $(MACOS_FLAGS)
 endif
 ifeq ($(UNAME),Linux)
-        NUM_THREADS = $(shell nproc --all)
         CFLAGS += $(LINUX_MACRO)
         FLAGS += $(LINUX_FLAGS)
 endif

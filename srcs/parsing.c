@@ -73,6 +73,9 @@ int	ft_count_space(char *line)
 
 int	parse_line(t_all *all)
 {
+	all->stack = NULL;
+	free_list(all->stack);
+
 	all->line = ignore_quote(all->line);
 	// all->line = ignore_quote_word(all->line);
 	replace_inib_space(all->line);
@@ -435,7 +438,9 @@ void	init_list_var(t_all *all)
 		reverse_pipe(all->target_cpy);
 		reverse_pipe(all->order_cpy);
 		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
-		ft_free_tab(all->order_cpy);
+
+		// ft_free_tab(all->order_cpy);
+		ft_free_order(all->order_cpy, all);
 		ft_free_tab(all->target_cpy);
 		ft_free_tab(all->redir_cpy);
 
@@ -450,12 +455,10 @@ void	init_list_var(t_all *all)
 void	split_redir(t_all *all)
 {
 	int	i;
-	int	size;
 
 	i = 0;
-	size = ft_strlen(all->pipendirect) + 1;
-	all->redir_cpy = malloc(sizeof(char *) * size);
-	reorder_tabs(all->pipendirect);
+	all->size_redir = ft_strlen(all->pipendirect);
+	all->redir_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
 	while (all->pipendirect[i])
 	{
 		all->redir_cpy[i] = malloc(sizeof(char) * 2);
@@ -463,9 +466,8 @@ void	split_redir(t_all *all)
 		all->redir_cpy[i][1] = 0;
 		i++;
 	}
-	all->size_redir = i + 1;
 	all->redir_cpy[i] = 0;
-	free(all->pipendirect);
+	// // free(all->pipendirect);
 }
 
 void	split_target(t_all *all, char *str)
@@ -477,7 +479,8 @@ void	split_target(t_all *all, char *str)
 
 	if (is_separator(str))
 	{
-		all->target_cpy = malloc(sizeof(char *) * (ft_count_space(str) * 2));
+		all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
+		// all->target_cpy = malloc(sizeof(char *) * (ft_count_space(str) * 2));
 		i = 0;
 		j = 0;
 		if (ft_count_redir(str) == 1)
@@ -591,7 +594,15 @@ void	split_orders(t_all *all, char *str)
 	int	j;
 	int start;
 
-	all->order_cpy = malloc(sizeof(char *) * (ft_count_space(str) * 2));
+	// all->to_free = (ft_get_nb_strs(str, ' ') - (all->size_redir * 2));
+	all->to_free = (ft_get_nb_strs(str, ' '));
+	// ft_putnbr_fd(all->to_free, 0);
+	// ft_putstr("\n");
+	// ft_putnbr_fd((all->size_redir * 2), 0);
+	// ft_putstr("\n");
+
+	all->order_cpy = malloc(sizeof(char *) * all->to_free);
+	// all->order_cpy = malloc(sizeof(char *) * (ft_count_space(str) * 2));
 	i = 0;
 	j = 0;
 	start = 0;
@@ -599,6 +610,7 @@ void	split_orders(t_all *all, char *str)
 	{
 		all->tmp = ft_strdup(str);
 		all->order_cpy = ft_split(all->tmp, ' ');
+		free(all->tmp);
 		return ;
 	}
 	// // while (str[i])
@@ -654,47 +666,4 @@ void	split_orders(t_all *all, char *str)
 	all->order_cpy = ft_split(str, ' ');
 	// // all->order_cpy = ft_split(all->tmp, ' ');
 	// // free(all->tmp);
-}
-
-void	reorder_tabs(char *str)
-{
-	int	i;
-	int c;
-	char	tmp;
-	int k;
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if (str[i] == '<' || str[i] == 'p')
-		{
-			// tmp = str[c];
-			// str[c] = str[i];
-			// str[i] = tmp;
-			// c++;
-			// tmp = str[i];
-			// // str[c] = tmp;
-			// c++;
-			// k = ft_strlen(str);
-			// while (k > c)
-			// {
-			// 	str[k] = str[k - 1];
-			// 	k--;
-			// }
-			// str[k] = tmp;
-			tmp = str[i];
-			k = ft_strlen(str) - 1;
-			while (k > c)
-			{
-				str[k] = str[k - 1];
-				ft_putnbr_fd(k, 0);
-				k--;
-			}
-			
-			str[c] = tmp;
-			c++;
-		}
-		i++;
-	}
-			printf("LINE : %s\n", str);
 }

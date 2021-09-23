@@ -32,9 +32,9 @@ int     begin(t_all *all)
 {
     ft_bzero(all->path, BUFFER_SIZE);
     getcwd(all->path, BUFFER_SIZE - 1);
-    printf("%s %s", all->path, SHELL_PROMPT);
+    printf("\033[0;35m%s \033[0;34m%s \033[0;0m", all->path, SHELL_PROMPT);
     all->line = readline("-> ");
 	add_history(all->line);
-    printf("%s\n", all->line);
+    // printf("%s\n", all->line);
     return (1);
 }

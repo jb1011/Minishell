@@ -18,7 +18,7 @@ int     _env(t_all *all,char **opts)
     t_slv   s;
 
     if (opts[1])
-        return (ft_err_msg("Env treated alone"));
+        return (ft_err_msg("Env treated alone\n"));
     ptr = all->env;
     s.stra = ft_strdup("");
     while (ptr)
@@ -30,7 +30,7 @@ int     _env(t_all *all,char **opts)
         }
         ptr = ptr->nxt;
     }
-    ft_putstr(s.stra);
+    write(1, s.stra, ft_strlen(s.stra));
     free (s.stra);
     return (1);
 }

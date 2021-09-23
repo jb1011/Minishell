@@ -15,7 +15,7 @@
 #include <readline/readline.h>
 
 
-int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[])
+int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[])
 {
 	int	i;
 	int id;
@@ -24,43 +24,52 @@ int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[
 	char	*buff;
 	char	*str = NULL;
 	int		size;
+	int		fd[2];
+	char	buff2[BUFFER_SIZE + 1];
+	int		right_redirect = 0;
 
 	i = -1;
-	stdout = 1;
 	stdin = 0;
 	if (!redirections)
-		return (_fct(todo, env, 0, 1, 0));
+		return (_fct(all, todo, env, 0, 1));
+	pipe(fd);
 	while (targets[++i])
 	{
-		printf ("in the loop redir\n");
-		if (redirections[i][0] == 'g')
-			stdout = open(targets[i],O_CREAT | O_WRONLY |  O_APPEND, S_IRUSR | S_IWUSR);
-		else if (redirections[i][0] == 'p')
+		if (redirections[i][0] == 'p')
 		{
-			str = ft_strdup("");
 			while (42)
 			{
-				// printf ("in the loop 42\n");
 				buff = readline("dquotes<");
-				// printf("buuf -- %s\n", buff);
 				if (ft_strlen(targets[i]) == ft_strlen(buff))
-					if (!ft_strncmp(targets[i], buff, BUFFER_SIZE))
+					if (!ft_strncmp(targets[i], buff, ft_strlen(targets[i])) && do_free(buff))
 						break;
-				str = ft_join_free(str,ft_join_free(buff, "\n", 1), 3);
+				buff = ft_join_free(buff, "\n", 1);
+				write(fd[1], buff, ft_strlen(buff));
+				free(buff);
 			}
-		} 
-		else if (redirections[i][0] == '>')
-			stdout = open(targets[i],O_CREAT | O_WRONLY |  O_TRUNC, S_IRUSR | S_IWUSR);
-		else
+		}
+		else if (redirections[i][0] == '<')
+		{
 			stdin = open(targets[i],O_RDONLY, S_IRUSR | S_IWUSR);
-		_fct(todo, env, stdin, stdout, str);
-		if (stdin > 2)
+			while (assign(&size, read(stdin , buff2, BUFFER_SIZE)) > 0)
+			{
+				buff2[size] = 0;
+				write(fd[1], buff2, size - 1);
+			}
 			close(stdin);
-		if (stdout > 2)
-			close(stdout);
-		stdout = 1;
-		stdin = 0;
-		// printf ("in the end redir\n");
+		}
 	}
+	close(fd[1]);
+	i = -1;
+	while (targets[++i])
+	{
+		if (redirections[i][0] == 'g' && ++right_redirect)
+			_fct(all, todo, env, fd[0], open(targets[i],O_CREAT | O_WRONLY |  O_APPEND, S_IRUSR | S_IWUSR));
+		else if (redirections[i][0] == '>' && ++right_redirect)
+			_fct(all, todo, env, fd[0], open(targets[i],O_CREAT | O_WRONLY |  O_TRUNC, S_IRUSR | S_IWUSR));
+	}
+	if (!right_redirect)
+		_fct(all, todo, env, fd[0], 1);
+	close(fd[0]);
     return (1);
 }

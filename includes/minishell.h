@@ -19,7 +19,7 @@
 # include "structs.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <curses.h>
+// # include <curses.h>
 # include <sys/wait.h>
 # include <term.h>
 # define STOP_DOLLAR "\"\'$"
@@ -30,6 +30,7 @@
 # define UNSET 2
 # define EXPORT 3
 # define PRINT	4
+# define PURPLE
 
 
 int		begin(t_all *all);
@@ -78,6 +79,8 @@ void	ft_putchar(char c);
 void	free_list(t_pipenodes *st);
 void	free_for_all(t_all *all);
 void	reorder_tabs(char *str);
+void	ft_free_order(char **t, t_all *all);
+int 	ft_get_nb_strs(char *s, char c);
 
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
@@ -108,6 +111,7 @@ int		_cd(char *path);
 
 /* BUILTINS UTILS*/
 int     assign_var(t_all *all, char *assignation, char export);
+int     is_builtins(t_all *all, char **opts);
 
 /*ORDERS TREATMENT*/
 int		changeline(t_all *all, char **line);
@@ -115,6 +119,6 @@ int		do_builtins(t_all *all, char **opts);
 int		isfct(char **path, char **fct);
 int     treat_orders(t_all *all, t_pipenodes *node);
 /* REDIRECTIONS !!!!!!!!!!! */
-int		_fct(char *todo[], char *env[], int stdin , int stdout, char *quote);
-int		redirect_fcts(char **redirections, char **targets, char *todo[], char *env[]);
+int		_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout);
+int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[]);
 #endif

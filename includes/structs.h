@@ -12,7 +12,7 @@
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-# define BUFFER_SIZE 400
+# define BUFFER_SIZE 4000
 
 typedef struct s_env
 {
@@ -45,6 +45,7 @@ typedef struct s_all
 	char	**target_cpy;
 	char	**order_cpy;
 	int		size_redir;
+	int		to_free;
 	t_pipenodes *stack;
 	
 }	t_all;

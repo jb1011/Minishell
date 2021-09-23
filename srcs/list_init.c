@@ -79,12 +79,12 @@ void	free_list(t_pipenodes *st)
 	t_pipenodes	*to_del;
 
 	tmp = st;
-	if (!is_empty(tmp))
+	if (!is_empty(st))
 	{
-		while (tmp)
+		while (st)
 		{
-			to_del = tmp;
-			tmp = tmp->next;
+			to_del = st;
+			st = st->next;
 			free(to_del);
 		}
 	}

@@ -29,6 +29,26 @@ void	ft_free_tab(char **t)
 	}
 }
 
+void	ft_free_order(char **t, t_all *all)
+{
+	int j;
+
+	j = 0;
+			// ft_putnbr_fd(all->to_free,0);
+
+	if (t)
+	{
+		while (j < all->to_free)
+		{
+			// ft_putnbr_fd(j,0);
+			free(t[j]);
+			j++;
+		}
+		free(t);
+		t = NULL;
+	}
+}
+
 void	ft_free_megatab(char ***t)
 {
 	int j;
