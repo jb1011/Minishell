@@ -32,6 +32,25 @@ int	ft_count_split(char *line)
 	return (count + 1);
 }
 
+int ft_count_pipes(t_all *all)
+{
+	int i;
+	int c;
+
+	all->count_list = 0;
+	i = 0;
+	c = 0;
+	while (all->line[i])
+	{
+		if (all->line[i] == '\'')
+			c++;
+		if ((all->line[i] == '|') && (c % 2 == 0))
+			all->count_list += 1;
+		i++;
+	}
+	return (all->count_list);
+}
+
 int	ft_count_redir(char *line)
 {
 	int i;
@@ -73,6 +92,7 @@ int	ft_count_space(char *line)
 
 int	parse_line(t_all *all)
 {
+	ft_count_pipes(all);
 	all->stack = NULL;
 	free_list(all->stack);
 
@@ -86,6 +106,7 @@ int	parse_line(t_all *all)
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
+	ft_putnbr_fd(all->count_list, 0);
 	return (1);
 }
 
@@ -441,11 +462,11 @@ void	init_list_var(t_all *all)
 		ft_free_order(all->order_cpy, all);
 		ft_free_tab(all->target_cpy);
 		ft_free_tab(all->redir_cpy);
-
 		i++;
 	}
 		// ft_free_tab(all->order_cpy);
-
+		all->count_list += 1;
+	// ft_putnbr_fd(all->count_list, 0);
 	ft_free_tab(all->splt_line);
 	print_linked_list(all->stack);
 }

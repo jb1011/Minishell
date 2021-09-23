@@ -46,6 +46,7 @@ typedef struct s_all
 	char	**order_cpy;
 	int		size_redir;
 	int		to_free;
+	int		count_list;
 	t_pipenodes *stack;
 	
 }	t_all;
