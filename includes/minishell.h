@@ -91,6 +91,7 @@ int	ft_count_spaces(char *line);
 int dollar_case(char **buffer, char *object, int *index, t_all *all);
 int str_case(char **buffer, char *object, int *index, char *stops);
 void quotes_bool(int *boolean);
+int     free_env(t_env **env);
 
 /* ENVIRONNEMENT GESTION */
 t_env	*vardo(t_env **list, char *tofind, char *ch_val, char do_what);

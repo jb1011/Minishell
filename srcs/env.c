@@ -89,3 +89,21 @@ char    **env_to_strtab(t_env *list)
     return (ret);
 
 }
+
+int     free_env(t_env **env)
+{
+    t_env *ptr;
+
+    ptr = *env;
+    while (ptr)
+    {
+        ptr = *env;
+        *env = (*env)->nxt;
+        if (ptr->var)
+            free(ptr->var);
+        if (ptr->val)
+            free(ptr->val);
+        free(ptr);
+    }
+    return (1);
+}
