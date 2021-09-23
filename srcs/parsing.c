@@ -81,7 +81,7 @@ int	parse_line(t_all *all)
 	replace_inib_space(all->line);
 	is_pipe_inhib(all->line);
 	// printf("line after : %s", all->line);
-	count_pipe_croc(all->line, all);
+	// count_pipe_croc(all->line, all);
 	init_list_var(all);
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
@@ -182,7 +182,6 @@ void count_pipe_croc(char *str, t_all *all)
 
 	count = 0;
 	i = 0;
-
 	while (str[i])
 	{
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
@@ -196,12 +195,11 @@ void count_pipe_croc(char *str, t_all *all)
 	{
 		if (!quote_is_odd(str, i))
 		{
-
-			if (str[i] == '|')
-			{
-				all->pipendirect[j] = str[i];
-				j++;
-			}
+			// if (str[i] == '|')
+			// {
+			// 	all->pipendirect[j] = str[i];
+			// 	j++;
+			// }
 			if (str[i] == '<' && str[i + 1] == '<')
 			{
 				all->pipendirect[j] = 'p';
@@ -430,7 +428,7 @@ void	init_list_var(t_all *all)
 	all->splt_line = ft_split(all->line, '|');
 	while (all->splt_line[i])
 	{
-		split_redir(all);
+		split_redir(all, all->splt_line[i]);
 		split_target(all, all->splt_line[i]);
 		split_orders(all, all->splt_line[i]);
 		replace_doubleback_inib_space(all->order_cpy);
@@ -452,13 +450,17 @@ void	init_list_var(t_all *all)
 	print_linked_list(all->stack);
 }
 
-void	split_redir(t_all *all)
+void	split_redir(t_all *all, char *str)
 {
 	int	i;
+	// char	*tmp;
 
 	i = 0;
+	count_pipe_croc(str, all);
+	// all->redir_cpy = malloc(sizeof(char *) * (ft_count_redir(str) + 1));
 	all->size_redir = ft_strlen(all->pipendirect);
 	all->redir_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
+	// tmp = ft_dup(all->pipendirect, '|');
 	while (all->pipendirect[i])
 	{
 		all->redir_cpy[i] = malloc(sizeof(char) * 2);
@@ -467,7 +469,7 @@ void	split_redir(t_all *all)
 		i++;
 	}
 	all->redir_cpy[i] = 0;
-	// // free(all->pipendirect);
+	free(all->pipendirect);
 }
 
 void	split_target(t_all *all, char *str)
