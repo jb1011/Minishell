@@ -94,7 +94,7 @@ int	parse_line(t_all *all)
 {
 	all->pipelist = NULL;
 	free_list(all->pipelist);
-
+	ft_count_pipes(all);
 	all->line = ignore_quote(all->line);
 	// all->line = ignore_quote_word(all->line);
 	replace_inib_space(all->line);
@@ -105,7 +105,7 @@ int	parse_line(t_all *all)
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
-	ft_putnbr_fd(all->count_list, 0);
+	// ft_putnbr_fd(all->count_list, 0);
 	return (1);
 }
 
