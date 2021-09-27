@@ -502,45 +502,12 @@ void	split_target(t_all *all, char *str)
 	if (is_separator(str))
 	{
 		all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
-		// all->target_cpy = malloc(sizeof(char *) * (ft_count_space(str) * 2));
 		i = 0;
 		j = 0;
 		if (ft_count_redir(str) == 1)
 		{
 			while (str[i])
 			{
-				// if (str[i] == '>')
-				// {
-				// 	if (is_redir(str[i + 1]))
-				// 		i++;
-				// 	start = i;
-				// 	i++;
-				// 	while (str[i] && !is_char_separator(str[i + 1]))
-				// 		i++;
-				// 	len = i - start;
-				// 	start++;
-				// 	all->tmp = ft_substr(str, start, len);
-				// 	j++;
-				// }
-				// if (str[i] == '<')
-				// {
-				// 	all->tmp = ft_substr(str, 0, i);
-				// 	j++;
-				// 	break;
-				// }
-				// // // // if (str[i] == '>' || str[i] == '<')
-				// // // // {
-				// // // // 	if (is_redir(str[i + 1]))
-				// // // // 		i++;
-				// // // // 	start = i;
-				// // // // 	i++;
-				// // // // 	while (str[i] && !is_char_separator(str[i + 1]))
-				// // // // 		i++;
-				// // // // 	len = i - start;
-				// // // // 	start++;
-				// // // // 	all->tmp = ft_substr(str, start, len);
-				// // // // 	j++;
-				// // // // }
 				if (str[i] == '>' || str[i] == '<')
 				{
 					if (is_redir(str[i + 1]))
@@ -554,7 +521,6 @@ void	split_target(t_all *all, char *str)
 					len = i - start;
 					start++;
 					all->tmp = ft_substr(str, start, len);
-					// printf("LINE : %s\n", all->tmp);
 					j++;
 					rpl_space(str, start, len);
 				}
@@ -576,7 +542,7 @@ void	split_target(t_all *all, char *str)
 					i++;
 					while (str[i] == ' ')
 						i++;
-					while (str[i + 1] != 0 && str[i + 1] != ' ')
+					while (str[i + 1] != 0 && str[i + 1] != ' ' && str[i + 1] != '>' && str[i + 1] != '<')
 						i++;
 					len = i - start;
 					start++;
@@ -616,15 +582,8 @@ void	split_orders(t_all *all, char *str)
 	int	j;
 	int start;
 
-	// all->to_free = (ft_get_nb_strs(str, ' ') - (all->size_redir * 2));
 	all->to_free = (ft_get_nb_strs(str, ' '));
-	// ft_putnbr_fd(all->to_free, 0);
-	// ft_putstr("\n");
-	// ft_putnbr_fd((all->size_redir * 2), 0);
-	// ft_putstr("\n");
-
 	all->order_cpy = malloc(sizeof(char *) * all->to_free);
-	// all->order_cpy = malloc(sizeof(char *) * (ft_count_space(str) * 2));
 	i = 0;
 	j = 0;
 	start = 0;
@@ -635,50 +594,6 @@ void	split_orders(t_all *all, char *str)
 		free(all->tmp);
 		return ;
 	}
-	// // while (str[i])
-	// // {
-	// // 	// if (str[i] == '>')
-	// // 	// {
-	// // 	// 	all->tmp = ft_substr(str, start, i);
-	// // 	// 	j++;
-	// // 	// 	break ;
-	// // 	// }
-	// // 	// if (str[i] ==  '<')
-	// // 	// {
-	// // 	// 	if (is_redir(str[i + 1]))
-	// // 	// 		i++;
-	// // 	// 	start = i;
-	// // 	// 	i++;
-	// // 	// 	while (str[i] && !is_char_separator(str[i + 1]))
-	// // 	// 		i++;
-	// // 	// 	start++;
-	// // 	// 	all->tmp = ft_substr(str, start, i);
-	// // 	// 	j++;
-	// // 	// 	break ;
-	// // 	// }
-	// // 	if (str[i] == '>' || str[i] == '<')
-	// // 	{
-	// // 		all->tmp = ft_substr(str, start, i);
-	// // 		j++;
-	// // 		break ;
-	// // 	}
-	// // 	i++;
-	// // }
-	// // while (str[i])
-	// // {
-	// // 	if (str[i] == '|')
-	// // 	{
-	// // 		start = i;
-	// // 		i++;
-	// // 		while (str[i] && !is_char_separator(str[i + 1]))
-	// // 			i++;
-	// // 		start++;
-	// // 		all->tmp = ft_substr(str, start, i);
-	// // 		j++;
-	// // 	}
-	// // 	if (i < ft_strlen(str))
-	// // 		i++;
-	// // }
 	while (str[i])
 	{
 		if (str[i] == '>' || str[i] == '<')
