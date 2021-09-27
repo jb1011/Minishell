@@ -44,10 +44,12 @@ void	addnew(t_all *all, char **orders, char **targets, char **redir)
 		all->pipelist = cell;
 		return ;
 	}
-	tmp = all->pipelist;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = cell;
+	// tmp = all->pipelist;
+	// while (tmp->next != NULL)
+	// 	tmp = tmp->next;
+	// tmp->next = cell;
+	cell->next = all->pipelist;
+	all->pipelist = cell;
 }
 
 void	print_linked_list(t_pipenodes *pipelist)
