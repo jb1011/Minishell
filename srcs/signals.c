@@ -25,6 +25,5 @@ void	ft_sigint(int signum, t_all *all)
 	if (signum == SIGQUIT)
 	{
 		ft_putstr("\n");
-
 	}
 }

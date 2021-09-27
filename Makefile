@@ -20,7 +20,11 @@ FILES   =       minishell.c \
 				orders_treatment.c \
 				redirections.c \
 				signals.c \
-				pipes.c
+				pipes.c \
+				parsing_utils3.c \
+				parsing_utils1.c \
+				parsing_utils2.c \
+				parsing_del.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 
