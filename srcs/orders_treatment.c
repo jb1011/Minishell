@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/14 16:06:36 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/24 18:54:03 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int     do_builtins(t_all *all, char **opts)
         return (_unset(&all->env, opts));
     if (!ft_strncmp(*opts, "exit", ft_strlen(*opts)))
         return (_myexit(all));
-        // return (1);
     if (!ft_strncmp(*opts, "/usr/bin/echo", ft_strlen(*opts)))
         return(_echo(all, opts));
     if (!ft_strncmp(*opts, "echo", ft_strlen(*opts)))

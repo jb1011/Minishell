@@ -64,6 +64,7 @@ int _myexit(t_all *all)
 	// ft_free_tab(all->order_cpy);
 	// ft_free_tab(all->redir_cpy);
 	// ft_free_tab(all->target_cpy);
+    printf("exit\n");
     if (all->pipelist->orders[1] != NULL)
     {
         ft_atoi(all->pipelist->orders[1]);
