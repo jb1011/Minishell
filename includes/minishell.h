@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/27 16:40:44 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int     is_builtins(t_all *all, char **opts);
 
 /*ORDERS TREATMENT*/
 int		changeline(t_all *all, char **line);
-int		do_builtins(t_all *all, char **opts);
+int		do_builtins(t_all *all, char **opts, int no_builtins);
 int		isfct(char **path, char **fct);
 int     treat_orders(t_all *all, t_pipenodes *node);
 /* REDIRECTIONS !!!!!!!!!!! */
