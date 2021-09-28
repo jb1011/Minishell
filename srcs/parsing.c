@@ -18,16 +18,12 @@ int	parse_line(t_all *all)
 	free_list(all->pipelist);
 	ft_count_pipes(all);
 	all->line = ignore_quote(all->line);
-	// all->line = ignore_quote_word(all->line);
 	replace_inib_space(all->line);
 	is_pipe_inhib(all->line);
-	// printf("line after : %s", all->line);
-	// count_pipe_croc(all->line, all);
 	init_list_var(all);
 	replace_double_croc(all->line);
 	if (!ft_check_error(all->line))
 		printf("ERRRROOROOOOOOORRRRR");
-	// ft_putnbr_fd(all->count_list, 0);
 	return (1);
 }
 
@@ -49,17 +45,14 @@ void	init_list_var(t_all *all)
 		reverse_pipe(all->target_cpy);
 		reverse_pipe(all->order_cpy);
 		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
-		// ft_free_tab(all->order_cpy);
-		ft_free_order(all->order_cpy, all);
+		// ft_free_order(all->order_cpy, all);
+		ft_free_tab(all->order_cpy);
 		ft_free_tab(all->target_cpy);
 		ft_free_tab(all->redir_cpy);
 		i++;
 	}
-	// ft_free_tab(all->order_cpy);
-	all->count_list += 1;
-	// ft_putnbr_fd(all->count_list, 0);
 	ft_free_tab(all->splt_line);
-	print_linked_list(all->pipelist);
+	// print_linked_list(all->pipelist);
 }
 
 void	split_redir(t_all *all, char *str)
@@ -155,14 +148,10 @@ void	split_target(t_all *all, char *str)
 void	split_orders(t_all *all, char *str)
 {
 	int	i;
-	int	j;
-	int start;
 
 	all->to_free = (ft_get_nb_strs(str, ' '));
 	all->order_cpy = malloc(sizeof(char *) * all->to_free);
 	i = 0;
-	j = 0;
-	start = 0;
 	if (!is_redir_str(str))
 	{
 		all->tmp = ft_strdup(str);

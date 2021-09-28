@@ -71,7 +71,7 @@ int _myexit(t_all *all)
 		status = 0;
 	free_list(all->pipelist);
 	// ft_print_tab(all->order_cpy);
-	// free_for_all(all);
+	// // free_for_all(all);
 	// printf("exit\n");
 	exit(status);
 	return (0);

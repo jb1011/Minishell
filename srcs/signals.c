@@ -17,13 +17,13 @@ void	ft_sigint(int signum, t_all *all)
 	if (signum == SIGINT)
 	{
 		ft_putstr("\n");
-		// begin(all);
 		ft_bzero(all->path, BUFFER_SIZE);
 		getcwd(all->path, BUFFER_SIZE - 1);
 		printf("%s %s-> ", all->path, SHELL_PROMPT);
 	}
 	if (signum == SIGQUIT)
 	{
-		ft_putstr("\n");
+		_myexit(all);
+		// ft_putstr("\n");
 	}
 }

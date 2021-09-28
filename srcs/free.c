@@ -64,14 +64,14 @@ void	ft_free_megatab(char ***t)
 
 void	free_for_all(t_all *all)
 {
-	if (all->order_cpy)
-		ft_free_tab(all->order_cpy);
-	if (all->target_cpy)
-		ft_free_tab(all->target_cpy);
-	if (all->redir_cpy)
-		ft_free_tab(all->redir_cpy);
-	if (all->splt_line)
-		ft_free_tab(all->splt_line);
+	// if (all->order_cpy)
+	// 	ft_free_tab(all->order_cpy);
+	// if (all->target_cpy)
+	// 	ft_free_tab(all->target_cpy);
+	// if (all->redir_cpy)
+	// 	ft_free_tab(all->redir_cpy);
+	// if (all->splt_line)
+	// 	ft_free_tab(all->splt_line);
 	if (all->tmp)
 		free(all->tmp);
 	if (all->line)
