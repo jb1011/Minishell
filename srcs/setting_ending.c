@@ -25,7 +25,6 @@ int     init(t_all *all)
     advar(&all->env, "USER", getenv("USER"), EXPORT);
     advar(&all->env, "SHELL", "minishell", EXPORT);
     advar(&all->env, "DESKTOP_SESSION", getenv("DESKTOP_SESSION"), EXPORT);
-    // printf("%s\n%sifhjweuifhweuifhwefuh\n", all->env->var, all->env->val);
 }
 
 int     begin(t_all *all)
@@ -35,6 +34,5 @@ int     begin(t_all *all)
     printf("\033[0;35m%s \033[0;34m%s \033[0;0m", all->path, SHELL_PROMPT);
     all->line = readline("-> ");
 	add_history(all->line);
-    // printf("%s\n", all->line);
     return (1);
 }

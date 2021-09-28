@@ -15,6 +15,7 @@
 #include <readline/readline.h>
 
 
+
 int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[])
 {
 	int	i;

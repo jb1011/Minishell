@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int     treatall(t_all *all, t_env *env, t_pipenodes *nd)
+int     do_pipes(t_all *all, t_env *env, t_pipenodes *nd)
 {
     int id;
     int fd[2];
@@ -25,7 +25,7 @@ int     treatall(t_all *all, t_env *env, t_pipenodes *nd)
     {
         close(fd[0]);
         dup2(fd[1], 1);
-        treatall(all, env, nd->next);
+        do_pipes(all, env, nd->next);
         close(fd[1]);
         close (1);
         exit(1);

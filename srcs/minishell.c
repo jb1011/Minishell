@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 		signal(SIGINT, ft_sigint);
 		begin(&all);
 		parse_line(&all);
-		treatall(&all, all.env, all.pipelist);
+		do_pipes(&all, all.env, all.pipelist);
 		printf("END ORDER \n");
 	}
 }
