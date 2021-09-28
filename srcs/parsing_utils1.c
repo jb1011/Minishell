@@ -37,7 +37,7 @@ int ft_count_pipes(t_all *all)
 	int i;
 	int c;
 
-	all->count_list = 0;
+	all->count_list = 1;
 	i = 0;
 	c = 0;
 	while (all->line[i])

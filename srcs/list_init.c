@@ -36,7 +36,6 @@ int	is_empty(t_pipenodes *pipelist)
 void	addnew(t_all *all, char **orders, char **targets, char **redir)
 {
 	t_pipenodes *cell;
-	t_pipenodes *tmp;
 
 	cell = createCell(orders, targets, redir);
 	if (is_empty(all->pipelist))
@@ -44,10 +43,6 @@ void	addnew(t_all *all, char **orders, char **targets, char **redir)
 		all->pipelist = cell;
 		return ;
 	}
-	// tmp = all->pipelist;
-	// while (tmp->next != NULL)
-	// 	tmp = tmp->next;
-	// tmp->next = cell;
 	cell->next = all->pipelist;
 	all->pipelist = cell;
 }
@@ -77,16 +72,17 @@ void	print_linked_list(t_pipenodes *pipelist)
 
 void	free_list(t_pipenodes *st)
 {
-	t_pipenodes	*tmp;
 	t_pipenodes	*to_del;
 
-	tmp = st;
 	if (!is_empty(st))
 	{
 		while (st)
 		{
 			to_del = st;
 			st = st->next;
+			ft_free_tab(to_del->orders);
+			ft_free_tab(to_del->redir);
+			ft_free_tab(to_del->targets);
 			free(to_del);
 		}
 	}

@@ -58,9 +58,6 @@ char	*ignore_quote(char *str)
 
 void	rpl_space(char *str, int start, int len)
 {
-	int	i;
-
-	i = 0;
 	while (len > 0)
 	{
 		str[start] = ' ';
