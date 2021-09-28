@@ -31,8 +31,20 @@ int     begin(t_all *all)
 {
     ft_bzero(all->path, BUFFER_SIZE);
     getcwd(all->path, BUFFER_SIZE - 1);
-    printf("\033[0;35m%s \033[0;34m%s \033[0;0m", all->path, SHELL_PROMPT);
+    printf("\033[0;35m%s\033[0;34m%s\033[0;0m", all->path, SHELL_PROMPT);
+    //if (all->line)
+    //    free(all->line);
+
     all->line = readline("-> ");
+    while(all->ctrl_c)
+    {
+        all->ctrl_c = 0;
+        if (all->line)
+            free (all->line);
+        printf("\033[0;35m%s\033[0;34m%s\033[0;0m", all->path, SHELL_PROMPT);
+        all->line = readline("-> ");
+    }
+    // free (all->line);
 	add_history(all->line);
     return (1);
 }

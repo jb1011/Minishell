@@ -39,6 +39,7 @@ typedef struct s_all
 	char	***w_line;
 	char	*pipendirect;
 	char	**exec_paths;
+	char	ctrl_c;
 	t_env	*env;
 	char	*tmp;
 	char	**redir_cpy;

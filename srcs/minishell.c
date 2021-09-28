@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 	char *test;
 	t_slv s;
 
+	all = (t_all){0};
 	init(&all);
 	while(42)
 	{

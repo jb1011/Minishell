@@ -14,16 +14,26 @@
 
 void	ft_sigint(int signum, t_all *all)
 {
+	int id;
+
 	if (signum == SIGINT)
 	{
-		ft_putstr("\n");
-		ft_bzero(all->path, BUFFER_SIZE);
-		getcwd(all->path, BUFFER_SIZE - 1);
-		printf("%s %s-> ", all->path, SHELL_PROMPT);
+		all->ctrl_c = 1;
+		if (!assign(&id, fork()))
+		{
+			sleep(0.5);
+			dup2(0,1);
+			dup2(2, 0);
+			ft_putstr("\n");
+			close (1);
+			close(0);
+			exit(1);
+		}
 	}
 	if (signum == SIGQUIT)
 	{
-		_myexit(all);
+		// _myexit(all);
+		exit (1);
 		// ft_putstr("\n");
 	}
 }

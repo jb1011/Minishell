@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define SHELL_PROMPT "MINISHELL:: "
+# define SHELL_PROMPT " MINISHELL:: "
 
 # include "libft.h"
 # include "structs.h"
