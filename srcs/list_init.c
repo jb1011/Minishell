@@ -87,6 +87,9 @@ void	free_list(t_pipenodes *st)
 		{
 			to_del = st;
 			st = st->next;
+			ft_free_tab(to_del->orders);
+			ft_free_tab(to_del->redir);
+			ft_free_tab(to_del->targets);
 			free(to_del);
 		}
 	}

@@ -36,6 +36,7 @@ void	init_list_var(t_all *all)
 	int	i;
 
 	all->pipelist = NULL;
+	free_list(all->pipelist);
 	i = 0;
 	all->splt_line = ft_split(all->line, '|');
 	while (all->splt_line[i])
@@ -150,8 +151,6 @@ void	split_target(t_all *all, char *str)
 		all->target_cpy[0] = 0;
 	}
 }
-
-
 
 void	split_orders(t_all *all, char *str)
 {
