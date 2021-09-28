@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/24 18:54:03 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:52:28 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,46 +39,44 @@ int changeline(t_all *all, char **line)
 
 int     is_builtins(t_all *all, char **opts)
 {
-    if (!ft_strncmp(*opts, "export", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "unset", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "exit", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "/usr/bin/echo", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "echo", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "/usr/bin/pwd", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "pwd", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "/usr/bin/env", ft_strlen(*opts)))
-        return (1);
-    if (!ft_strncmp(*opts, "env", ft_strlen(*opts)))
-        return (1);
+    int len;
+
+    len = ft_strlen(*opts) + 1;
+    printf("%s%d\n", *opts, len);
+    if (len > 7)
+        return (0);
+    if (len == 7)
+        if (!ft_strncmp(*opts, "export", 7))
+            return (1);
+    if (len == 6)
+        if (!ft_strncmp(*opts, "unset", 6))
+            return (2);
+    if (len == 5)
+        if (!ft_strncmp(*opts, "echo", 5))
+            return(3);
+    if (len ==4)
+    {
+        if (!ft_strncmp(*opts, "pwd", 4))
+            return(4);
+        if (!ft_strncmp(*opts, "env", 4))
+            return (5);
+    }
     return (0);
 }
-int     do_builtins(t_all *all, char **opts)
+int     do_builtins(t_all *all, char **opts, int no_builtins)
 {
-    if (!ft_strncmp(*opts, "export", ft_strlen(*opts)))
+    if (!no_builtins)
+        return (0);
+    if (no_builtins == 1)
         return (_export(all, opts));
-    if (!ft_strncmp(*opts, "unset", ft_strlen(*opts)))
+    if (no_builtins == 2)
         return (_unset(&all->env, opts));
-    if (!ft_strncmp(*opts, "exit", ft_strlen(*opts)))
-        return (_myexit(all));
-    if (!ft_strncmp(*opts, "/usr/bin/echo", ft_strlen(*opts)))
+    if (no_builtins == 3)
         return(_echo(all, opts));
-    if (!ft_strncmp(*opts, "echo", ft_strlen(*opts)))
-        return(_echo(all, opts));
-    if (!ft_strncmp(*opts, "/usr/bin/pwd", ft_strlen(*opts)))
+    if (no_builtins == 4)
         return(_pwd(all));
-    if (!ft_strncmp(*opts, "pwd", ft_strlen(*opts)))
-        return(_pwd(all));
-    if (!ft_strncmp(*opts, "/usr/bin/env", ft_strlen(*opts)))
-        return (_env(all, opts));
-    if (!ft_strncmp(*opts, "env", ft_strlen(*opts)))
-        return (_env(all, opts));
+    if (no_builtins == 5)
+        return(_env(all, opts));
     return (0);
 }
 
@@ -90,11 +88,6 @@ int     isfct(char **path, char **fct)
     char *buff;
 
     i = 0;
-    if (assign(&fd, open(*fct, O_RDONLY)) != -1)
-    {
-        close(fd);
-        return (1);
-    }
     buff = ft_join_free(ft_strjoin(path[0], "/"), *fct, 1);
     while (assign(&fd, open(buff, O_RDONLY)) < 1 && path[++i])
     {
@@ -104,7 +97,7 @@ int     isfct(char **path, char **fct)
     }
     free (buff);
     if (!path[i])
-        return (0);
+        return (ft_err_msg("No fonctions\n"));
     close(fd);
     *fct = ft_join_free(ft_strjoin(path[i], "/"), *fct, 3);
     return (1);
@@ -120,7 +113,8 @@ int     treat_orders(t_all *all, t_pipenodes *node)
         return  (0);
     while(node->orders[++i])
         changeline(all, &node->orders[i]);
-    if (!ft_strncmp("exit", node->orders[0], 4))
+    printf("[%s]\n", node->orders[0]);
+    if (ft_strlen(node->orders[0]) == 4 && !ft_strncmp("exit", node->orders[0], 4))
         return (_myexit(all));
     i = -1;
     while (node->orders[++i] && ft_strchr(node->orders[i], '='))
