@@ -41,7 +41,6 @@ int _echo(t_all *all,char **opts)
 
 	(void)all;
 	s = (t_slv){0, 0, 0, 0, 0, 0, ft_strdup(""), 0, 0};
-	// printf("opts[0] == %s\n opts[1] == %s\n opts[2] == %s\n", opts[0], opts[1], opts[2]);
 	if (!ft_memcmp(opts[1], "-n", 3) && ++s.i)
 		s.k = 1;
 	while (opts[++s.i])
