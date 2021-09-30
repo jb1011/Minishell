@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:33:35 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 16:16:00 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int     is_builtins(char **opts)
 {
     int len;
 
+    if (assign(&len, ft_rankchr(*opts, '=')))
+        if (opts[0][len])
+            return (6);
     len = ft_strlen(*opts) + 1;
-    printf("%s%d\n", *opts, len);
     if (len > 7)
         return (0);
     if (len == 7)
@@ -77,6 +79,13 @@ int     do_builtins(t_all *all, char **opts, int no_builtins)
         return(_pwd(all));
     if (no_builtins == 5)
         return(_env(all, opts));
+    if (no_builtins == 6)
+    {
+        if (all->count_list == 1)
+            return(assign_var(all, *opts, 0));
+        else
+            return (write(1, "\0", 1));
+    }
     return (0);
 }
 
@@ -103,29 +112,22 @@ int     isfct(char **path, char **fct)
     return (1);
 }
 
+
 int     treat_orders(t_all *all, t_pipenodes *node)
 {
     int i;
+    int len;
     
     i = -1;
     if (!node || !(node->orders))
         return  (0);
-    while(node->orders[++i])
+    while (node->orders[++i])
         changeline(all, &node->orders[i]);
-    printf("[%s]\n", node->orders[0]);
-    if (ft_strlen(node->orders[0]) == 4 && !ft_strncmp("exit", node->orders[0], 4))
+    len = ft_strlen(node->orders[0]);
+    if (len == 4 && !ft_strncmp("exit", node->orders[0], 4))
         return (_myexit(all));
     i = -1;
-    while (node->orders[++i] && ft_strchr(node->orders[i], '='))
-        ;
-    if (!node->orders[i])
-    {
-        i = -1;
-        while (node->orders[++i])
-            assign_var(all, node->orders[i], 0);
-        return (1);  
-    }    
-    if (!ft_strncmp(node->orders[0], "cd", ft_strlen(node->orders[0])))
+    if (len == 2 && !ft_strncmp(node->orders[0], "cd", len))
         return (_cd(node->orders[1]));
     redirect_fcts(all, node->redir, node->targets, node->orders, env_to_strtab(all->env));
     return (-1);

@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 15:58:00 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_list_var(t_all *all)
 		i++;
 	}
 	ft_free_tab(all->splt_line);
-	// print_linked_list(all->pipelist);
+	print_linked_list(all->pipelist);
 }
 
 void	split_redir(t_all *all, char *str)

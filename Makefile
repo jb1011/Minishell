@@ -24,7 +24,8 @@ FILES   =       minishell.c \
 				parsing_utils3.c \
 				parsing_utils1.c \
 				parsing_utils2.c \
-				parsing_del.c
+				parsing_del.c \
+				treatment.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
 
@@ -34,7 +35,7 @@ CC              = gcc
 
 RM              = rm -f
 
-CFLAGS  = -Wall -Wextra  -g3 -fsanitize=address -I $(HEAD)
+CFLAGS  = -Wall -Wextra  -g3  -I $(HEAD)
 
 FLAGS = -L $(LIB)libft -lft -L/usr/includes -lcurses 
 
