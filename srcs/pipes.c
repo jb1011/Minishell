@@ -6,13 +6,13 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 17:11:42 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:28:32 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:36:34 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int     treatall(t_all *all, t_env *env, t_pipenodes *nd)
+int     piping(t_all *all, t_env *env, t_pipenodes *nd)
 {
     int id;
     int fd[2];
@@ -25,7 +25,7 @@ int     treatall(t_all *all, t_env *env, t_pipenodes *nd)
     {
         close(fd[0]);
         dup2(fd[1], 1);
-        treatall(all, env, nd->next);
+        piping(all, env, nd->next);
         close(fd[1]);
         close (1);
         exit(1);

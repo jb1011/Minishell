@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:34:06 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:36:34 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,5 @@ int		_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout);
 int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[]);
 
 /* PIPES */
-int     treatall(t_all *all, t_env *env, t_pipenodes *nd);
+int     piping(t_all *all, t_env *env, t_pipenodes *nd);
 #endif
