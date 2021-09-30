@@ -17,13 +17,27 @@ void	ft_sigint(int signum, t_all *all)
 	if (signum == SIGINT)
 	{
 		ft_putstr("\n");
-		ft_bzero(all->path, BUFFER_SIZE);
-		getcwd(all->path, BUFFER_SIZE - 1);
+		// ft_bzero(all->path, BUFFER_SIZE);
+		// getcwd(all->path, BUFFER_SIZE - 1);
 		printf("%s %s-> ", all->path, SHELL_PROMPT);
 	}
 	if (signum == SIGQUIT)
 	{
-		_myexit(all);
+		// _myexit(all);
 		// ft_putstr("\n");
+		return ;
 	}
+	if (signum == SIGSEGV)
+	{
+		// printf("hey");
+		exit (1);
+		// return ;
+	}
+}
+
+void	ft_term(t_all *all)
+{
+	struct termios oldtio, newtio;
+
+	fd = open(MODEMDEVICE, O_RDWR | O_NOCTTY):
 }

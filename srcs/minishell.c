@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 	init(&all);
 	while(42)
 	{
-		signal(SIGINT, ft_sigint);
+		// signal(SIGINT, ft_sigint);
+		ft_term(&all);
 		begin(&all);
 		parse_line(&all);
 		treatall(&all, all.env, all.pipelist);
