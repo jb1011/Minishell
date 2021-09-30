@@ -39,6 +39,10 @@ void	init_list_var(t_all *all)
 	free_list(all->pipelist);
 	i = 0;
 	all->splt_line = ft_split(all->line, '|');
+		all->order_cpy = 0;
+		all->target_cpy = 0;
+		all->redir_cpy = 0;
+
 	while (all->splt_line[i])
 	{
 		split_redir(all, all->splt_line[i]);
@@ -53,6 +57,7 @@ void	init_list_var(t_all *all)
 		ft_free_tab(all->order_cpy);
 		ft_free_tab(all->target_cpy);
 		ft_free_tab(all->redir_cpy);
+
 		i++;
 	}
 	ft_free_tab(all->splt_line);

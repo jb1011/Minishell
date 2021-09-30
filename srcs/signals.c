@@ -12,6 +12,8 @@
 
 #include "../includes/minishell.h"
 
+struct termios saved_att;
+
 void	ft_sigint(int signum, t_all *all)
 {
 	if (signum == SIGINT)
@@ -37,8 +39,21 @@ void	ft_sigint(int signum, t_all *all)
 
 void	ft_term(t_all *all)
 {
-	struct termios oldtio, newtio;
+	struct termios tattr;
 
-	fd = open(MODEMDEVICE, O_RDWR | O_NOCTTY):
+	char *name;
+	if (!isatty (STDIN_FILENO))
+	{
+		printf ("not a terminal");
+	}
+	tcgetattr(STDIN_FILENO, &saved_att);
+
+	tcgetattr(STDIN_FILENO, &tattr);
+	tattr.c_cc[VINTR] = 0; /*CTRL C*/
+	// tattr.c_cc[VEOF] = 0; /*CTRL D*/
+	// tattr.c_cc[VQUIT] = 0; /*CTRL \*/
+	all->line = "\n";
+
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
 	// return (NULL);
 }

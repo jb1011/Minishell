@@ -34,7 +34,6 @@
 # define PRINT	4
 # define PURPLE
 
-
 int		begin(t_all *all);
 int		parse_line(t_all *all);
 void	ft_print_tab(char **t);
