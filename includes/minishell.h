@@ -22,6 +22,8 @@
 // # include <curses.h>
 # include <sys/wait.h>
 # include <term.h>
+# include <termios.h>
+# include <fcntl.h>
 # define STOP_DOLLAR "\"\'$"
 # define STOP_STR "\"\'$"
 # define STOP_DBLQUOTE "\"$"
@@ -31,7 +33,6 @@
 # define EXPORT 3
 # define PRINT	4
 # define PURPLE
-
 
 int		begin(t_all *all);
 int		parse_line(t_all *all);
@@ -82,7 +83,7 @@ void	reorder_tabs(char *str);
 void	ft_free_order(char **t, t_all *all);
 int 	ft_get_nb_strs(char *s, char c);
 int     ft_count_pipes(t_all *all);
-
+void    ft_term(t_all *all);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *pipelist);

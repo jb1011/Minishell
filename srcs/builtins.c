@@ -68,6 +68,7 @@ int _myexit(t_all *all)
 	else
 		status = 0;
 	free_list(all->pipelist);
+	// ft_free_tab(all->order_cpy);
 	// ft_print_tab(all->order_cpy);
 	// // free_for_all(all);
 	// printf("exit\n");

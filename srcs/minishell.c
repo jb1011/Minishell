@@ -22,11 +22,17 @@ int main()
 	t_all all;
 	// char *test;
 	// t_slv s;
+	char	c;
 
 	init(&all);
+	// ft_term(&all);
 	while(42)
 	{
-		signal(SIGINT, &ft_sigint);
+		// // read(STDIN_FILENO, &c, 1);
+		// // if (c == '\004')
+		// // 	printf("hello");
+		// signal(SIGINT, ft_sigint);
+		// signal(SIGINT, &ft_sigint);
 		begin(&all);
 		parse_line(&all);
 		treatall(&all, all.env, all.pipelist);
