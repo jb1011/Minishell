@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:25:27 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:36:34 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main()
 		// signal(SIGINT, &ft_sigint);
 		begin(&all);
 		parse_line(&all);
-		treatall(&all, all.env, all.pipelist);
+		piping(&all, all.env, all.pipelist);
 		printf("END ORDER \n");
 	}
 }
