@@ -50,9 +50,8 @@ void	ft_term(t_all *all)
 
 	tcgetattr(STDIN_FILENO, &tattr);
 	tattr.c_cc[VINTR] = 0; /*CTRL C*/
-	// tattr.c_cc[VEOF] = 0; /*CTRL D*/
-	// tattr.c_cc[VQUIT] = 0; /*CTRL \*/
-	all->line = "\n";
+	tattr.c_cc[VEOF] = 0; /*CTRL D*/
+	tattr.c_cc[VQUIT] = 0; /*CTRL \*/
 
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
 	// return (NULL);

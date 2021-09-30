@@ -25,7 +25,7 @@ int main()
 	char	c;
 
 	init(&all);
-	// ft_term(&all);
+	ft_term(&all);
 	while(42)
 	{
 		// // read(STDIN_FILENO, &c, 1);

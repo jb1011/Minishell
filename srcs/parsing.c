@@ -165,6 +165,7 @@ void	split_orders(t_all *all, char *str)
 	{
 		all->tmp = ft_strdup(str);
 		all->order_cpy = ft_split(all->tmp, ' ');
+			// ft_print_tab(all->order_cpy);
 		free(all->tmp);
 		return ;
 	}

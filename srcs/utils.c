@@ -106,7 +106,7 @@ int	ft_get_nb_strs(char *s, char c)
 	if (!s[0])
 		return (0);
 	i = 0;
-	nb_strs = 0;
+	nb_strs = 1;
 	while (s[i] && s[i] == c)
 		i++;
 	while (s[i])
