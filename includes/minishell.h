@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/27 16:40:44 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:34:06 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int		_cd(char *path);
 
 /* BUILTINS UTILS*/
 int     assign_var(t_all *all, char *assignation, char export);
-int     is_builtins(t_all *all, char **opts);
+int     is_builtins(char **opts);
 
 /*ORDERS TREATMENT*/
 int		changeline(t_all *all, char **line);

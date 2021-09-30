@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 15:39:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 16:47:42 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:30:53 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int     advar(t_env **list, char *var, char *val, char is_env)
 {
-    t_slv s;
     t_env *ret;
 
     ret = malloc(sizeof(t_env));

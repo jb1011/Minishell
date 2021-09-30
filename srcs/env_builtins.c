@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:37:55 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 17:27:24 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:31:16 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int     _export(t_all *all, char **opts)
     i = 0;
     while (opts[++i])
         assign_var(all, opts[i], EXPORT);
+    return (1);
 }
 
 int     _unset(t_env **list, char **opts)

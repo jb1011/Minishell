@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/27 19:52:28 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:33:35 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int changeline(t_all *all, char **line)
     return (1);
 }
 
-int     is_builtins(t_all *all, char **opts)
+int     is_builtins(char **opts)
 {
     int len;
 
@@ -105,7 +105,6 @@ int     isfct(char **path, char **fct)
 
 int     treat_orders(t_all *all, t_pipenodes *node)
 {
-    char *msg;
     int i;
     
     i = -1;
@@ -126,7 +125,7 @@ int     treat_orders(t_all *all, t_pipenodes *node)
             assign_var(all, node->orders[i], 0);
         return (1);  
     }    
-    if (!ft_strncmp(node->orders[0], "cd", node->orders[0]))
+    if (!ft_strncmp(node->orders[0], "cd", ft_strlen(node->orders[0])))
         return (_cd(node->orders[1]));
     redirect_fcts(all, node->redir, node->targets, node->orders, env_to_strtab(all->env));
     return (-1);

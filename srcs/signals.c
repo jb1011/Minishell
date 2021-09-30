@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 11:59:27 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:27:30 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	ft_sigint(int signum, t_all *all)
 		_myexit(all);
 		// ft_putstr("\n");
 	}
+	// return (NULL);
 }
