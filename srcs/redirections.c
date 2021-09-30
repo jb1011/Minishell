@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 17:00:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/14 17:17:45 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:29:50 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@
 int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[])
 {
 	int	i;
-	int id;
 	int stdout;
 	int stdin;
 	char	*buff;
-	char	*str = NULL;
 	int		size;
 	int		fd[2];
 	char	buff2[BUFFER_SIZE + 1];

@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/27 14:44:27 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:25:27 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@
 #include <unistd.h>
 
 
-int main(int argc, char **argv)
+int main()
 {
 	t_all all;
-	char *test;
-	t_slv s;
+	// char *test;
+	// t_slv s;
 
 	init(&all);
 	while(42)
 	{
 		// signal(SIGINT, ft_sigint);
 		ft_term(&all);
+		// signal(SIGINT, &ft_sigint);
 		begin(&all);
 		parse_line(&all);
 		treatall(&all, all.env, all.pipelist);

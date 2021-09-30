@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 17:11:42 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/27 15:06:32 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:28:32 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int     treatall(t_all *all, t_env *env, t_pipenodes *nd)
     if (all->count_list == 1 || !nd->next)
         return (treat_orders(all, nd));
     pipe(fd);
-    if (!fork())
+    if (!(assign(&id, fork())))
     {
         close(fd[0]);
         dup2(fd[1], 1);

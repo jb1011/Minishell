@@ -34,7 +34,7 @@ CC              = gcc
 
 RM              = rm -f
 
-CFLAGS  = -Wall -Wextra -g3 -fsanitize=address -I $(HEAD)
+CFLAGS  = -Wall -Wextra  -g3 -fsanitize=address -I $(HEAD)
 
 FLAGS = -L $(LIB)libft -lft -L/usr/includes -lcurses 
 
