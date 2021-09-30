@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 13:40:25 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 16:24:10 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
 {
 	int		k;
 	pid_t	id;
-	int		realfd[2];
+	int	realfd[2];
 
 	if (!assign(&k, is_builtins(todo)) && !isfct(all->exec_paths, todo))
 	{
 		multclose(stdin, stdout); 
-		return (ft_err_msg("Error , unknown function\n"));
+		return (ft_err_msg("Error : %s :unknown function\n"), *todo);
 	}
-	dup2(0, realfd[0]);
-	dup2(1, realfd[1]);
+	realfd[0] = dup(0);
+	realfd[1] = dup(1);
 	dup2(stdin,0);
 	dup2(stdout,1);
 	if (k)
@@ -47,7 +47,6 @@ int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
 	multclose(stdin, stdout);
 	dup2(realfd[0],0);
 	dup2(realfd[1],1);
-	multclose(realfd[0], realfd[1]);
 	if (!env)
 		return (1);
 	return (1);

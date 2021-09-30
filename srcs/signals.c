@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:27:30 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 15:33:53 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_sigint(int signum, t_all *all)
 {
 	if (signum == SIGINT)
 	{
-		ft_putstr("\n");
-		ft_bzero(all->path, BUFFER_SIZE - 1);
-		getcwd(all->path, BUFFER_SIZE - 1);
-		printf("%s %s-> \n", all->path, SHELL_PROMPT);
+		// ft_putstr("\n");
+		// ft_bzero(all->path, BUFFER_SIZE - 1);
+		// getcwd(all->path, BUFFER_SIZE - 1);
+		// printf("%s %s-> \n", all->path, SHELL_PROMPT);
 	}
 	if (signum == SIGQUIT)
 	{

@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 17:00:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:29:50 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/09/30 16:09:28 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[]
 
 	i = -1;
 	stdin = 0;
-	if (!redirections)
+	if (!redirections && printf("on rentre dans fct\n"))
 		return (_fct(all, todo, env, 0, 1));
 	pipe(fd);
 	while (targets[++i])
