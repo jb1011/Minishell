@@ -26,7 +26,7 @@ int main()
 	// t_slv s;
 
 	init(&all);
-	ft_term(&all);
+	// ft_term(&all);
 	while(42)
 	{
 		// // read(STDIN_FILENO, &c, 1);

@@ -17,16 +17,15 @@ int	parse_line(t_all *all)
 	all->pipelist = NULL;
 	if (all->line)
 	{
-
-	free_list(all->pipelist);
-	ft_count_pipes(all);
-	all->line = ignore_quote(all->line);
-	replace_inib_space(all->line);
-	is_pipe_inhib(all->line);
-	init_list_var(all);
-	replace_double_croc(all->line);
-	if (!ft_check_error(all->line))
-		printf("ERRRROOROOOOOOORRRRR");
+		free_list(all->pipelist);
+		ft_count_pipes(all);
+		all->line = ignore_quote(all->line);
+		replace_inib_space(all->line);
+		is_pipe_inhib(all->line);
+		init_list_var(all);
+		replace_double_croc(all->line);
+		if (!ft_check_error(all->line))
+			printf("ERRRROOROOOOOOORRRRR");
 	}
 	return (1);
 }
@@ -57,7 +56,6 @@ void	init_list_var(t_all *all)
 		ft_free_tab(all->order_cpy);
 		ft_free_tab(all->target_cpy);
 		ft_free_tab(all->redir_cpy);
-
 		i++;
 	}
 	ft_free_tab(all->splt_line);

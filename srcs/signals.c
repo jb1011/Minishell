@@ -21,7 +21,6 @@ void	ft_sigint(int signum, t_all *all)
 		// ft_bzero(all->path, BUFFER_SIZE - 1);
 		// getcwd(all->path, BUFFER_SIZE - 1);
 		// printf("%s %s-> \n", all->path, SHELL_PROMPT);
-		tattr.c_cc[VINTR] = 1;
 	}
 	if (signum == SIGQUIT)
 	{
@@ -37,20 +36,20 @@ void	ft_sigint(int signum, t_all *all)
 	}
 }
 
-void	ft_term(t_all *all)
-{
+// void	ft_term(t_all *all)
+// {
 
-	if (!isatty (STDIN_FILENO))
-	{
-		printf ("not a terminal");
-	}
-	// tcgetattr(STDIN_FILENO, &saved_att);
+// 	if (!isatty (STDIN_FILENO))
+// 	{
+// 		printf ("not a terminal");
+// 	}
+// 	// tcgetattr(STDIN_FILENO, &saved_att);
 
-	tcgetattr(STDIN_FILENO, &tattr);
-	tattr.c_cc[VINTR] = 0; /*CTRL C*/
-	tattr.c_cc[VEOF] = 0; /*CTRL D*/
-	tattr.c_cc[VQUIT] = 0; /*CTRL \*/
-    // all->line = readline("\n");
+// 	tcgetattr(STDIN_FILENO, &tattr);
+// 	tattr.c_cc[VINTR] = 0; /*CTRL C*/
+// 	tattr.c_cc[VEOF] = 0; /*CTRL D*/
+// 	tattr.c_cc[VQUIT] = 0; /*CTRL \*/
+//     // all->line = readline("\n");
 
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
-}
+// 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
+// }
