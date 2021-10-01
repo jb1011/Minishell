@@ -12,7 +12,6 @@
 
 #include "../includes/minishell.h"
 
-struct termios saved_att;
 
 void	ft_sigint(int signum, t_all *all)
 {
@@ -22,6 +21,7 @@ void	ft_sigint(int signum, t_all *all)
 		// ft_bzero(all->path, BUFFER_SIZE - 1);
 		// getcwd(all->path, BUFFER_SIZE - 1);
 		// printf("%s %s-> \n", all->path, SHELL_PROMPT);
+		tattr.c_cc[VINTR] = 1;
 	}
 	if (signum == SIGQUIT)
 	{
@@ -39,14 +39,12 @@ void	ft_sigint(int signum, t_all *all)
 
 void	ft_term(t_all *all)
 {
-	struct termios tattr;
 
-	char *name;
 	if (!isatty (STDIN_FILENO))
 	{
 		printf ("not a terminal");
 	}
-	tcgetattr(STDIN_FILENO, &saved_att);
+	// tcgetattr(STDIN_FILENO, &saved_att);
 
 	tcgetattr(STDIN_FILENO, &tattr);
 	tattr.c_cc[VINTR] = 0; /*CTRL C*/
@@ -55,5 +53,4 @@ void	ft_term(t_all *all)
     // all->line = readline("\n");
 
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
-	// return (NULL);
 }
