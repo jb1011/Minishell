@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 14:06:48 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/01 16:21:54 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_list_var(t_all *all);
 void	print_linked_list(t_pipenodes *pipelist);
 char	**mall_doubletab(char **t);
 int		is_redir_str(char *s);
-void	ft_sigint(int signum, t_all *all);
+void	ft_sigint(int signum);
 int		ft_count_redir(char *line);
 void	rpl_space(char *str, int start, int len);
 int		_myexit(t_all *all);
@@ -84,6 +84,7 @@ void	ft_free_order(char **t, t_all *all);
 int 	ft_get_nb_strs(char *s, char c);
 int     ft_count_pipes(t_all *all);
 void    ft_term(t_all *all);
+int     put_prompt(char *path);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *pipelist);
@@ -130,4 +131,7 @@ int     piping(t_all *all, t_env *env, t_pipenodes *nd);
 
 /* TREATALL */
 int treatall(t_all *all, t_env *env, t_pipenodes *node);
+
+extern struct termios tattr;
+
 #endif
