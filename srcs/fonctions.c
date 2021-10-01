@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 16:24:10 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:58:29 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
 	if (!assign(&k, is_builtins(todo)) && !isfct(all->exec_paths, todo))
 	{
 		multclose(stdin, stdout); 
-		return (ft_err_msg("Error : %s :unknown function\n"), *todo);
+		return (ft_err_msg("Error :unknown function\n"));
 	}
 	realfd[0] = dup(0);
 	realfd[1] = dup(1);

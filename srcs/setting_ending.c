@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:26:18 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:41:15 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,30 @@ int     init(t_all *all)
     return(1);
 }
 
+int     put_prompt(char *path)
+{
+    char buffer[BUFFER_SIZE + 1];
+
+    ft_putstr("\033[0;35m");
+    getcwd(buffer, BUFFER_SIZE);
+    ft_putstr(buffer);
+    ft_putstr(" \033[0;34m");
+    ft_putstr(SHELL_PROMPT);
+    ft_putstr(" \033[0;0m");
+    return (1);
+}
 int     begin(t_all *all)
 {
+    int i;
+    char *str;
+
+    i = -1;
     ft_bzero(all->path, BUFFER_SIZE);
     getcwd(all->path, BUFFER_SIZE - 1);
-    printf("\033[0;35m%s \033[0;34m%s \033[0;0m", all->path, SHELL_PROMPT);
-    all->line = readline("-> ");
+    put_prompt(all->path);
+    all->line = readline("");
+    if (!all->line)
+        all->line = ft_strdup("exit");
 	add_history(all->line);
     // printf("%s\n", all->line);
     return (1);

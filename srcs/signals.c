@@ -6,34 +6,21 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 15:33:53 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:47:32 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 
-void	ft_sigint(int signum, t_all *all)
+void	ft_sigint(int signum)
 {
 	if (signum == SIGINT)
 	{
-		// ft_putstr("\n");
-		// ft_bzero(all->path, BUFFER_SIZE - 1);
-		// getcwd(all->path, BUFFER_SIZE - 1);
-		// printf("%s %s-> \n", all->path, SHELL_PROMPT);
-		tattr.c_cc[VINTR] = 1;
-	}
-	if (signum == SIGQUIT)
-	{
-		// _myexit(all);
-		// ft_putstr("\n");
-		return ;
-	}
-	if (signum == SIGSEGV)
-	{
-		// printf("hey");
-		exit (1);
-		// return ;
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_redisplay();
+		put_prompt(0);
 	}
 }
 
@@ -42,15 +29,11 @@ void	ft_term(t_all *all)
 
 	if (!isatty (STDIN_FILENO))
 	{
-		printf ("not a terminal");
+		ft_putstr ("not a terminal");
 	}
-	// tcgetattr(STDIN_FILENO, &saved_att);
-
 	tcgetattr(STDIN_FILENO, &tattr);
-	tattr.c_cc[VINTR] = 0; /*CTRL C*/
-	tattr.c_cc[VEOF] = 0; /*CTRL D*/
-	tattr.c_cc[VQUIT] = 0; /*CTRL \*/
-    // all->line = readline("\n");
-
+	tattr.c_iflag &= ~(ISIG | IUTF8);
+	tattr.c_lflag &= ~(ICANON);
+	tattr.c_cc[VQUIT] = -1;
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
 }
