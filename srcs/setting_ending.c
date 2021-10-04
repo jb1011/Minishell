@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/01 17:41:15 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:56:58 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,30 @@ int     init(t_all *all)
     return(1);
 }
 
-int     put_prompt(char *path)
+char *set_prompt(void)
 {
     char buffer[BUFFER_SIZE + 1];
+    char *prompt;
 
-    ft_putstr("\033[0;35m");
     getcwd(buffer, BUFFER_SIZE);
-    ft_putstr(buffer);
-    ft_putstr(" \033[0;34m");
-    ft_putstr(SHELL_PROMPT);
-    ft_putstr(" \033[0;0m");
-    return (1);
+    prompt = ft_strjoin("\033[0;35m", buffer);
+    prompt = ft_join_free(prompt, " \033[0;34m", 1);
+    prompt = ft_join_free(prompt, SHELL_PROMPT, 1);
+    prompt = ft_join_free(prompt, " \033[0;0m", 1);
+    return (prompt);
 }
 int     begin(t_all *all)
 {
     int i;
     char *str;
+    char *prompt;
 
     i = -1;
     ft_bzero(all->path, BUFFER_SIZE);
     getcwd(all->path, BUFFER_SIZE - 1);
-    put_prompt(all->path);
-    all->line = readline("");
+    prompt = set_prompt();
+    all->line = readline(prompt);
+    free (prompt);
     if (!all->line)
         all->line = ft_strdup("exit");
 	add_history(all->line);
