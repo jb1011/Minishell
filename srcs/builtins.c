@@ -8,7 +8,10 @@ int _cd(char *path)
 		return (1);
 	}
 	if (chdir(path) == -1)
-		return (ft_err_msg("Wrong path\n"));
+	{
+		perror(path);
+		return (0);
+	}
 	return (1);
 }
 
@@ -58,23 +61,14 @@ int _echo(t_all *all,char **opts)
 
 int _myexit(t_all *all)
 {
-	int status;
 	// free_doubletab(all->order_cpy);
 	// free_doubletab(all->redir_cpy);
 	// free_doubletab(all->target_cpy);
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
 		ft_atoi(all->pipelist->orders[1]);
-	else
-		status = 0;
 	free_list(&all->pipelist);
 	all->pipelist = NULL;
-	// ft_free_tab(all->order_cpy);
-	// ft_print_tab(all->order_cpy);
-	// // free_for_all(all);
-	// printf("exit\n");
-	if (all->line)
-		free(all->line);
 	exit(status);
 	return (0);
 }

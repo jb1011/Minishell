@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/01 16:21:54 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 14:55:00 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 // # include <curses.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include <term.h>
 # include <termios.h>
 # include <fcntl.h>
@@ -83,7 +84,7 @@ void	reorder_tabs(char *str);
 void	ft_free_order(char **t, t_all *all);
 int 	ft_get_nb_strs(char *s, char c);
 int     ft_count_pipes(t_all *all);
-void    ft_term(t_all *all);
+void    ft_term(t_all *all, struct termios *tattr);
 int     put_prompt(char *path);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
@@ -132,6 +133,6 @@ int     piping(t_all *all, t_env *env, t_pipenodes *nd);
 /* TREATALL */
 int treatall(t_all *all, t_env *env, t_pipenodes *node);
 
-extern struct termios tattr;
+extern int status;
 
 #endif
