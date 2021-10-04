@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 15:56:58 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:12:07 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char *set_prompt(void)
     char buffer[BUFFER_SIZE + 1];
     char *prompt;
 
+    ft_bzero(buffer, BUFFER_SIZE);
     getcwd(buffer, BUFFER_SIZE);
     prompt = ft_strjoin("\033[0;35m", buffer);
     prompt = ft_join_free(prompt, " \033[0;34m", 1);

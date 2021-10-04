@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 14:57:09 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:18:01 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int     isfct(char **path, char **fct)
     free (buff);
     if (!path[i])
     {
-        perror(*fct);
-        return (-1);
+        status = 127;
+        printf("%s : command not found\n", *fct);
+        return (0);
     }
     close(fd);
     *fct = ft_join_free(ft_strjoin(path[i], "/"), *fct, 3);
