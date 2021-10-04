@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:18:42 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/10 14:05:40 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 13:11:34 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ double			ft_atof(char *str);
 int				argvsrch(char **tab, char find);
 char			*chartostr(char c);
 char	*extractstr(char *str, char *set_to_stop);
+int		free_doubletab(char **tab);
 
 #endif

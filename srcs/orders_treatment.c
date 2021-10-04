@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 16:49:41 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 13:19:53 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int     treat_orders(t_all *all, t_pipenodes *node)
 {
     int i;
     int len;
+    char **env;
     
     i = -1;
     if (!node || !(node->orders))
@@ -129,6 +130,8 @@ int     treat_orders(t_all *all, t_pipenodes *node)
     i = -1;
     if (len == 2 && !ft_strncmp(node->orders[0], "cd", len))
         return (_cd(node->orders[1]));
-    redirect_fcts(all, node->redir, node->targets, node->orders, env_to_strtab(all->env));
+    env = env_to_strtab(all->env);
+    redirect_fcts(all, node->redir, node->targets, node->orders, env);
+    free_doubletab(env);
     return (-1);
 }

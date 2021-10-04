@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/01 17:58:29 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 13:17:17 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	multclose(int stdin, int stdout)
 		close (stdout);
 	return (0);
 }
+
+
 int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
 {
 	int		k;
@@ -47,8 +49,6 @@ int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
 	multclose(stdin, stdout);
 	dup2(realfd[0],0);
 	dup2(realfd[1],1);
-	if (!env)
-		return (1);
 	return (1);
 }
 
