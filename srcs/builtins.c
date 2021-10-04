@@ -59,9 +59,9 @@ int _echo(t_all *all,char **opts)
 int _myexit(t_all *all)
 {
 	int status;
-	free_doubletab(all->order_cpy);
-	free_doubletab(all->redir_cpy);
-	free_doubletab(all->target_cpy);
+	// free_doubletab(all->order_cpy);
+	// free_doubletab(all->redir_cpy);
+	// free_doubletab(all->target_cpy);
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
 		ft_atoi(all->pipelist->orders[1]);
@@ -73,6 +73,8 @@ int _myexit(t_all *all)
 	// ft_print_tab(all->order_cpy);
 	// // free_for_all(all);
 	// printf("exit\n");
+	if (all->line)
+		free(all->line);
 	exit(status);
 	return (0);
 }
