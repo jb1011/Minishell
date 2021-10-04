@@ -70,21 +70,26 @@ void	print_linked_list(t_pipenodes *pipelist)
 	ft_putstr("\n");
 }
 
-void	free_list(t_pipenodes *st)
+void	free_list(t_pipenodes **st)
 {
 	t_pipenodes	*to_del;
 
-	if (!is_empty(st))
+	if (st && *st)
 	{
-		while (st->next != NULL)
+		while (*st)
 		{
-			to_del = st;
-			ft_free_tab(to_del->orders);
-			ft_free_tab(to_del->redir);
-			ft_free_tab(to_del->targets);
+			to_del = *st;
+			free_doubletab(to_del->orders);
+			free_doubletab(to_del->redir);
+
+			free_doubletab(to_del->targets);
+
+			// ft_free_tab(to_del->orders);
+			// ft_free_tab(to_del->redir);
+			// ft_free_tab(to_del->targets);
+			*st = (*st)->next;
 			free(to_del);
-			st = st->next;
 		}
+		*st = NULL;
 	}
-	st = NULL;
 }

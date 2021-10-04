@@ -27,8 +27,7 @@ int	parse_line(t_all *all)
 		if (!ft_check_error(all->line))
 		{
 			printf("Parse Error\n");
-			all->count_list = 0;
-			free_list(all->pipelist);
+			free_list(&all->pipelist);
 		}
 	}
 	return (1);

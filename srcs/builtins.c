@@ -59,15 +59,16 @@ int _echo(t_all *all,char **opts)
 int _myexit(t_all *all)
 {
 	int status;
-	// ft_free_tab(all->order_cpy);
-	// ft_free_tab(all->redir_cpy);
-	// ft_free_tab(all->target_cpy);
+	free_doubletab(all->order_cpy);
+	free_doubletab(all->redir_cpy);
+	free_doubletab(all->target_cpy);
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
 		ft_atoi(all->pipelist->orders[1]);
 	else
 		status = 0;
-	free_list(all->pipelist);
+	free_list(&all->pipelist);
+	all->pipelist = NULL;
 	// ft_free_tab(all->order_cpy);
 	// ft_print_tab(all->order_cpy);
 	// // free_for_all(all);

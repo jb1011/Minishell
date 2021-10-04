@@ -218,6 +218,7 @@ char **mall_doubletab(char **t)
 	char **new;
 
 	j = 0;
+	new = NULL;
 	if (t[0] == 0)
 		return (0);
 	while(t[j])

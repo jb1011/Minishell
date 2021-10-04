@@ -77,7 +77,7 @@ int		ft_count_redir(char *line);
 void	rpl_space(char *str, int start, int len);
 int		_myexit(t_all *all);
 void	ft_putchar(char c);
-void	free_list(t_pipenodes *st);
+void	free_list(t_pipenodes **st);
 void	free_for_all(t_all *all);
 void	reorder_tabs(char *str);
 void	ft_free_order(char **t, t_all *all);
