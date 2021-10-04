@@ -39,3 +39,15 @@ char	*chartostr(char c)
 	s[1] = 0;
 	return (ft_strdup(s));
 }
+
+int		free_doubletab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab[i]);
+	free(tab);
+	return (1);
+}
