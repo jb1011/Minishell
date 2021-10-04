@@ -76,14 +76,14 @@ void	free_list(t_pipenodes *st)
 
 	if (!is_empty(st))
 	{
-		while (st)
+		while (st->next != NULL)
 		{
 			to_del = st;
-			st = st->next;
 			ft_free_tab(to_del->orders);
 			ft_free_tab(to_del->redir);
 			ft_free_tab(to_del->targets);
 			free(to_del);
+			st = st->next;
 		}
 	}
 	st = NULL;

@@ -25,7 +25,11 @@ int	parse_line(t_all *all)
 		init_list_var(all);
 		replace_double_croc(all->line);
 		if (!ft_check_error(all->line))
-			printf("ERRRROOROOOOOOORRRRR");
+		{
+			printf("Parse Error\n");
+			all->count_list = 0;
+			free_list(all->pipelist);
+		}
 	}
 	return (1);
 }
@@ -59,7 +63,7 @@ void	init_list_var(t_all *all)
 		i++;
 	}
 	ft_free_tab(all->splt_line);
-	print_linked_list(all->pipelist);
+	// // print_linked_list(all->pipelist);
 }
 
 void	split_redir(t_all *all, char *str)
