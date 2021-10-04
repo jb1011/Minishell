@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 15:39:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/09/30 12:30:53 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:31:12 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char    **env_to_strtab(t_env *list)
     i = -1;
     while (ret[++i])
     {
-        ret[i] = ft_strjoin(ft_strjoin(ptr->var, "="), ptr->val);
+        ret[i] = ft_join_free(ft_strjoin(ptr->var, "="), ptr->val, 1);
         ptr = ptr->nxt;
     }
     return (ret);

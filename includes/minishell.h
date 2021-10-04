@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 14:55:00 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:51:21 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_free_order(char **t, t_all *all);
 int 	ft_get_nb_strs(char *s, char c);
 int     ft_count_pipes(t_all *all);
 void    ft_term(t_all *all, struct termios *tattr);
-int     put_prompt(char *path);
+char    *set_prompt(void);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *pipelist);

@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 14:57:09 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:40:46 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int     isfct(char **path, char **fct)
     free (buff);
     if (!path[i])
     {
-        perror(*fct);
-        return (-1);
+        status = 127;
+        printf("%s : command not found\n", *fct);
+        return (0);
     }
     close(fd);
     *fct = ft_join_free(ft_strjoin(path[i], "/"), *fct, 3);
@@ -125,8 +126,8 @@ int     treat_orders(t_all *all, t_pipenodes *node)
     i = -1;
     if (!node || !(node->orders))
         return  (0);
-    while (node->orders[++i])
-       changeline(all, &node->orders[i]);
+    //while (node->orders[++i])
+    //   changeline(all, &node->orders[i]);
     len = ft_strlen(node->orders[0]);
     if (len == 4 && !ft_strncmp("exit", node->orders[0], 4))
         return (_myexit(all));
