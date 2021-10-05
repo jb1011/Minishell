@@ -19,7 +19,7 @@ void	ft_putchar(char c)
 
 void	ft_print_tab(char **t)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (t[j])
@@ -31,18 +31,18 @@ void	ft_print_tab(char **t)
 
 void	ft_print_megatab(char ***t)
 {
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	j = 0;
 	printf("***TAB :\n");
 	while (t[j])
 	{
 		i = 0;
-    	printf("\tCASE %d :\n", j);
+		printf("\tCASE %d :\n", j);
 		while (t[j][i])
 		{
-        	printf("\t\tCASE STRING :\n");
+			printf("\t\tCASE STRING :\n");
 			printf("\t\t\t%s\n", t[j][i]);
 			i++;
 		}
@@ -62,7 +62,6 @@ char	*ft_dup_char(const char *s)
 	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!str)
 		return (NULL);
-	
 	count = 0;
 	while (s[i])
 	{
@@ -80,7 +79,7 @@ char	*ft_dup_char(const char *s)
 
 void	ft_malloc_tab(char ***t, int size, char **s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)
@@ -127,7 +126,7 @@ int	ft_get_nb_strs(char *s, char c)
 
 int	is_separator(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -148,12 +147,12 @@ int	is_char_separator(char c)
 
 int	quote_is_odd(char *s, int end)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
-	while(i < end)
+	while (i < end)
 	{
 		if (s[i] == '\'')
 			count ++;
@@ -207,22 +206,21 @@ int	is_redir(char s)
 	return (0);
 }
 
-char **mall_doubletab(char **t)
+char	**mall_doubletab(char **t)
 {
-	int	j;
-	char **new;
+	int		j;
+	char	**new;
 
 	j = 0;
 	new = NULL;
 	if (t[0] == 0)
 		return (0);
-	while(t[j])
+	while (t[j])
 		j++;
 	new = malloc(sizeof(char *) * (j + 1));
 	j = 0;
 	while (t[j])
 	{
-		// new[j] = ft_strdup(t[j]);
 		new[j] = ft_strtrim(t[j], " ");
 		j++;
 	}
@@ -232,7 +230,7 @@ char **mall_doubletab(char **t)
 
 int	is_redir_str(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])

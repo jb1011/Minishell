@@ -14,8 +14,8 @@
 
 void	replace_doubleback_inib_space(char **str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (str[j])
@@ -33,9 +33,9 @@ void	replace_doubleback_inib_space(char **str)
 
 char	*ignore_quote(char *str)
 {
-	int	i;
+	int		i;
 	char	*tmp;
-	int	count;
+	int		count;
 
 	i = 0;
 	count = 0;
@@ -43,9 +43,11 @@ char	*ignore_quote(char *str)
 	{
 		if (str[i] == '"')
 			count++;
-		if (((str[i] == '\'' && str[i - 1] == '`') || (str[i] == '"' && str[i - 1] == '`')) && (count % 2 == 0))
+		if (((str[i] == '\'' && str[i - 1] == '`')
+				|| (str[i] == '"' && str[i - 1] == '`')) && (count % 2 == 0))
 			str[i] = '`';
-		if (((str[i] == '\'' && str[i + 1] == '\'') || (str[i] == '"' && str[i + 1] == '"')) && (count % 2 == 0))
+		if (((str[i] == '\'' && str[i + 1] == '\'')
+				|| (str[i] == '"' && str[i + 1] == '"')) && (count % 2 == 0))
 			str[i] = '`';
 		i++;
 	}

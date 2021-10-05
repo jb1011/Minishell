@@ -14,9 +14,9 @@
 
 int	ft_count_split(char *line)
 {
-	int i;
-	int count;
-	int c;
+	int	i;
+	int	count;
+	int	c;
 
 	count = 1;
 	i = 0;
@@ -25,17 +25,18 @@ int	ft_count_split(char *line)
 	{
 		if (line[i] == '\'')
 			c++;
-		if ((line[i] == '|' || line[i] == '<' || line[i] == '>') && (c % 2 == 0))
+		if ((line[i] == '|' || line[i] == '<'
+				|| line[i] == '>') && (c % 2 == 0))
 			count++;
 		i++;
 	}
 	return (count + 1);
 }
 
-int ft_count_pipes(t_all *all)
+int	ft_count_pipes(t_all *all)
 {
-	int i;
-	int c;
+	int	i;
+	int	c;
 
 	all->count_list = 1;
 	i = 0;
@@ -53,9 +54,9 @@ int ft_count_pipes(t_all *all)
 
 int	ft_count_redir(char *line)
 {
-	int i;
-	int count;
-	int c;
+	int	i;
+	int	count;
+	int	c;
 
 	count = 0;
 	i = 0;
@@ -70,11 +71,12 @@ int	ft_count_redir(char *line)
 	}
 	return (count);
 }
+
 int	ft_count_space(char *line)
 {
-	int i;
-	int count;
-	int c;
+	int	i;
+	int	count;
+	int	c;
 
 	count = 1;
 	i = 0;
@@ -92,8 +94,8 @@ int	ft_count_space(char *line)
 
 int	is_pipe_inhib(char *str)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	count = 0;
 	i = 0;
