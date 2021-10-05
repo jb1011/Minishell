@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 16:40:46 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:44:45 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,5 @@ int     treat_orders(t_all *all, t_pipenodes *node)
     env = env_to_strtab(all->env);
     redirect_fcts(all, node->redir, node->targets, node->orders, env);
     free_doubletab(env);
-    return (-1);
+    return (1);
 }

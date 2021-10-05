@@ -61,9 +61,6 @@ int _echo(t_all *all,char **opts)
 
 int _myexit(t_all *all)
 {
-	// free_doubletab(all->order_cpy);
-	// free_doubletab(all->redir_cpy);
-	// free_doubletab(all->target_cpy);
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
 		ft_atoi(all->pipelist->orders[1]);
