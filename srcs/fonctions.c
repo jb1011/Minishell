@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/05 16:53:09 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 17:01:39 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	forkexec(char **todo, t_env *list)
 {
 	int		id;
 	int		stat;
-	char	env;
+	char	**env;
 
 	env = env_to_strtab(list);
 	id = fork();
