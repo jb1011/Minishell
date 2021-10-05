@@ -197,9 +197,6 @@ char	*ft_dup(const char *s, char c)
 		j++;
 	}
 	str[j] = '\0';
-	// ft_putstr("ligne : ");
-	// ft_putstr(str);
-	// ft_putstr("\n");
 	return (str);
 }
 
