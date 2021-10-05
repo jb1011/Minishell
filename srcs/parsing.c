@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/05 12:57:26 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:04:52 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	split_target(t_all *all, char *str)
 
 	if (is_separator(str))
 	{
-		all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
+		// all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
 		i = 0;
 		j = 0;
 		if (ft_count_redir(str) == 1)
@@ -166,8 +166,6 @@ void	split_orders(t_all *all, char *str)
 	int	i;
 
 	all->to_free = (ft_get_nb_strs(str, ' '));
-	all->order_cpy = malloc(sizeof(char *) * all->to_free);
-	printf("tofree --> %d \n", all->to_free);
 	i = 0;
 	if (!is_redir_str(str))
 	{

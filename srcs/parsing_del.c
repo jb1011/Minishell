@@ -151,6 +151,5 @@ char	*ignore_quote_word(char *str)
 	free(str);
 	str = ft_strdup(tmp);
 	free(tmp);
-	printf("LIGNE : %s", str);
 	return (str);
 }

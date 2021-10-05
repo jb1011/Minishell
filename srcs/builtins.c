@@ -61,13 +61,15 @@ int _echo(t_all *all,char **opts)
 
 int _myexit(t_all *all)
 {
+	int ret;
+
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
-		ft_atoi(all->pipelist->orders[1]);
+		ret = ft_atoi(all->pipelist->orders[1]);
 	free_list(&all->pipelist);
 	all->pipelist = NULL;
 	if (all->line)
 		free(all->line);
-	exit(status);
+	exit(ret);
 	return (0);
 }
