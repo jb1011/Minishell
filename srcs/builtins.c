@@ -44,7 +44,7 @@ int _echo(t_all *all,char **opts)
 
 	(void)all;
 	s = (t_slv){0, 0, 0, 0, 0, 0, ft_strdup(""), 0, 0};
-	if (!ft_memcmp(opts[1], "-n", 3) && ++s.i)
+	if (opts[1] && !ft_memcmp(opts[1], "-n", 3) && ++s.i)
 		s.k = 1;
 	while (opts[++s.i])
 	{
@@ -61,9 +61,6 @@ int _echo(t_all *all,char **opts)
 
 int _myexit(t_all *all)
 {
-	// free_doubletab(all->order_cpy);
-	// free_doubletab(all->redir_cpy);
-	// free_doubletab(all->target_cpy);
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
 		ft_atoi(all->pipelist->orders[1]);
