@@ -42,11 +42,15 @@ int	ft_get_nb_strs(char *s, char c)
 int	is_separator(char *s)
 {
 	int	i;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (s[i])
 	{
-		if (s[i] == '|' || s[i] == '>' || s[i] == '<')
+		if (s[i] == '\'' || s[i] == '"')
+			count++;
+		if ((s[i] == '|' || s[i] == '>' || s[i] == '<') && (count % 2 == 0))
 			return (1);
 		i++;
 	}

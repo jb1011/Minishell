@@ -44,3 +44,18 @@ int	is_only_space(char *s, int start)
 	}
 	return (1);
 }
+
+void	count_and_malloc(t_all *all, char *str)
+{
+	int	i;
+
+	all->count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+			all->count++;
+		i++;
+	}
+	all->pipendirect = malloc(sizeof(char) * all->count + 2);
+}

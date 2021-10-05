@@ -27,6 +27,7 @@ void	count_pipe_croc(char *str, t_all *all)
 		i++;
 	}
 	all->pipendirect = malloc(sizeof(char) * count + 2);
+	// count_and_malloc(all, str);
 	i = 0;
 	j = 0;
 	while (str[i])

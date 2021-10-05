@@ -80,11 +80,15 @@ char	**mall_doubletab(char **t)
 int	is_redir_str(char *s)
 {
 	int	i;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (s[i])
 	{
-		if (s[i] == '>' || s[i] == '<')
+		if (s[i] == '\'' || s[i] == '"')
+			count++;
+		if ((s[i] == '>' || s[i] == '<') && (count % 2 == 0))
 			return (1);
 		i++;
 	}

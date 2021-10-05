@@ -95,6 +95,7 @@ int			dollar_case(char **buffer, char *object, int *index, t_all *all);
 int			str_case(char **buffer, char *object, int *index, char *stops);
 void		quotes_bool(int *boolean);
 int			free_env(t_env **env);
+void		count_and_malloc(t_all *all, char *str);
 /* ENVIRONNEMENT GESTION */
 t_env		*vardo(t_env **list, char *tofind, char *ch_val, char do_what);
 int			advar(t_env **list, char *var, char *val, char is_env);

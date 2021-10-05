@@ -46,6 +46,7 @@ typedef struct s_all
 	int			size_redir;
 	int			to_free;
 	int			count_list;
+	int			count;
 	t_pipenodes	*pipelist;
 }	t_all;
 

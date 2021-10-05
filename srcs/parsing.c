@@ -41,10 +41,12 @@ void	init_list_var(t_all *all)
 	all->splt_line = ft_split(all->line, '|');
 	while (all->splt_line[i])
 	{
+		ft_putstr(all->splt_line[i]);
 		split_redir(all, all->splt_line[i]);
 		split_target(all, all->splt_line[i]);
 		split_orders(all, all->splt_line[i]);
 		replace_doubleback_inib_space(all->order_cpy);
+		ft_print_tab(all->order_cpy);
 		replace_doubleback_inib_space(all->target_cpy);
 		reverse_pipe(all->target_cpy);
 		reverse_pipe(all->order_cpy);
@@ -87,6 +89,7 @@ void	split_target(t_all *all, char *str)
 	}
 	else
 	{
+		ft_putstr("!!!!!");
 		all->target_cpy = malloc(sizeof(char *) * 1);
 		all->target_cpy[0] = 0;
 	}
