@@ -65,3 +65,61 @@ void	rpl_space(char *str, int start, int len)
 		len--;
 	}
 }
+
+void	split_target2(t_all *all, char *str)
+{
+	t_slv	s;
+
+	s = (t_slv){0, 0, 0, 0, 0, 0, 0, 0, 0};
+	while (str[s.i])
+	{
+		if (str[s.i] == '>' || str[s.i] == '<')
+		{
+			if (is_redir(str[s.i + 1]))
+				s.i++;
+			s.k = s.i;
+			s.i++;
+			while (str[s.i] == ' ')
+				s.i++;
+			while (str[s.i + 1] != 0 && str[s.i + 1] != ' ')
+				s.i++;
+			s.la = s.i - s.k;
+			s.k++;
+			all->tmp = ft_substr(str, s.k, s.la);
+			rpl_space(str, s.k, s.la);
+		}
+		if (s.i < ft_strlen(str))
+			s.i++;
+	}
+	all->target_cpy = ft_split(all->tmp, ' ');
+	free(all->tmp);
+}
+
+void	split_target3(t_all *all, char *str)
+{
+	t_slv	s;
+
+	s = (t_slv){0, 0, 0, 0, 0, 0, 0, 0, 0};
+	all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
+	while (str[s.i])
+	{
+		if (str[s.i] == '>' || str[s.i] == '<')
+		{
+			if (is_redir(str[s.i + 1]))
+				s.i++;
+			s.k = s.i;
+			s.i++;
+			while (str[s.i] == ' ' && str[s.i + 1] != 0 && str[s.i + 1] != ' '
+				&& str[s.i + 1] != '>' && str[s.i + 1] != '<')
+				s.i++;
+			s.la = s.i - s.k;
+			s.k++;
+			all->target_cpy[s.j] = ft_substr(str, s.k, s.la);
+			rpl_space(str, s.k, s.la);
+			s.j++;
+		}
+		if (s.i < ft_strlen(str))
+			s.i++;
+	}
+	all->target_cpy[s.j] = 0;
+}

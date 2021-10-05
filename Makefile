@@ -12,6 +12,8 @@ FILES   =       minishell.c \
 				parsing.c \
 				free.c \
 				utils.c \
+				utils2.c \
+				utils3.c \
 				builtins.c \
 				orders_utils.c \
 				env.c \
