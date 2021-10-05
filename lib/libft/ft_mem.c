@@ -40,7 +40,7 @@ char	*chartostr(char c)
 	return (ft_strdup(s));
 }
 
-int		free_doubletab(char **tab)
+int	free_doubletab(char **tab)
 {
 	int	i;
 
