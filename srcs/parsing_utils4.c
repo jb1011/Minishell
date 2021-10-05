@@ -1,21 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   treatment.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 12:54:53 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/05 16:52:26 by lgelinet         ###   ########.fr       */
+/*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
+/*   Updated: 2021/09/23 17:19:26 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	treatall(t_all *all, t_env *env, t_pipenodes *node)
+void	replace_inib_space(char *str)
 {
-	if (!node)
-		return (0);
-	piping(all, env, node);
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			count++;
+		if (str[i] == ' ' && (count % 2 != 0))
+			str[i] = '`';
+		i++;
+	}
+}
+
+int	is_only_space(char *s, int start)
+{
+	start++;
+	while (s[start])
+	{
+		if (is_char_separator(s[start]))
+		{
+			return (1);
+		}
+		if (s[start] != ' ')
+			return (0);
+		start++;
+	}
 	return (1);
 }

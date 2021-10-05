@@ -12,62 +12,33 @@
 
 #include "../includes/minishell.h"
 
-void	ft_putchar(char c)
+void	megatab_malloc_simple(t_all *all)
 {
-	write(1, &c, 1);
+	all->w_line = malloc(sizeof(char **) * 2);
+	all->w_line[0] = (char **)malloc(sizeof(char *) * 2);
+	all->w_line[0][0] = ft_strdup(all->line);
+	all->w_line[0][1] = 0;
+	all->w_line[1] = 0;
 }
 
-void	ft_print_tab(char **t)
-{
-	int	j;
-
-	j = 0;
-	while (t[j])
-	{
-		printf("\t%s\n", t[j]);
-		j++;
-	}
-}
-
-void	ft_print_megatab(char ***t)
-{
-	int	j;
-	int	i;
-
-	j = 0;
-	printf("***TAB :\n");
-	while (t[j])
-	{
-		i = 0;
-		printf("\tCASE %d :\n", j);
-		while (t[j][i])
-		{
-			printf("\t\tCASE STRING :\n");
-			printf("\t\t\t%s\n", t[j][i]);
-			i++;
-		}
-		j++;
-	}
-}
-
-char	*ft_dup_char(const char *s)
+char	*ft_dup(const char *s, char c)
 {
 	char	*str;
 	int		i;
 	int		j;
-	int		count;
 
 	i = 0;
 	j = 0;
 	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!str)
 		return (NULL);
-	count = 0;
 	while (s[i])
 	{
-		if (s[i] == '\'')
-			count++;
-		if ((s[i] == '|' || s[i] == '<' || s[i] == '>') && (count % 2 != 0))
+		if (s[i] == c && s[i + 1] == 0)
+		{
+			break ;
+		}
+		while (s[i] == c)
 			i++;
 		str[j] = (char)s[i];
 		i++;
@@ -77,22 +48,45 @@ char	*ft_dup_char(const char *s)
 	return (str);
 }
 
-void	ft_malloc_tab(char ***t, int size, char **s)
+int	is_redir(char s)
+{
+	if (s == '>' || s == '<')
+		return (1);
+	return (0);
+}
+
+char	**mall_doubletab(char **t)
+{
+	int		j;
+	char	**new;
+
+	j = 0;
+	new = NULL;
+	if (t[0] == 0)
+		return (0);
+	while (t[j])
+		j++;
+	new = malloc(sizeof(char *) * (j + 1));
+	j = 0;
+	while (t[j])
+	{
+		new[j] = ft_strtrim(t[j], " ");
+		j++;
+	}
+	new[j] = 0;
+	return (new);
+}
+
+int	is_redir_str(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (i < size)
-	{
-		t[i] = (char **)malloc(sizeof(char *) * 2);
-		i++;
-	}
-	i = 0;
 	while (s[i])
 	{
-		t[i][0] = ft_strdup(s[i]);
-		t[i][1] = 0;
+		if (s[i] == '>' || s[i] == '<')
+			return (1);
 		i++;
 	}
-	t[i] = 0;
+	return (0);
 }

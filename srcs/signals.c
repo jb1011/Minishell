@@ -6,17 +6,16 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/05 13:32:55 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 16:52:01 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
 void	ft_sigint(int signum)
 {
-	char *prompt;
-	
+	char	*prompt;
+
 	if (signum == SIGINT)
 	{
 		write(1, "\n", 1);
@@ -24,14 +23,13 @@ void	ft_sigint(int signum)
 		rl_replace_line("", 0);
 		rl_redisplay();
 		ft_putstr(prompt);
-		status = 130;
+		g_status = 130;
 		free(prompt);
 	}
 }
 
 void	ft_term(struct termios *tattr)
 {
-
 	if (!isatty (STDIN_FILENO))
 	{
 		ft_putstr ("not a terminal");

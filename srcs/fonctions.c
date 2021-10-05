@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/05 16:34:12 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 16:53:09 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	forkexec(char **todo, t_env *list)
 	else
 	{
 		waitpid(id, &stat, 0);
-		status = WEXITSTATUS(stat);
+		g_status = WEXITSTATUS(stat);
 	}
 	free_doubletab(env);
 }
@@ -56,9 +56,9 @@ int	_fct(t_all *all, char *todo[], int std[2])
 	if (k)
 	{
 		if (!do_builtins(all, todo, k))
-			status = 1;
+			g_status = 1;
 		else
-			status = 0;
+			g_status = 0;
 	}	
 	else
 		forkexec(todo, all->env);

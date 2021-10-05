@@ -16,7 +16,7 @@
 #include <term.h>
 #include <unistd.h>
 
-int status;
+int g_status;
 
 int main()
 {
