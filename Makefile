@@ -26,7 +26,7 @@ FILES   =       minishell.c \
 				parsing_utils3.c \
 				parsing_utils1.c \
 				parsing_utils2.c \
-				parsing_del.c \
+				parsing_utils4.c \
 				treatment.c
 
 SRCS    = $(addprefix $(SRCDIR), $(FILES))
