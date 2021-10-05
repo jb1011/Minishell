@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int _cd(char *path)
+int	_cd(char *path)
 {
 	if (!path || !path[0])
 	{
@@ -15,32 +15,32 @@ int _cd(char *path)
 	return (1);
 }
 
-int _pwd(t_all *all)
+int	_pwd(t_all *all)
 {
 	printf("%s\n", all->path);
 	return (1);
 }
 
-int     assign_var(t_all *all, char *assignation, char export)
+int	assign_var(t_all *all, char *assignation, char export)
 {
-	int i;
-	char *temp;
-	char  *value;
+	int		i;
+	char	*temp;
+	char	*value;
 
 	i = ft_rankchr(assignation, '=');
 	if (!i)
 		value = NULL;
 	else
-		value =  &assignation[i];
+		value = &assignation[i];
 	temp = extractstr(assignation, "=");
 	if (!vardo(&all->env, temp, value, export))
 		advar(&all->env, temp, value, export);
 	return (1);
 }
 
-int _echo(t_all *all,char **opts)
+int	_echo(t_all *all, char **opts)
 {
-	t_slv s;
+	t_slv	s;
 
 	(void)all;
 	s = (t_slv){0, 0, 0, 0, 0, 0, ft_strdup(""), 0, 0};
@@ -48,7 +48,7 @@ int _echo(t_all *all,char **opts)
 		s.k = 1;
 	while (opts[++s.i])
 	{
-		s.stra = ft_join_free(s.stra , opts[s.i], 1);
+		s.stra = ft_join_free(s.stra, opts[s.i], 1);
 		if (opts[s.i + 1])
 			s.stra = ft_join_free(s.stra, " ", 1);
 	}
@@ -59,9 +59,9 @@ int _echo(t_all *all,char **opts)
 	return (1);
 }
 
-int _myexit(t_all *all)
+int	_myexit(t_all *all)
 {
-	int ret;
+	int	ret;
 
 	printf("exit\n");
 	if (all->pipelist->orders[1] != NULL)
