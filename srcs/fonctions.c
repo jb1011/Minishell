@@ -46,16 +46,16 @@ int	_fct(t_all *all,char *todo[], int std[2])
 	if (k)
 	{
 		if (!do_builtins(all, todo, k))
-			status = 1;
+			g_status = 1;
 		else
-			status = 0;
+			g_status = 0;
 	}	
 	else if (!assign(&id, fork()))
 		execve(*todo, todo, env);
 	else
 	{
 		waitpid(id , &k, 0);
-		status = WEXITSTATUS(k);
+		g_status = WEXITSTATUS(k);
 	}
 	free_doubletab(env);
 	multclose(std[0], std[1]);

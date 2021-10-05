@@ -24,7 +24,7 @@ void	ft_sigint(int signum)
 		rl_replace_line("", 0);
 		rl_redisplay();
 		ft_putstr(prompt);
-		status = 130;
+		g_status = 130;
 		free(prompt);
 	}
 }

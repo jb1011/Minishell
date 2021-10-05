@@ -21,7 +21,7 @@ int dollar_case(char **buffer, char *object, int *index, t_all *all)
     if (object[*index + 1] == '$' && ++*index)
         *buffer = ft_join_free(*buffer, ft_itoa(getpid()), 3);
     else if (object[*index + 1] == '?' && ++*index)
-        *buffer = ft_join_free(*buffer, ft_itoa(status), 3);
+        *buffer = ft_join_free(*buffer, ft_itoa(g_status), 3);
     else if (!object[*index + 1])
         *buffer = ft_join_free(*buffer, "$", 1);
     else

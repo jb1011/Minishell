@@ -107,7 +107,7 @@ int     isfct(char **path, char **fct)
     free (buff);
     if (!path[i])
     {
-        status = 127;
+        g_status = 127;
         printf("%s : command not found\n", *fct);
         return (0);
     }
