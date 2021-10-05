@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:32:32 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 15:22:54 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:11 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,24 @@ int	multclose(int stdin, int stdout)
 }
 
 
-int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
+int	_fct(t_all *all,char *todo[], int std[2])
 {
 	int		k;
 	pid_t	id;
 	int	realfd[2];
+	char **env = NULL;
 
 	if (!assign(&k, is_builtins(todo)) && !isfct(all->exec_paths, todo))
 	{
-		multclose(stdin, stdout); 
+		multclose(std[0], std[1]); 
 		return (-1);
 	}
+	if (!k)
+		env = env_to_strtab(all->env);
 	realfd[0] = dup(0);
 	realfd[1] = dup(1);
-	dup2(stdin,0);
-	dup2(stdout,1);
+	dup2(std[0], 0);
+	dup2(std[1], 1);
 	if (k)
 	{
 		if (!do_builtins(all, todo, k))
@@ -54,7 +57,8 @@ int	_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout)
 		waitpid(id , &k, 0);
 		status = WEXITSTATUS(k);
 	}
-	multclose(stdin, stdout);
+	free_doubletab(env);
+	multclose(std[0], std[1]);
 	dup2(realfd[0],0);
 	dup2(realfd[1],1);
 	return (1);

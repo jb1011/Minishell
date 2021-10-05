@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:29:25 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/05 13:15:36 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 15:01:33 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int changeline(t_all *all, char **line)
     {        
         if ((*line)[s.i] == '\"' && !s.j)
             quotes_bool(&s.k);
-        else if ((*line)[s.i] == '\'' && !s.k) 
+        else if ((*line)[s.i] == '\'' && !s.k)
             quotes_bool(&s.j);
         else if (s.j) // s.j --->> apostrophe !!!!!!
             str_case(&s.stra, (*line), &s.i, STOP_QUOTE);
@@ -121,7 +121,6 @@ int     treat_orders(t_all *all, t_pipenodes *node)
 {
     int i;
     int len;
-    char **env;
     
     i = -1;
     if (!node || !(node->orders))
@@ -134,8 +133,6 @@ int     treat_orders(t_all *all, t_pipenodes *node)
     i = -1;
     if (len == 2 && !ft_strncmp(node->orders[0], "cd", len))
         return (_cd(node->orders[1]));
-    env = env_to_strtab(all->env);
-    redirect_fcts(all, node->redir, node->targets, node->orders, env);
-    free_doubletab(env);
+    redirect_fcts(all, node);
     return (1);
 }

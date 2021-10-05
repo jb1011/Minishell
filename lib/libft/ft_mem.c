@@ -49,8 +49,7 @@ int		free_doubletab(char **tab)
 		return (0);
 	while (tab[++i])
 		free(tab[i]);
-	if (tab[i])
-		free(tab[i]);
+	free(tab[i]);
 	free(tab);
 	return (1);
 }

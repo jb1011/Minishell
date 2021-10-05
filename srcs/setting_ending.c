@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 16:12:07 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:35:19 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@ char *set_prompt(void)
 }
 int     begin(t_all *all)
 {
-    int i;
-    char *str;
     char *prompt;
 
-    i = -1;
     ft_bzero(all->path, BUFFER_SIZE);
     getcwd(all->path, BUFFER_SIZE - 1);
     prompt = set_prompt();
@@ -56,7 +53,7 @@ int     begin(t_all *all)
     free (prompt);
     if (!all->line)
         all->line = ft_strdup("exit");
-	add_history(all->line);
-    // printf("%s\n", all->line);
+    else
+	    add_history(all->line);
     return (1);
 }

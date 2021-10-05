@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 00:56:20 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 15:09:47 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:41:51 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int str_case(char **buffer, char *object, int *index, char *stops)
     char *temp;
 
     k = *index;
-    // if (!ft_memcmp(STOP_QUOTE, stops, 4))
-    //     k++;
     while (!ft_strchr(stops, object[++*index]))
         ;
     temp = extractstr(&object[k], stops);

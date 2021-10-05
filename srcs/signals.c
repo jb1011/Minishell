@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:41:10 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 16:03:24 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:32:55 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_sigint(int signum)
 	}
 }
 
-void	ft_term(t_all *all, struct termios *tattr)
+void	ft_term(struct termios *tattr)
 {
 
 	if (!isatty (STDIN_FILENO))
@@ -40,6 +40,5 @@ void	ft_term(t_all *all, struct termios *tattr)
 	tattr->c_iflag &= ~(ISIG | IUTF8);
 	tattr->c_lflag &= ~(ICANON);
 	tattr->c_cc[VQUIT] = -1;
-	// tattr->c_cc[VERASE] = -1;
 	tcsetattr(STDIN_FILENO, TCSADRAIN, tattr);
 }

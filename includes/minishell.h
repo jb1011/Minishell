@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:25:46 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 15:51:21 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 15:02:35 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	reorder_tabs(char *str);
 void	ft_free_order(char **t, t_all *all);
 int 	ft_get_nb_strs(char *s, char c);
 int     ft_count_pipes(t_all *all);
-void    ft_term(t_all *all, struct termios *tattr);
+void    ft_term(struct termios *tattr);
 char    *set_prompt(void);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
@@ -124,8 +124,8 @@ int		do_builtins(t_all *all, char **opts, int no_builtins);
 int		isfct(char **path, char **fct);
 int     treat_orders(t_all *all, t_pipenodes *node);
 /* REDIRECTIONS !!!!!!!!!!! */
-int		_fct(t_all *all,char *todo[], char *env[], int stdin , int stdout);
-int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[]);
+int		_fct(t_all *all,char *todo[], int std[2]);
+int		redirect_fcts(t_all *all, t_pipenodes *nd);
 
 /* PIPES */
 int     piping(t_all *all, t_env *env, t_pipenodes *nd);

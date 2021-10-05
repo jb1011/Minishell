@@ -6,68 +6,79 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 17:00:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 15:11:28 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 15:02:42 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <fcntl.h>
-#include <readline/readline.h>
 
-
-int		redirect_fcts(t_all *all, char **redirections, char **targets, char *todo[], char *env[])
+void		in_fct(char **redirections, char **targets, int fd)
 {
-	int	i;
-	int stdout;
-	int stdin;
-	char	*buff;
-	int		size;
-	int		fd[2];
-	char	buff2[BUFFER_SIZE + 1];
-	int		right_redirect = 0;
+	t_slv s;
 
-	i = -1;
-	stdin = 0;
-	if (!redirections)
-		return (_fct(all, todo, env, 0, 1));
-	pipe(fd);
-	while (targets[++i])
+	s = (t_slv){-1, 0, 0, 0, 0, 0, 0, (char[BUFFER_SIZE]){0}, 0,};
+	while (targets[++s.i])
 	{
-		if (redirections[i][0] == 'p')
+		if (redirections[s.i][0] == 'p')
 		{
 			while (42)
 			{
-				buff = readline("dquotes<");
-				if (ft_strlen(targets[i]) == ft_strlen(buff))
-					if (!ft_strncmp(targets[i], buff, ft_strlen(targets[i])) && do_free(buff))
+				s.stra = readline("dquotes<");
+				if (ft_strlen(targets[s.i]) == ft_strlen(s.stra))
+					if (!ft_strncmp(targets[s.i], s.stra, ft_strlen(targets[s.i])) && do_free(s.stra))
 						break;
-				buff = ft_join_free(buff, "\n", 1);
-				write(fd[1], buff, ft_strlen(buff));
-				free(buff);
+				s.stra = ft_join_free(s.stra, "\n", 1);
+				write(fd, s.stra, ft_strlen(s.stra));
+				free(s.stra);
 			}
 		}
-		else if (redirections[i][0] == '<')
+		else if (redirections[s.i][0] == '<')
 		{
-			stdin = open(targets[i],O_RDONLY, S_IRUSR | S_IWUSR);
-			while (assign(&size, read(stdin , buff2, BUFFER_SIZE)) > 0)
+			s.k = open(targets[s.i],O_RDONLY, S_IRUSR | S_IWUSR);
+			while (assign(&s.j, read(s.k , s.strb, BUFFER_SIZE)) > 0)
 			{
-				buff2[size] = 0;
-				write(fd[1], buff2, size - 1);
+				s.strb[s.j] = 0;
+				write(fd, s.strb, s.j - 1);
 			}
-			close(stdin);
+			close(s.k);
 		}
 	}
-	close(fd[1]);
+}
+
+void		out_fct(t_all *all, t_pipenodes *nd, int fd)
+{
+	int i;
+	int	*fds;
+
 	i = -1;
-	while (targets[++i])
+	fds = (int [2]) {fd, 1};
+	while (nd->targets[++i])
 	{
-		if (redirections[i][0] == 'g' && ++right_redirect)
-			_fct(all, todo, env, fd[0], open(targets[i],O_CREAT | O_WRONLY |  O_APPEND, S_IRUSR | S_IWUSR));
-		else if (redirections[i][0] == '>' && ++right_redirect)
-			_fct(all, todo, env, fd[0], open(targets[i],O_CREAT | O_WRONLY |  O_TRUNC, S_IRUSR | S_IWUSR));
+		if (nd->redir[i][0] == 'g')
+		{
+			fds[1] = open(nd->targets[i] , O_CREAT | O_WRONLY |  O_APPEND, S_IRUSR | S_IWUSR);
+			_fct(all, nd->orders, fds);
+		}
+		else if (nd->redir[i][0] == '>')
+		{
+			fds[1] = open(nd->targets[i] , O_CREAT | O_WRONLY |  O_TRUNC, S_IRUSR | S_IWUSR);
+			_fct(all, nd->orders, fds);
+		}
 	}
-	if (!right_redirect)
-		_fct(all, todo, env, fd[0], 1);
+	if (fds[1] == 1)
+		_fct(all, nd->orders, fds);
+}
+
+int		redirect_fcts(t_all *all, t_pipenodes *nd)
+{
+	int		fd[2];
+
+	if (!nd->redir)
+		return (_fct(all, nd->orders, (int[2]){0, 1}));
+	pipe(fd);
+	in_fct(nd->redir , nd->targets, fd[1]);
+	close(fd[1]);
+	out_fct(all, nd,fd[0]);
 	close(fd[0]);
     return (1);
 }

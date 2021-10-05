@@ -6,7 +6,7 @@
 /*   By: lgelinet <lgelinet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 16:31:11 by lgelinet          #+#    #+#             */
-/*   Updated: 2021/10/04 16:45:02 by lgelinet         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:33:14 by lgelinet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main()
 	t_all all;
 
 	init(&all);
-	ft_term(&all, &tattr);
+	ft_term(&tattr);
 	while(42)
 	{
 		signal(SIGINT, ft_sigint);
