@@ -109,7 +109,9 @@ void	split_target3(t_all *all, char *str)
 				s.i++;
 			s.k = s.i;
 			s.i++;
-			while (str[s.i] == ' ' && str[s.i + 1] != 0 && str[s.i + 1] != ' '
+			while (str[s.i] == ' ')
+				s.i++;
+			while (str[s.i + 1] != 0 && str[s.i + 1] != ' '
 				&& str[s.i + 1] != '>' && str[s.i + 1] != '<')
 				s.i++;
 			s.la = s.i - s.k;

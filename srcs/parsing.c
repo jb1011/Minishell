@@ -54,6 +54,7 @@ void	init_list_var(t_all *all)
 		free_doubletab(all->redir_cpy);
 		i++;
 	}
+	print_linked_list(all->pipelist);
 	ft_free_tab(all->splt_line);
 }
 
