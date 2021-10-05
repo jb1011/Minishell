@@ -31,5 +31,7 @@ int main()
 		begin(&all);
 		parse_line(&all);
 		treatall(&all, all.env, all.pipelist);
+		free_list(&all.pipelist);
+		free(all.line);
 	}
 }

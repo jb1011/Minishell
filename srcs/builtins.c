@@ -69,6 +69,8 @@ int _myexit(t_all *all)
 		ft_atoi(all->pipelist->orders[1]);
 	free_list(&all->pipelist);
 	all->pipelist = NULL;
+	if (all->line)
+		free(all->line);
 	exit(status);
 	return (0);
 }

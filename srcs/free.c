@@ -16,9 +16,9 @@ void	ft_free_tab(char **t)
 {
 	int j;
 
-	j = 0;
 	if (t != NULL)
 	{
+		j = 0;
 		while (t[j])
 		{
 			free(t[j]);

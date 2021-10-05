@@ -51,9 +51,10 @@ char	*ignore_quote(char *str)
 	}
 	tmp = ft_dup(str, '`');
 	free(str);
-	str = ft_strdup(tmp);
-	free(tmp);
-	return (str);
+	// str = ft_strdup(tmp);
+	// free(tmp);
+	// return (str);
+	return (tmp);
 }
 
 void	rpl_space(char *str, int start, int len)
