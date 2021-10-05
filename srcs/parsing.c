@@ -37,13 +37,8 @@ void	init_list_var(t_all *all)
 {
 	int	i;
 
-	// all->pipelist = NULL;
-	// free_list(&all->pipelist);
 	i = 0;
 	all->splt_line = ft_split(all->line, '|');
-		// all->order_cpy = 0;
-		// all->target_cpy = 0;
-		// all->redir_cpy = 0;
 	while (all->splt_line[i])
 	{
 		split_redir(all, all->splt_line[i]);
@@ -54,21 +49,12 @@ void	init_list_var(t_all *all)
 		reverse_pipe(all->target_cpy);
 		reverse_pipe(all->order_cpy);
 		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
-		// ft_free_order(all->order_cpy, all);
-		// ft_free_tab(all->order_cpy);
-		// ft_free_tab(all->target_cpy);
-		// ft_free_tab(all->redir_cpy);
 		free_doubletab(all->order_cpy);
 		free_doubletab(all->target_cpy);
 		free_doubletab(all->redir_cpy);
 		i++;
 	}
-	// ft_free_tab(all->order_cpy);
-	// 	ft_free_tab(all->target_cpy);
-	// 	ft_free_tab(all->redir_cpy);
-
 	ft_free_tab(all->splt_line);
-	// // print_linked_list(all->pipelist);
 }
 
 void	split_redir(t_all *all, char *str)
@@ -94,12 +80,11 @@ void	split_target(t_all *all, char *str)
 {
 	int	i;
 	int	j;
-	int start;
+	int	start;
 	int	len;
 
 	if (is_separator(str))
 	{
-		// all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
 		i = 0;
 		j = 0;
 		if (ft_count_redir(str) == 1)
@@ -140,7 +125,8 @@ void	split_target(t_all *all, char *str)
 					i++;
 					while (str[i] == ' ')
 						i++;
-					while (str[i + 1] != 0 && str[i + 1] != ' ' && str[i + 1] != '>' && str[i + 1] != '<')
+					while (str[i + 1] != 0 && str[i + 1] != ' '
+						&& str[i + 1] != '>' && str[i + 1] != '<')
 						i++;
 					len = i - start;
 					start++;
@@ -166,7 +152,6 @@ void	split_orders(t_all *all, char *str)
 	int	i;
 
 	all->to_free = (ft_get_nb_strs(str, ' '));
-	// all->order_cpy = malloc(sizeof(char *) * all->to_free);
 	i = 0;
 	if (!is_redir_str(str))
 	{

@@ -12,11 +12,11 @@
 
 #include "../includes/minishell.h"
 
-void count_pipe_croc(char *str, t_all *all)
+void	count_pipe_croc(char *str, t_all *all)
 {
-	int i;
-	int count;
-	int j;
+	int	i;
+	int	count;
+	int	j;
 
 	count = 0;
 	i = 0;
@@ -67,10 +67,10 @@ void count_pipe_croc(char *str, t_all *all)
 	all->pipendirect[j] = 0;
 }
 
-void reverse_pipe(char **str)
+void	reverse_pipe(char **str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (str[j])
@@ -88,7 +88,7 @@ void reverse_pipe(char **str)
 
 int	ft_check_error(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -99,10 +99,7 @@ int	ft_check_error(char *s)
 				return (0);
 			if (is_char_separator(s[i]))
 				if (is_only_space(s, i))
-				{
-				printf("########");
-				return (0);
-			}
+					return (0);
 		}
 		i++;
 	}
@@ -111,7 +108,7 @@ int	ft_check_error(char *s)
 
 void	replace_double_croc(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
