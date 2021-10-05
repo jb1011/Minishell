@@ -83,9 +83,11 @@ void	free_for_all(t_all *all);
 void	reorder_tabs(char *str);
 void	ft_free_order(char **t, t_all *all);
 int 	ft_get_nb_strs(char *s, char c);
-int     ft_count_pipes(t_all *all);
-void    ft_term(struct termios *tattr);
-char    *set_prompt(void);
+int		ft_count_pipes(t_all *all);
+void	ft_term(struct termios *tattr);
+char	*set_prompt(void);
+void	split_target2(t_all *all, char *str);
+void	split_target3(t_all *all, char *str);
 
 t_pipenodes	*createCell(char **orders, char **targets, char **redir);
 int	is_empty(t_pipenodes *pipelist);

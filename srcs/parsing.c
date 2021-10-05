@@ -85,59 +85,37 @@ void	split_target(t_all *all, char *str)
 
 	if (is_separator(str))
 	{
+		all->target_cpy = malloc(sizeof(char *) * (all->size_redir + 1));
 		i = 0;
 		j = 0;
 		if (ft_count_redir(str) == 1)
-		{
-			while (str[i])
-			{
-				if (str[i] == '>' || str[i] == '<')
-				{
-					if (is_redir(str[i + 1]))
-						i++;
-					start = i;
-					i++;
-					while (str[i] == ' ')
-						i++;
-					while (str[i + 1] != 0 && str[i + 1] != ' ')
-						i++;
-					len = i - start;
-					start++;
-					all->tmp = ft_substr(str, start, len);
-					j++;
-					rpl_space(str, start, len);
-				}
-				if (i < ft_strlen(str))
-					i++;
-			}
-			all->target_cpy = ft_split(all->tmp, ' ');
-			free(all->tmp);
-		}
+			split_target2(all, str);
 		else if (ft_count_redir(str) > 1)
 		{
-			while (str[i])
-			{
-				if (str[i] == '>' || str[i] == '<')
-				{
-					if (is_redir(str[i + 1]))
-						i++;
-					start = i;
-					i++;
-					while (str[i] == ' ')
-						i++;
-					while (str[i + 1] != 0 && str[i + 1] != ' '
-						&& str[i + 1] != '>' && str[i + 1] != '<')
-						i++;
-					len = i - start;
-					start++;
-					all->target_cpy[j] = ft_substr(str, start, len);
-					rpl_space(str, start, len);
-					j++;
-				}
-				if (i < ft_strlen(str))
-					i++;
-			}
-			all->target_cpy[j] = 0;
+			split_target3(all, str);
+			// while (str[i])
+			// {
+			// 	if (str[i] == '>' || str[i] == '<')
+			// 	{
+			// 		if (is_redir(str[i + 1]))
+			// 			i++;
+			// 		start = i;
+			// 		i++;
+			// 		while (str[i] == ' ')
+			// 			i++;
+			// 		while (str[i + 1] != 0 && str[i + 1] != ' '
+			// 			&& str[i + 1] != '>' && str[i + 1] != '<')
+			// 			i++;
+			// 		len = i - start;
+			// 		start++;
+			// 		all->target_cpy[j] = ft_substr(str, start, len);
+			// 		rpl_space(str, start, len);
+			// 		j++;
+			// 	}
+			// 	if (i < ft_strlen(str))
+			// 		i++;
+			// }
+			// all->target_cpy[j] = 0;
 		}
 	}
 	else
@@ -145,6 +123,74 @@ void	split_target(t_all *all, char *str)
 		all->target_cpy = malloc(sizeof(char *) * 1);
 		all->target_cpy[0] = 0;
 	}
+}
+
+void	split_target2(t_all *all, char *str)
+{
+	int	i;
+	int	j;
+	int	start;
+	int	len;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			if (is_redir(str[i + 1]))
+				i++;
+			start = i;
+			i++;
+			while (str[i] == ' ')
+				i++;
+			while (str[i + 1] != 0 && str[i + 1] != ' ')
+				i++;
+			len = i - start;
+			start++;
+			all->tmp = ft_substr(str, start, len);
+			j++;
+			rpl_space(str, start, len);
+		}
+		if (i < ft_strlen(str))
+			i++;
+	}
+	all->target_cpy = ft_split(all->tmp, ' ');
+	free(all->tmp);
+}
+
+void	split_target3(t_all *all, char *str)
+{
+	int	i;
+	int	j;
+	int	start;
+	int	len;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			if (is_redir(str[i + 1]))
+				i++;
+			start = i;
+			i++;
+			while (str[i] == ' ')
+				i++;
+			while (str[i + 1] != 0 && str[i + 1] != ' '
+				&& str[i + 1] != '>' && str[i + 1] != '<')
+				i++;
+			len = i - start;
+			start++;
+			all->target_cpy[j] = ft_substr(str, start, len);
+			rpl_space(str, start, len);
+			j++;
+		}
+		if (i < ft_strlen(str))
+			i++;
+	}
+	all->target_cpy[j] = 0;
 }
 
 void	split_orders(t_all *all, char *str)
