@@ -17,7 +17,7 @@ int	parse_line(t_all *all)
 	all->pipelist = NULL;
 	if (all->line)
 	{
-		free_list(all->pipelist);
+		free_list(&all->pipelist);
 		ft_count_pipes(all);
 		all->line = ignore_quote(all->line);
 		replace_inib_space(all->line);
@@ -37,14 +37,13 @@ void	init_list_var(t_all *all)
 {
 	int	i;
 
-	all->pipelist = NULL;
-	free_list(all->pipelist);
+	// all->pipelist = NULL;
+	// free_list(&all->pipelist);
 	i = 0;
 	all->splt_line = ft_split(all->line, '|');
-		all->order_cpy = 0;
-		all->target_cpy = 0;
-		all->redir_cpy = 0;
-
+		// all->order_cpy = 0;
+		// all->target_cpy = 0;
+		// all->redir_cpy = 0;
 	while (all->splt_line[i])
 	{
 		split_redir(all, all->splt_line[i]);
@@ -56,11 +55,18 @@ void	init_list_var(t_all *all)
 		reverse_pipe(all->order_cpy);
 		addnew(all, all->order_cpy, all->target_cpy, all->redir_cpy);
 		// ft_free_order(all->order_cpy, all);
-		ft_free_tab(all->order_cpy);
-		ft_free_tab(all->target_cpy);
-		ft_free_tab(all->redir_cpy);
+		// ft_free_tab(all->order_cpy);
+		// ft_free_tab(all->target_cpy);
+		// ft_free_tab(all->redir_cpy);
+		free_doubletab(all->order_cpy);
+		free_doubletab(all->target_cpy);
+		free_doubletab(all->redir_cpy);
 		i++;
 	}
+	// ft_free_tab(all->order_cpy);
+	// 	ft_free_tab(all->target_cpy);
+	// 	ft_free_tab(all->redir_cpy);
+
 	ft_free_tab(all->splt_line);
 	// // print_linked_list(all->pipelist);
 }
@@ -166,7 +172,6 @@ void	split_orders(t_all *all, char *str)
 	{
 		all->tmp = ft_strdup(str);
 		all->order_cpy = ft_split(all->tmp, ' ');
-			// ft_print_tab(all->order_cpy);
 		free(all->tmp);
 		return ;
 	}

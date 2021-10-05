@@ -188,7 +188,6 @@ char	*ft_dup(const char *s, char c)
 	{
 		if (s[i] == c && s[i + 1] == 0)
 		{
-			// ft_putstr("!!!!!");
 			break ;
 		}
 		while (s[i] == c)
@@ -201,7 +200,6 @@ char	*ft_dup(const char *s, char c)
 	// ft_putstr("ligne : ");
 	// ft_putstr(str);
 	// ft_putstr("\n");
-
 	return (str);
 }
 
