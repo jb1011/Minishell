@@ -60,14 +60,14 @@ void	*ft_memset(void *s, int c, int n)
 
 char	*extractstr(char *str, char *set_to_stop)
 {
-	int	i;
-	int	j;
-	char *ret;
+	int		i;
+	int		j;
+	char	*ret;
 
 	i = 0;
 	if (!set_to_stop || !*str)
-		return(ft_strdup(""));
-	while(str[i] && !ft_strchr(set_to_stop, str[i]))
+		return (ft_strdup(""));
+	while (str[i] && !ft_strchr(set_to_stop, str[i]))
 		i++;
 	if (!str[i])
 		return (ft_strdup(str));
