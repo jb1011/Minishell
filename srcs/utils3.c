@@ -73,7 +73,7 @@ int	quote_is_odd(char *s, int end)
 	count = 0;
 	while (i < end)
 	{
-		if (s[i] == '\'')
+		if (s[i] == '\'' || s[i] == '"')
 			count ++;
 		i++;
 	}
