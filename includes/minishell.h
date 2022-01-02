@@ -101,7 +101,7 @@ void		double_croc_left(t_all *all);
 void		double_croc_right(t_all *all);
 void		double_croc_skip_left(t_all *all, char *str);
 void		double_croc_skip_right(t_all *all, char *str);
-
+int			check_empty_quote(char *s);
 /* ENVIRONNEMENT GESTION */
 t_env		*vardo(t_env **list, char *tofind, char *ch_val, char do_what);
 int			advar(t_env **list, char *var, char *val, char is_env);

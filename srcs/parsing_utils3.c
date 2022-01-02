@@ -41,7 +41,7 @@ char	*ignore_quote(char *str)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '"')
+		if (str[i] == '"' || str[i] == '\'')
 			count++;
 		if (((str[i] == '\'' && str[i - 1] == '`')
 				|| (str[i] == '"' && str[i - 1] == '`')) && (count % 2 == 0))

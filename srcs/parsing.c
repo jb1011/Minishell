@@ -19,6 +19,8 @@ int	parse_line(t_all *all)
 	{
 		free_list(&all->pipelist);
 		ft_count_pipes(all);
+		if (check_empty_quote(all->line) == 0)
+			return (1);
 		all->line = ignore_quote(all->line);
 		replace_inib_space(all->line);
 		is_pipe_inhib(all->line);

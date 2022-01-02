@@ -81,3 +81,15 @@ int	quote_is_odd(char *s, int end)
 		return (0);
 	return (1);
 }
+
+int	check_empty_quote(char *s)
+{
+	if (ft_strlen(s) >= 2)
+	{
+		if (s[0] == '\'' && s[1] == '\'')
+			return (0);
+		if (s[0] == '"' && s[1] == '"')
+			return (0);
+	}
+	return (1);
+}
